@@ -2,7 +2,7 @@
 ### CT216 Software engineering I - Group Project.
 
 
-## Team Try Catch – Andrew East, Chika Onyia, David O'Dea, James Quaife
+## Team Try Catch – Andrew East, Chika Onyia, David O'Dea (davedodea), James Quaife (secretagentx09)
 
 ## Project Goal
   - Develop a web application for the Junior Film Fleadh in Galway
