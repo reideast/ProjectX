@@ -1,20 +1,23 @@
 # ProjectX - Web App for JFF (Junior Film Fleadh) #
-  CT216 Software engineering I - Group Project.#
+### CT216 Software engineering I - Group Project.
 
 
-** Team Try Catch – Andrew East, Chika Onyia, David O'Dea, James Quaife **
-Project Goal
-Develop a web application for the Junior Film Fleadh in Galway
-Functionality
-Film creators will submit their films to be entered into the festival
-Students will submit written scripts for judgement
-Festival officials will judge films and scripts; each judge will record notes and film rankings
-Festival events will be arranged into a schedule
-Potential festival attendees will view film schedule and book tickets
-Attendees will view workshop schedule and book tickets
-Post-festival, schools can view and book available outreach programmes
-Schedule and meta data can be exported from database to send to graphic design firm to create festival program
-Minimum Viable Product
-The minimum functionality to be a success to our client is to implement the film submission and festival workshop booking portions of the product 
-Existing Web Design
-http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
+## Team Try Catch – Andrew East, Chika Onyia, David O'Dea, James Quaife
+
+## Project Goal
+  - Develop a web application for the Junior Film Fleadh in Galway
+  - Functionality
+  - Film creators will submit their films to be entered into the festival.
+  - Students will submit written scripts for judgement.
+  - Festival officials will judge films and scripts; each judge will record notes and film rankings.
+  - Festival events will be arranged into a schedule.
+  - Potential festival attendees will view film schedule and book tickets.
+  - Attendees will view workshop schedule and book tickets.
+  - Post-festival, schools can view and book available outreach programmes.
+  - Schedule and meta data can be exported from database to send to graphic design firm to create festival program.
+  
+## Minimum Viable Product
+  - The minimum functionality to be a success to our client is to implement the film submission and festival workshop booking portions of the product.
+  
+## Existing Web Design
+- http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
