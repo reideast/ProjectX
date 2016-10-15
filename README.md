@@ -10,7 +10,8 @@
 
 ## Project Goal
   - Develop a web application for the Junior Film Fleadh in Galway
-  - Functionality
+
+## Functionality
   - Film creators will submit their films to be entered into the festival.
   - Students will submit written scripts for judgement.
   - Festival officials will judge films and scripts; each judge will record notes and film rankings.
