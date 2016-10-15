@@ -4,7 +4,7 @@
 
 ## Team Try Catch: 
   - Andrew East (reideast) 
-  - Chika Onyia (tbc) 
+  - Chika Onyia (beaconCK) 
   - David O'Dea (davedodea) 
   - James Quaife (secretagentx09)
 
