@@ -1,16 +1,20 @@
 # ProjectX - Web App for JFF (Junior Film Fleadh) #
+
+![] (https://csatunibackups.s3-eu-west-1.amazonaws.com/original/1X/4e38ab68cdd720f318630d668ef012d395a9c09b.png)
+
 ### CT216 Software engineering I - Group Project.
 
 
 ## Team Try Catch: 
   - Andrew East (reideast) 
-  - Chika Onyia (tbc) 
+  - Chika Onyia (beaconCK) 
   - David O'Dea (davedodea) 
   - James Quaife (secretagentx09)
 
 ## Project Goal
   - Develop a web application for the Junior Film Fleadh in Galway
-  - Functionality
+
+## Functionality
   - Film creators will submit their films to be entered into the festival.
   - Students will submit written scripts for judgement.
   - Festival officials will judge films and scripts; each judge will record notes and film rankings.
