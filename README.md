@@ -5,7 +5,7 @@
 ### CT216 Software engineering I - Group Project.
 
 
-## Team Try Catch: 
+## Team Try Catch members: 
   - Andrew East (reideast) 
   - Chika Onyia (beaconCK) 
   - David O'Dea (davedodea) 
