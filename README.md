@@ -28,7 +28,7 @@
   The minimum functionality to be a success to our client is to implement:
   - film submissions,
   - submission reviews,
-  - film bookkings.
+  - film bookings.
   
 ## Existing Web Design
 - http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
