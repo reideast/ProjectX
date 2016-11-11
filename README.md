@@ -25,7 +25,10 @@
   - Schedule and meta data can be exported from database to send to graphic design firm to create festival program.
   
 ## Minimum Viable Product
-  - The minimum functionality to be a success to our client is to implement the film submission and festival workshop booking portions of the product.
+  The minimum functionality to be a success to our client is to implement:
+  - film submissions,
+  - submission reviews,
+  - film bookkings.
   
 ## Existing Web Design
 - http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
