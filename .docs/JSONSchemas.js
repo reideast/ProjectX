@@ -1,10 +1,14 @@
-{ //movie db
-    "title" : "movie1",
+{ //film submission collection
+    "title" : "film1",
     "genre" : "thriller",
     "length": "feature",
     "shortDescript": "bla bla",
     "addComm" : "bla bla bla",
-    "storageLink" : "http..." //place upload button on submission UI
+    "reviewComm" : "bla bla"
+    "storageLink" : "http...",
+    "suggestTime" : "00:00",
+    "suggestDate" : "dd/mm/yy",
+    "suggestVenue" : "place
 }
 
 { //screening cal
@@ -24,4 +28,14 @@
         "other" : "info",
     }
     "terms" : "bool"
+}
+
+{//bookings available collection
+    "title" : "film1",
+    "genre" : "thriller",
+    "length": "feature",
+    "shortDescript": "bla bla",
+    "addComm" : "bla bla bla",
+    "storageLink" : "http..."
+    "price" : "€.." //place upload button on submission UI
 }
