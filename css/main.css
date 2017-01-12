@@ -61,8 +61,12 @@
     margin-top: 50px;
 }
 
-body {
+.body {
     padding-top: 0px;
     padding-bottom: 20px;
+}
+
+.navbar-below {
+    background-color: black;
 }
 
