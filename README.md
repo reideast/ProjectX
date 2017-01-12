@@ -2,7 +2,7 @@
 
 ![] (https://csatunibackups.s3-eu-west-1.amazonaws.com/original/1X/4e38ab68cdd720f318630d668ef012d395a9c09b.png)
 
-### CT216 Software engineering I - Group Project.
+### CT216 Software engineering I - Group Test.
 
 
 ## Team Try Catch members: 
