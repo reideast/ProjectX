@@ -1,0 +1,31 @@
+
+table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+margin-top: auto;;
+}
+
+td {
+border: 1px solid #dddddd;
+text-align: left;
+height: 30px;
+padding-left: 8px;
+margin-top: auto;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+
+th {
+border: 1px solid #dddddd;
+text-align: left;
+padding: 8px;
+}
+
+.dropdownAdmin1 {
+  float: right;
+}
