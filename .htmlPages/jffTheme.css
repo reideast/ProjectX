@@ -8,13 +8,14 @@
     background-color: #CD071E;
 }
 
-.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success,
+.btn-success.disabled:hover, .btn-success.disabled:focus, .btn-success.disabled:active, .btn-success.disabled.active, .open>.dropdown-toggle.disabled.btn-success {
     color: #CD071E;
     background-color: #fff;
     border-color: transparent;
 }
 
-nav .btn {
+.btn {
     display: inline-block;
     padding: 6px 12px;
     margin-bottom: 0;
