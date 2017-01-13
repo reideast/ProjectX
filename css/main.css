@@ -46,6 +46,7 @@ border-collapse: collapse;
 width: 100%;
 margin-left: auto;
 margin-right: auto;
+
 }
 
 td {
@@ -72,3 +73,28 @@ padding: 8px;
 .dropdownAdmin1 {
   float: right;
 }
+
+#filmBookingsGrid .row{
+    margin-bottom: 20px;
+   
+}
+
+#filmBookingsGrid .col-xs-4{
+    text-align:center;
+}
+
+#filmBookingsGrid .col-xs-4 img{
+    display: inline-block;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #CC061D;
+    border-color: #fff;
+}
+.btn-primary:hover {
+    color: #CC061D;
+    background-color: #fff;
+    border-color: #CC061D;
+}
+

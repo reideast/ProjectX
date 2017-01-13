@@ -33,6 +33,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/main.css">
+    <script src="https://use.fontawesome.com/7d5c3bcc7a.js"></script>
+    <link rel="stylesheet" href="css/sidebar.css">
 </head>
 
 <body>
@@ -52,12 +54,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right" role="form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
+                    <!--<div class="form-group">-->
+                    <!--    <input type="text" placeholder="Email" class="form-control">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                    <!--    <input type="password" placeholder="Password" class="form-control">-->
+                    <!--</div>-->
                     <button type="submit" class="btn btn-success">Log in</button>
                     <button type="submit" class="btn btn-success">Sign up</button>
                 </form>
@@ -65,15 +67,49 @@
             <!--/.navbar-collapse -->
         </div>
     </nav>
+    
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav" padding-top="100px">
+            <li class="sidebar-brand">
+                <!--<a href="#">-->
+                <!--    Admin-->
+                <!--</a>-->
+           
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lock" aria-hidden="true"></i> Submissions</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-user" aria-hidden="true"></i> Users</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-ticket" aria-hidden="true"></i> Bookings</a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-film" aria-hidden="true"></i> Review</a>
+            </li>
+            <!--<li>-->
+            <!--    <a href="#">About</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--    <a href="#">Services</a>-->
+            <!--</li>-->
+            <!--<li>-->
+            <!--    <a href="#">Contact</a>-->
+            <!--</li>-->
+        </ul>
+
+    </div>
+    <!-- end Sidebar -->
 
     <div class="container">
         <h1></h1>
         <div class="row">
-            <div class="col-sm-25">
-                <table>
-                    <p></p>
+            <div class="col-sm-12">
 
-                    <div class="col-sm-10">
+                <div class="row">
+                    <div class="col-sm-12">
                         <table align="left">
                             <tr>
                                 <th>Monday</th>
@@ -86,29 +122,110 @@
                             </tr>
                         </table>
                     </div>
+                </div>
 
 
 
+            </div>
+        </div>
+        <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-3 col-md-offset-.5" >
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Shaniqua</h3>
+                        <p>A young girl goes on a sexual exploration of self discovery</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Pablos Choice</h3>
+                        <p>A stoner can't decide if he wants Mountain Dew or Coke</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Insert Brain Here</h3>
+                        <p>A highschool student discovers he has no brain</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-3">
-                <img class="img-responsive" src="http://placehold.it/350x150">
+            <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Redonkulous</h3>
+                        <p>Two friends discover they can speak to donkeys when they eat peyote</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-3 col-xs-offset-1">
-                <img class="img-responsive" src="http://placehold.it/350x150">
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>On a scale of 1 to shit, "What is going on?"</h3>
+                        <p>Programmers working for a large company realize they haven't a clue what their doing</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
             </div>
-            <div class="col-xs-3 col-xs-offset-1">
-
-                <img class="img-responsive" src="http://placehold.it/350x150">
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3></h3>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Book</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                    </div>
+                </div>
+            </div>
+             <div class="col-sm-6 col-md-3 col-md-offset-.5">
+                <div class="thumbnail" style="margin-top:75px">
+                    <img src="http://placehold.it/150x75" alt="...">
+                    <div class="caption">
+                        <h3>Thumbnail label</h3>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
-
-
-
-
 </body>
 
 </html>
