@@ -30,14 +30,14 @@
     color: #CD071E;
     background-color: #fff;
     border-color: #CD071E;
-    border-left: 6px solid red
+    border-right: 6px solid red
 }
 
 .btn-success-right:hover{
     color: #CD071E;
     background-color: #fff;
     border-color: #CD071E;
-    border-right: 6px solid red
+    border-left: 6px solid red
 }
 
 .btn {
