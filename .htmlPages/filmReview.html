@@ -127,42 +127,73 @@
                         </div>
                         <div class="col-sm-4 col-xs-12">
                             <h4>Proposed Venue &amp; Time</h4>
-                            <ul class="nav nav-tabs nav-justified">
-                                <li class="active" role="presentation"><a href="#">Town Hall Theatre</a></li>
-                                <li role="presentation"><a href="#">IMC Galway</a></li>
+                            <ul class="nav nav-tabs nav-justified" id="tabsVenue" role="tablist">
+                                <li class="active" role="presentation"><a href="#venueTown" data-tab-value="townHallTheatre" aria-controls="Town Hall Theatre" role="tab" data-toggle="tab">Town Hall</a></li>
+                                <li role="presentation"><a href="#venueIMC" data-tab-value="imcGalway" aria-controls="IMC Galway" role="tab" data-toggle="tab">IMC Galway</a></li>
                             </ul>
-                            TODO: make tabs change things. see "tab panels": http://getbootstrap.com/components/#nav
-                            TODO: how will changing tabs be reflected on the form?
-                            TODO: probably remove the panel and make it just a table
-                            TODO: make it line up with the tabs
-                            </table>
-                            <div class="panel panel-default">
-                                <table class="table">
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2</td>
-                                        <td>3</td>
-                                    </tr>
-                                </table>
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="venueTown" role="tabpanel">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeTownHall" id="timeTownHall1000" value="1000">
+                                            10:00am
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeTownHall" id="timeTownHall1230" value="1230">
+                                            12:30pm
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeTownHall" id="timeTownHall1400" value="1400">
+                                            2:00pm
+                                        </label>
+                                    </div>
+                                <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeTownHall" id="timeTownHall1730" value="1730">
+                                            5:30pm
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="venueIMC" role="tabpanel">
+                                    <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeIMC" id="timeIMC1100" value="1100">
+                                            11:00am
+                                        </label>
+                                    </div>
+                                <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeIMC" id="timeIMC1430" value="1430">
+                                            2:30pm
+                                        </label>
+                                    </div>
+                                <div class="radio">
+                                        <label>
+                                            <input type="radio" name="timeIMC" id="timeIMC1830" value="1830">
+                                            6:30pm
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="hidden" disabled="true" id="venue" name="venue" value="townHallTheatre">
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <button type="cancel" class="btn btn-default btn-block">Discard Changes</button>
-                        </div>
-                        <div class="col-xs-6">
-                            <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Save Review</button>
+                    <div class="row form-group">
+                        <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-6">
+                                    <button type="cancel" class="btn btn-default btn-block">Discard Changes</button>
+                                </div>
+                                <div class="col-xs-6">
+                                    <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Save Review</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -171,6 +202,9 @@
     </div> <!-- /container -->
 
     <style>
+        /**************************/
+        /* styles for ratings box */
+        /**************************/
         #ratings .glyphicon {
             font-size: 24px;
             line-height: 14px;
@@ -194,7 +228,17 @@
         #ratings div:last-child {
             text-align: left;
         }
-    </style>
+
+        /**************************/
+        /* styles for tab box */
+        /**************************/
+        .tab-pane {
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            padding: 20px;
+        }
+     </style>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -209,25 +253,18 @@
     ga('create','UA-XXXXX-X','auto');ga('send','pageview');
 </script> -->
 <script>
-$(document).ready(function() {
-    // $('input[name="rating"]').click(function() {
-    $('.list-group-item').click(function() {
-        $('.list-group-item').removeClass('active');
-        $(this).addClass('active');
+    $(document).ready(function() {
+        // add visual class to ratings radio when selected
+        $('.list-group-item').click(function() {
+            $('.list-group-item').removeClass('active');
+            $(this).addClass('active');
+        });
+
+        // fill in hidden txt box when tab changes
+        $('#tabsVenue a').on('shown.bs.tab', function(event) {
+            $('#venue').val(this.dataset.tabValue);
+        });
     });
-
-
-
-
-    $('#filmSubmit').prop('disabled', true).addClass('disabled');
-    $('#filmTermsAccepted').change(function() {
-        if ($(this).is(':checked')) {
-            $('#filmSubmit').prop('disabled', false).removeClass('disabled');
-        } else {
-            $('#filmSubmit').prop('disabled', true).addClass('disabled');
-        }
-    })
-});
 </script>
 
 
