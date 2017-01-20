@@ -7,57 +7,57 @@
 <!--<![endif]-->
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <style>
+    <style>
     body {
-      padding-top: 50px;
-      padding-bottom: 20px;
+        padding-top: 50px;
+        padding-bottom: 20px;
     }
-  </style>
+    </style>
 
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
-  <link rel="stylesheet" href="jffTheme.css">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="jffTheme.css">
 </head>
 
 <body>
-  <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
-  <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-        <a href="#" class="navbar-brand"><img src="jffLogo.jpg" style="height: 100%"></a>
-      </div>
-      <div id="navbar" class="navbar-collapse collapse">
-        <form class="navbar-form navbar-right" role="form">
-          <div class="form-group">
-            <input type="text" placeholder="Email" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="password" placeholder="Password" class="form-control">
-          </div>
-          <button type="submit" class="btn btn-success">Log in</button>
-          <button type="submit" class="btn btn-success">Sign up</button>
-        </form>
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="#" class="navbar-brand"><img src="jffLogo.jpg" style="height: 100%"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <form class="navbar-form navbar-right" role="form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Email" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" placeholder="Password" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-success">Log in</button>
+                    <button type="submit" class="btn btn-success">Sign up</button>
+                </form>
 
-      </div>
-      <!--/.navbar-collapse -->
-    </div>
-  </nav>
+            </div>
+            <!--/.navbar-collapse -->
+        </div>
+    </nav>
 
 
 
@@ -91,8 +91,10 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+                            <div class="row">
                                 <input type="checkbox" name="filmTermsAccepted" id="filmTermsAccepted">
-                                <label for="filmTermsAccepted">I have read JFF's <a href="#">terms and privacy policy</a></label>
+                                <label for="filmTermsAccepted">I have read JFF's <a data-toggle="modal" href="#terms">terms and privacy policy</a></label>
+                            </div>
                             <div class="row">
                                 <div class="col-xs-6">
                                     <button type="cancel" class="btn btn-default btn-block">Cancel</button>
@@ -108,31 +110,60 @@
         </div>
     </div> <!-- /container -->
 
+    <!-- Terms modal dialog (hidden) -->
+    <div id="terms" class="modal" role="dialog" tabindex="-1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">Terms and Privacy Policy</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque leo massa, facilisis sed gravida eget, egestas sit amet odio. Aliquam dapibus tempus nunc, non rhoncus diam bibendum ac. Praesent sed ex at elit ornare vestibulum. Aenean non dui vitae ante molestie pulvinar nec nec nisi. Quisque venenatis, augue vel tincidunt blandit, nunc urna ultricies leo, quis suscipit dolor ante sit amet erat. Praesent porttitor mauris quis tristique pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer iaculis erat sit amet tincidunt viverra. Vivamus libero urna, vulputate a consequat ac, congue in odio. Curabitur dapibus pellentesque tortor eget fermentum. Morbi a imperdiet sapien, a auctor urna. Proin tincidunt lacus neque, quis tincidunt tellus efficitur eu. Donec magna nunc, condimentum quis fringilla in, laoreet eu mi. Fusce vestibulum risus ac nisi accumsan, quis porttitor ipsum bibendum.</p>
+                    <p>Sed luctus nibh elit, non interdum neque sodales blandit. Etiam pellentesque enim eros, in convallis tellus aliquet ac. Vestibulum tempor nisi id orci iaculis, vitae hendrerit nisl hendrerit. Maecenas id volutpat magna. Praesent ornare sit amet eros ac pharetra. Aliquam sed ante eu tellus commodo dignissim. Ut vel justo lacus. Duis turpis orci, auctor eu nisl in, molestie auctor massa. Aliquam pharetra porta quam, ac condimentum est sodales sed. Aliquam facilisis ante nec egestas posuere. In facilisis non risus id auctor.</p>
+                    <p>Morbi vulputate bibendum sem. Suspendisse scelerisque turpis a sodales consectetur. Vivamus et finibus ante. Vivamus suscipit vulputate nibh, id tempor felis. Donec quis luctus dui, et pretium mi. Morbi est mi, fermentum et orci a, lobortis sollicitudin erat. In auctor et arcu nec sodales. Praesent molestie, lectus sit amet interdum interdum, metus purus scelerisque nibh, sed lobortis lectus odio sit amet magna.</p>
+                    <p>Nunc enim ante, vulputate ut enim in, vehicula blandit erat. Integer euismod auctor arcu, et hendrerit felis accumsan eu. Nunc venenatis semper risus, eget sollicitudin elit euismod ac. Nullam lorem sem, feugiat ac odio ut, pharetra tempor eros. Nulla pharetra eget elit sed commodo. Ut consectetur justo ultrices suscipit eleifend. In in consequat sem, a pharetra erat. Donec interdum felis lacinia nibh aliquet ullamcorper. Maecenas blandit pellentesque pretium. Cras vehicula dui eget gravida lacinia. Suspendisse aliquet varius tempus. Maecenas vehicula, arcu vitae facilisis finibus, leo enim molestie metus, nec vehicula metus nunc sit amet nisl. Curabitur dignissim vehicula odio, ut tempor urna scelerisque at. Morbi eget nulla risus.</p>
+                    <p>Nullam porttitor mattis erat, sit amet ornare purus dictum ut. Nulla sagittis eleifend viverra. Maecenas vel varius leo. Praesent viverra in dolor at tempor. Pellentesque nec ipsum odio. Nulla in pellentesque diam. Sed id congue sem. Suspendisse rhoncus elementum ultrices. Ut in pulvinar nisl. Mauris gravida, tellus a condimentum venenatis, augue turpis venenatis leo, non porta nibh odio eget nulla. Nullam vel eros in velit vestibulum finibus vitae ac magna. Suspendisse potenti. Nunc condimentum, quam et semper fermentum, ante mi mattis libero, a facilisis ligula quam in arcu. Integer aliquam gravida dui.</p>
+                    <p>Phasellus non lorem ut dolor porta mattis eget vitae dolor. Maecenas interdum augue eu erat venenatis, ut aliquam mi efficitur. Suspendisse potenti. Aliquam fringilla ante vitae mauris varius pellentesque. Aliquam arcu dui, porta rutrum arcu ut, consectetur ullamcorper lorem. Mauris porta elit ut ante ullamcorper interdum. Nullam a mi at nunc varius dictum. Nulla in nulla id neque semper fringilla. Aliquam venenatis efficitur sollicitudin. Mauris cursus libero non leo accumsan suscipit. Sed sapien nunc, convallis non leo dictum, malesuada sollicitudin mi.</p>
+                    <p>Morbi ullamcorper eu turpis nec blandit. Maecenas tristique diam sit amet eros imperdiet gravida. Aliquam mattis est a eros mattis pulvinar. Donec quis vulputate eros. Vestibulum sed erat ac ligula pharetra scelerisque. Praesent volutpat dui diam, at lacinia nisi vestibulum ac. Proin pellentesque efficitur lacus id ullamcorper. Phasellus tempor, arcu sed ornare efficitur, nibh ipsum tincidunt justo, et suscipit lorem risus nec massa. Donec aliquam sapien vitae quam tempus laoreet. Sed iaculis mi in eros rhoncus ultrices. Duis egestas porttitor purus, fringilla iaculis elit cursus id. Mauris facilisis, felis nec volutpat venenatis, purus eros malesuada ligula, laoreet dignissim sem nibh vel purus.</p>
+                    <p>Donec lobortis ultricies felis, quis tempor mi condimentum at. Pellentesque suscipit felis in odio mollis volutpat. In hac habitasse platea dictumst. In volutpat in lectus vitae dignissim. Praesent sem elit, scelerisque vitae nisl ac, tristique scelerisque mi. Donec bibendum sed augue ut aliquam. Praesent nec arcu libero. Nullam consectetur urna vel risus imperdiet semper ac at ipsum. Vivamus consequat velit neque, ut vehicula massa suscipit in. Suspendisse non scelerisque tortor. Fusce pulvinar justo lobortis, vestibulum dolor nec, luctus ante. Proin rutrum urna vel arcu varius aliquet.</p>
+                    <p>Maecenas eros leo, faucibus quis sollicitudin vel, dictum ut dolor. Donec sed efficitur est, nec pretium lectus. Quisque nec diam purus. Curabitur a mi mollis, ornare purus non, suscipit mi. Nunc fringilla, arcu a vehicula varius, felis metus viverra sapien, eu feugiat ex neque sit amet diam. Integer interdum, ante a accumsan pellentesque, lacus tortor dictum ligula, non pulvinar ligula orci non leo. Pellentesque nec lorem nec nulla posuere egestas nec eget tortor. Nulla non scelerisque arcu. Etiam quis viverra mauris. Nullam quis eros nec dolor pulvinar porta nec eu turpis.</p>
+                    <p>Morbi non ante leo. Donec et placerat dolor. Fusce ultrices mauris elit, eget posuere neque commodo quis. Fusce in lorem dui. Maecenas in ante eu erat mattis fermentum. Fusce commodo arcu eget diam placerat, a commodo eros venenatis. Pellentesque sit amet enim vel nisi tristique ultricies.</p>
+                    <p>Ut laoreet elementum justo et venenatis. Etiam fringilla leo nec felis pellentesque, ac volutpat justo pellentesque. Morbi iaculis pellentesque ante. Aliquam luctus egestas erat, id tincidunt turpis pharetra at. Nulla facilisi. Fusce porta tortor mauris, ac luctus est fermentum ac. Donec sagittis ultrices urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed interdum mauris vitae tortor malesuada, at ornare dui varius. Donec quis consectetur lectus. Quisque condimentum quam et commodo posuere. Vivamus vulputate rhoncus ipsum, sit amet congue est dignissim ornare. Aliquam fringilla eleifend velit, ac tincidunt quam dignissim at. Phasellus efficitur suscipit dui nec egestas. Etiam sem lacus, pulvinar quis nunc vitae, imperdiet fermentum dolor. Ut ultrices turpis metus.</p>
+                    <p>Phasellus dictum, lorem nec auctor vulputate, neque lorem placerat ipsum, vel facilisis enim nibh sagittis massa. In tristique, magna at rutrum iaculis, odio augue pretium leo, eget efficitur leo nisl sed nisi. Nulla pulvinar, urna vel malesuada iaculis, erat sem mattis odio, id feugiat lectus nisi et justo. Duis rhoncus dui erat, ac finibus tortor ultricies vel. Aliquam mattis luctus sapien, commodo elementum nisi aliquet a. Proin in suscipit elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur dignissim finibus magna, iaculis commodo diam feugiat sed.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <!-- <script src="js/main.js"></script> -->
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
     <!-- <script>
     (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-        function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-        e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-        e.src='//www.google-analytics.com/analytics.js';
-        r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-        ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-    </script> -->
+    function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
+    e=o.createElement(i);r=o.getElementsByTagName(i)[0];
+    e.src='//www.google-analytics.com/analytics.js';
+    r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
+    ga('create','UA-XXXXX-X','auto');ga('send','pageview');
+</script> -->
 
-    <script>
-        $(document).ready(function() {
+<script>
+$(document).ready(function() {
+    $('#filmSubmit').prop('disabled', true).addClass('disabled');
+    $('#filmTermsAccepted').change(function() {
+        if ($(this).is(':checked')) {
+            $('#filmSubmit').prop('disabled', false).removeClass('disabled');
+        } else {
             $('#filmSubmit').prop('disabled', true).addClass('disabled');
-            $('#filmTermsAccepted').change(function() {
-                if ($(this).is(':checked')) {
-                    $('#filmSubmit').prop('disabled', false).removeClass('disabled');
-                } else {
-                    $('#filmSubmit').prop('disabled', true).addClass('disabled');
-                }
-            })
-        });
-    </script>
+        }
+    })
+});
+</script>
 
-    </body>
-    </html>
+</body>
+</html>
