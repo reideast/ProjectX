@@ -1,6 +1,19 @@
-.navbar-inverse {
+.navbar-inverse{
     background-color: #fff;
     border-color: #CD071E;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: #CD071E;
+    background-image: none;
+    border: transparent;
+
 }
 
 .btn-success {
@@ -8,16 +21,29 @@
     background-color: #CD071E;
 }
 
+.btn-success-right {
+    color: #fff;
+    background-color: #CD071E;
+}
+
 .btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
     color: #CD071E;
     background-color: #fff;
-    border-color: transparent;
+    border-color: #CD071E;
+    border-right: 6px solid red
+}
+
+.btn-success-right:hover{
+    color: #CD071E;
+    background-color: #fff;
+    border-color: #CD071E;
+    border-left: 6px solid red
 }
 
 .btn {
     display: inline-block;
     padding: 6px 12px;
-    margin-bottom: 0;
+    margin-top: 5px;
     font-size: 14px;
     font-weight: 600;
     line-height: 1.42857143;
@@ -37,55 +63,57 @@
 }
 
 .navbar-brand {
-padding: 0;
+    padding: 0;
 }
 
-table {
-font-family: arial, sans-serif;
-border-collapse: collapse;
-width: 100%;
-margin-left: auto;
-margin-right: auto;
-
+.table.left {
+    margin-top: 30px;
 }
 
-td {
-border: 1px solid #dddddd;
-text-align: left;
-height: 30px;
-padding-left: 8px;
-margin-top: auto;
+.table {
+    margin-top: 50px;
 }
 
-tr:nth-child(even) {
-background-color: #dddddd;
-}
-tr:nth-child(even) td {
-border: 1px solid white;
+.body {
+    padding-top: 0px;
+    padding-bottom: 20px;
 }
 
-/*days of week bar*/
-th {
-border: 3px solid #dddddd;
-text-align: left;
-padding: 8px;
+.navbar-below {
+    background-color: black;
 }
 
-.dropdownAdmin1 {
-  float: right;
-}
-
-#filmBookingsGrid .row{
+hr {
+    margin-top: 20px;
     margin-bottom: 20px;
-   
+    border: 0;
+    border-top: 0px solid #eee;
 }
 
-#filmBookingsGrid .col-xs-4{
-    text-align:center;
+.navbar-form {
+    padding: 10px 15px;
+    margin-top: 8px;
+    margin-right: -15px;
+    margin-bottom: 8px;
+    margin-left: -15px;
+    border-top: 0px solid transparent;
+    border-bottom: 0px solid transparent;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1),0 1px 0 rgba(255,255,255,.1);
 }
 
-#filmBookingsGrid .col-xs-4 img{
-    display: inline-block;
+.navbar-collapse {
+    padding-right: 15px;
+    padding-left: 15px;
+    overflow-x: visible;
+    -webkit-overflow-scrolling: touch;
+    border-top: 0px solid transparent;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+}
+
+.container-img {
+    margin-top:75px;
 }
 
 .btn-primary {
@@ -97,71 +125,4 @@ padding: 8px;
     color: #CC061D;
     background-color: #fff;
     border-color: #CC061D;
-}
-
-#days th:hover{
-    color: #CC061D;
-    background-color: #fff;
-    border-color: #CC061D;
-}
-
-.navbar.center .navbar-inner {
-    text-align: center;
-    background-color:#CD071E;
-    
-    
-}
-.navbar.center .navbar-inner .nav {
-    float: none;
-    display:inline-block;
-    background-color:#CD071E;
-    text-align: center;
-}
-
-.navbar-default .navbar-nav>li>a {
-    color: #fff;
-}
-
-/*nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {*/
-/*    color: #fff;*/
-/*    background-color: #cd071e;*/
-/*}*/
-
-/*.col-xs-3{*/
-/*    border: #cdcdcd medium solid;*/
-/*}*/
-
-.col-xs-4{
-    border: #cdcdcd medium solid;
-}
-
-.adminPageUserContent{
-    min-width: 70vw;
-    position:fixed;
-    right:0;
-    text-align:right;
-}
-
-.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
-    color: #555;
-    background-color: #cd071e;
-}
-
-/*days of week word spacing*/
-.nav>li>a {
-    position: relative;
-    display: block;
-    padding: 20px 35px;
-}
-
-.collections {
-    position: absolute;
-    top: 50;
-    bottom: 50;
-    right: 50;
-}
-
-.container{
-     top:50;
-     bottom:50;
 }
