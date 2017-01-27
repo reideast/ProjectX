@@ -64,8 +64,9 @@ tr:nth-child(even) td {
 border: 1px solid white;
 }
 
+/*days of week bar*/
 th {
-border: 1px solid #dddddd;
+border: 3px solid #dddddd;
 text-align: left;
 padding: 8px;
 }
@@ -98,3 +99,69 @@ padding: 8px;
     border-color: #CC061D;
 }
 
+#days th:hover{
+    color: #CC061D;
+    background-color: #fff;
+    border-color: #CC061D;
+}
+
+.navbar.center .navbar-inner {
+    text-align: center;
+    background-color:#CD071E;
+    
+    
+}
+.navbar.center .navbar-inner .nav {
+    float: none;
+    display:inline-block;
+    background-color:#CD071E;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+/*nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {*/
+/*    color: #fff;*/
+/*    background-color: #cd071e;*/
+/*}*/
+
+/*.col-xs-3{*/
+/*    border: #cdcdcd medium solid;*/
+/*}*/
+
+.col-xs-4{
+    border: #cdcdcd medium solid;
+}
+
+.adminPageUserContent{
+    min-width: 70vw;
+    position:fixed;
+    right:0;
+    text-align:right;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #555;
+    background-color: #cd071e;
+}
+
+/*days of week word spacing*/
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 20px 35px;
+}
+
+.collections {
+    position: absolute;
+    top: 50;
+    bottom: 50;
+    right: 50;
+}
+
+.container{
+     top:50;
+     bottom:50;
+}
