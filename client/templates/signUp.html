@@ -1,0 +1,75 @@
+<template name="signUp">
+	
+  <style>
+	
+	
+	.btn-link {
+		color: #fff;
+		background-color: #CD071E;
+	}
+	
+	.btn-primary {
+		color: #000;
+		background-color: #CD071E;
+	}
+	
+	.btn btn-default {
+		color: #000;
+		border: 2px solid #F00;
+	}
+
+  </style>
+   <div class="container">
+   		<div class="row">
+                <form class="form-horizontal" role="form">
+                    <h1 align="center">Sign Up</h1>
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <input type="text" id="firstName" placeholder="Name" class="form-control" autofocus>
+                        </div>
+                    </div>
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <input type="email" id="email" placeholder="Email" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <input type="password" id="contact" placeholder="Contact No." class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="student" value="Student">Student
+                                </label>
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="student" value="Student">Teacher
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox">I have read JFF's terms & privacy policy <a href="#">terms</a>
+                                </label>
+                            </div>
+                        </div>
+                    </div> <!-- /.form-group -->
+                    <div class="form-group">
+           				<div class="col-xs-3 col-xs-offset-2">
+                            <button type="submit" class="btn btn-default btn-block">Cancel</button>
+                        </div>
+           				<div class="col-xs-3">
+                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
+                </form> <!-- /form -->
+           </div>
+    </div> <!-- ./container -->
+</template>
