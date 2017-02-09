@@ -1,11 +1,13 @@
 language: node_js
 node_js:
-  - "0.12"
-  # - "6"
-  # - "6.1"
-  # - "5.11"
-  # - "0.6"
-  # - "iojs"
+- '0.12'
 services:
-  - mongodb
-# script: 
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: ifvtlL9cgTglqetmbQPndP8XtEh9cwUijcmac48fE9e9QjHb0Hvm54uWYYcfkI+w11AO1Hko7ksclxhqL4ZKmdpY1Uw/bvBWfKlyogW2SF44MX6balcwo0KUtwt7MjueXIPyyZezF6VNNIRcRSsZRNFuXhVICYVpPbdkhWxoulO4jhvvJuieKzQD+uDiSYm5MtqRbQN8DL9WGhQuO/XgfYwk5/K5SStlL2+kfkpx2ARwwkl8Dr7WOpoBb7BxXIEqjzYgiC0vuOANU+Z6gNy2V6cTUQbpmC3NoGlmzsuVapN0WgRytOfvPVlG+57KkkzUbb6TK4YgHWBPK3w76SJXoshz9T1cGXLTn8JM+Qf6zlWCd08Cgv6V2xfw2XKeSP5bh6ZXoC8Gm5sbRR03ncPltAn0CB/1DH1MZLarc72lTqZ+OynanU/TfY6ymtLLOKz45EP+oyF4rFqELOiaA6rpuEA+BpOAivC78UcPSK+TymuJap/AoolkrdoaD1GbclBxC1dnwUGauzIciuIUVya1UaYR5pwG1NRqYKrtknmNSed0HP5dFuxuGnTQ61Ik88ZDu36ah+qb1oh/ggdImbeNnv+t5T7jv2XlLlTErRP9iEt/znO1Xl6lAIUeNnuqVniF2r+D6GSuCglK/wvENa/fmKdEi+f/QBLId4qj43OXZRE=
+  app:
+    TravisConfig: teamtrycatch
+    dev: ProjectX
+  buildpack: https://github.com/AdmitHub/meteor-buildpack-horse.git
