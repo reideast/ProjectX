@@ -10,4 +10,5 @@ deploy:
   app:
     master: teamtrycatch
     dev: devtrycatch
+    dev-reideast: reidtrycatch
   buildpack: https://github.com/AdmitHub/meteor-buildpack-horse.git
