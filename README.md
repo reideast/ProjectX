@@ -26,9 +26,10 @@
   
 ## Minimum Viable Product
   The minimum functionality to be a success to our client is to implement:
+  - user creation,
   - film submissions,
   - submission reviews,
-  - film bookings.
+  
   
 ## Existing Website
 - http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
