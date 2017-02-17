@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+- '0.12'
+services:
+- mongodb
+deploy:
+  provider: heroku
+  api_key:
+    secure: ykBnridyVP1iRpgHlE8L9192V5+xZYWw+n3FaRlvy0EJJV3BlNwC+4aVn/sRJllx22Q8If35u6l9J7MxeO7KTK90omFhrlvCLGEB45Sz69DV2k4FJVopqzfgRSjZ1Bn5XFUzHtpYaW3fOQ0Af7ppHyM/WlUh8VeI14zkvzEpfjjcMx9elmeRAKRSnB5Dk//pk1PDBE2BiNVjho3fNgc3mrZZznBcTqgGR4GPp28IBB8+pcxiJ5Ko2b13QdUo5lIPTVn7sHprkp5e09qX0MPonx4eA5uK04YXnydGIpe6uY4OiWrGmKD1Hs950UJy9n3kYlRy3SmQ4ZK4ME4x96aDpw6M29c9Vy9NkfH4rlAS6jAajpccRJCpBD/TwBD+YgEupjIrkpoQlKTRcoOrMk8+hfv9zEMMrZ+jaTd4JhTcHtzfLrpRS19FlQALy37xm73Sk/Jao/jzT7goRtDS7T2bwX8zUThcqcX9BoI7sh5MqpEnxDSXHlTYFPw57aHlsRAMubEWIgmbD/Kj7mgjO8AL0rIPDL5WxFrhB8oMI8gm7q8BwFhI6IDCStOlUjY01uN+gz4jnNGsZCANYsQVXjNoRnaYGp/J2/F5dIKEBeBF+J+xPhCqgoa118IzfBnKrQObTMIv4ecfrYNFHJI8x8eGqqXi3PXLW7wTpd+HdtDEA3k=
+  app:
+    master: teamtrycatch
+    dev: devtrycatch
+  buildpack: https://github.com/AdmitHub/meteor-buildpack-horse.git
