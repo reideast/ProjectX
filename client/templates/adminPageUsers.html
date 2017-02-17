@@ -1,0 +1,262 @@
+<template name="adminPageUsers">
+
+     <div class="container-fluid">
+    <div class="container">
+      <h1></h1>
+      <div class="row">
+        <div class="col-xs-2  collections">
+          <table>
+            <tr>
+              <td>Collections</td>
+              </tr>
+          </table>
+          <table>
+            <tr>
+              <td>Submissions</td>
+              </tr>
+          </table>
+          <table>
+            <tr>
+              <td>Bookings</td>
+              </tr>
+          </table>
+          <table>
+            <tr>
+              <td>Users</td>
+              </tr>
+          </table>
+          <p></p>
+        </div>
+        <div class="col-xs-9 col-md-offset-3 ">
+          <table>
+            <tr>
+              <th>Users</th>
+              <th>Email</th>
+              <th>Seen</th>
+              <th>Priveleges</th>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>
+                <div class="dropdown">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">User
+                          <span class="caret"></span></button>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Reviewer</a></li>
+                    <li><a href="#">Admin</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<style>
+
+    .navbar-inverse {
+    background-color: #fff;
+    border-color: #CD071E;
+}
+
+.btn-success {
+    color: #fff;
+    background-color: #CD071E;
+}
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open>.dropdown-toggle.btn-success {
+    color: #CD071E;
+    background-color: #fff;
+    border-color: transparent;
+}
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: bottom;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-brand {
+padding: 0;
+}
+
+table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 100%;
+margin-left: auto;
+margin-right: auto;
+
+}
+
+td {
+border: 1px solid #dddddd;
+text-align: left;
+height: 30px;
+padding-left: 8px;
+margin-top: auto;
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+}
+tr:nth-child(even) td {
+border: 1px solid white;
+}
+
+/*days of week bar*/
+th {
+border: 3px solid #dddddd;
+text-align: left;
+padding: 8px;
+}
+
+.dropdownAdmin1 {
+  float: right;
+}
+
+#filmBookingsGrid .row{
+    margin-bottom: 20px;
+
+}
+
+#filmBookingsGrid .col-xs-4{
+    text-align:center;
+}
+
+#filmBookingsGrid .col-xs-4 img{
+    display: inline-block;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #CC061D;
+    border-color: #fff;
+}
+.btn-primary:hover {
+    color: #CC061D;
+    background-color: #fff;
+    border-color: #CC061D;
+}
+
+#days th:hover{
+    color: #CC061D;
+    background-color: #fff;
+    border-color: #CC061D;
+}
+
+.navbar.center .navbar-inner {
+    text-align: center;
+    background-color:#CD071E;
+
+
+}
+.navbar.center .navbar-inner .nav {
+    float: none;
+    display:inline-block;
+    background-color:#CD071E;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
+}
+
+/*nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {*/
+/*    color: #fff;*/
+/*    background-color: #cd071e;*/
+/*}*/
+
+/*.col-xs-3{*/
+/*    border: #cdcdcd medium solid;*/
+/*}*/
+
+.col-xs-4{
+    border: #cdcdcd medium solid;
+}
+
+.adminPageUserContent{
+    min-width: 70vw;
+    position:fixed;
+    right:0;
+    text-align:right;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #555;
+    background-color: #cd071e;
+}
+
+/*days of week word spacing*/
+.nav>li>a {
+    position: relative;
+    display: block;
+    padding: 20px 35px;
+}
+
+.collections {
+    position: absolute;
+    top: 50;
+    bottom: 50;
+    right: 50;
+}
+
+.container{
+     top:50;
+     bottom:50;
+}
+</style>
+
+</template>
