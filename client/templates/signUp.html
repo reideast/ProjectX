@@ -25,50 +25,56 @@
                     <h1 align="center">Sign Up</h1>
                     <div class="form-group">
            				<div class="col-sm-6 col-sm-offset-3">
-                            <input type="text" id="firstName" placeholder="Name" class="form-control" autofocus>
+                            <input type="text" name="name" placeholder="Name" class="form-control" autofocus required>
                         </div>
                     </div>
                     <div class="form-group">
            				<div class="col-sm-6 col-sm-offset-3">
-                            <input type="email" id="email" placeholder="Email" class="form-control">
+                            <input type="email" name="email" placeholder="Email" class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
            				<div class="col-sm-6 col-sm-offset-3">
-                            <input type="password" id="contact" placeholder="Contact No." class="form-control">
+                            <input type="password"  name="password" placeholder="Password" class="form-control" required>
+                        </div>
+                        </div>
+                    <div class="form-group">
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <input type="tel"  name="contactNo" placeholder="Contact No." class="form-control" required>
                         </div>
                     </div>
                     <div class="form-group">
            				<div class="col-sm-6 col-sm-offset-3">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="student" value="Student">Student
+                                    <input type="radio" name="person" value="Student" checked> Student
                                 </label>
                             </div>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" id="student" value="Student">Teacher
-                                </label>
-                            </div>
-                        </div>
-                    </div> <!-- /.form-group -->
-                    <div class="form-group">
-           				<div class="col-sm-6 col-sm-offset-3">
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox">I have read JFF's terms & privacy policy <a href="#">terms</a>
+                                    <input type="radio" name="person" value="Teacher"> Teacher
                                 </label>
                             </div>
                         </div>
                     </div> <!-- /.form-group -->
-                    <div class="form-group">
+                    <div class="form-group" >
+           				<div class="col-sm-6 col-sm-offset-3">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="terms">I have read JFF's terms & privacy policy <a href="#">terms</a>
+                                </label>
+                            </div>
+
+                    </div> <!-- /.form-group -->
+
            				<div class="col-xs-3 col-xs-offset-2">
-                            <button type="submit" class="btn btn-default btn-block">Cancel</button>
+                            <button type="reset" class="btn btn-default btn-block"> Cancel</button>
                         </div>
            				<div class="col-xs-3">
-                            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                            <button type="submit" class="btn btn-primary btn-block"  >Submit</button>
                         </div>
                     </div>
+
                 </form> <!-- /form -->
            </div>
     </div> <!-- ./container -->
