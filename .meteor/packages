@@ -25,6 +25,7 @@ accounts-password
 kadira:blaze-layout
 twbs:bootstrap
 
-juliancwirko:s-alert
+juliancwirko:s-alert          #start of jim-login packages
 themeteorchef:jquery-validation
 juliancwirko:s-alert-scale
+aldeed:autoform
