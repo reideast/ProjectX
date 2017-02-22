@@ -24,3 +24,7 @@ accounts-ui
 accounts-password
 kadira:blaze-layout
 twbs:bootstrap
+
+juliancwirko:s-alert
+themeteorchef:jquery-validation
+juliancwirko:s-alert-scale
