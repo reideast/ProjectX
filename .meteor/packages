@@ -20,3 +20,11 @@ shell-server@0.2.1            # Server-side component of the `meteor shell` comm
 
 autopublish@1.0.7             # Publish all data to the clients (for prototyping)
 insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+kadira:flow-router
+twbs:bootstrap
+aldeed:autoform
+accounts-password
+accounts-ui
+juliancwirko:s-alert
+themeteorchef:jquery-validation
+juliancwirko:s-alert-scale
