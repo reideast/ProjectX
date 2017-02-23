@@ -1,1 +1,17 @@
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 160px;
+    /*set margin this way in your custom styesheet*/
+}
+
+
 /* CSS declarations go here */
+
+
+/*.signUpBtns {
+    padding-top: 10px;
+  }*/
+
+#login-buttons {
+    margin-top: 18px;
+}
