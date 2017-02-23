@@ -1,3 +1,2 @@
 #!/bin/bash
-MONGO_URL='mongodb://mongodb2885qj:ly0dig@danu7.it.nuigalway.ie:8717/mongodb2885' meteor --port 8635
-
+MONGO_URL='mongodb://mongodb2606od:we3xux@danu7.it.nuigalway.ie:8717/mongodb2606' meteor --port 8619
