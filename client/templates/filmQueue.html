@@ -1,4 +1,7 @@
 <template name="filmQueue">
+  {{#unless currentUser.emails.[0].verified}}
+    <p class="alert alert-warning">You need to verify your email address before using the admin area. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
+  {{else}}
     <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-xs-12">
             <!-- table.table.table-striped>thead>tr>th*8^^+tbody>(tr>th{$}+td>img[src="http://placehold.it/50x50"]^+td{Title}+td{Name}+td{20:00}+td{Short}+td{desc}+td{comments}+td>span.glyphicon.glyphicon-ok)*6 -->
@@ -87,6 +90,7 @@
             </table>
         </div>
     </div>
+  {{/unless}}
 
     <script>
     // Basic way to make a whole DOM node act as an anchor tag

@@ -1,4 +1,7 @@
 <template name="filmBooking">
+  {{#unless currentUser.emails.[0].verified}}
+    <p class="alert alert-warning">You need to verify your email address before using the admin area. <a href="#" class="resend-verification-link">Resend verification link</a>.</p>
+  {{else}}
      <div class="container">
         <div class="row">
             <div class="col-sm-12">
@@ -259,4 +262,6 @@ padding: 8px;
 
 
      </style>*/ -->
+
+   {{/unless}}
 </template>
