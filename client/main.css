@@ -26,3 +26,9 @@
     border-color: #CD071E;
     background-color: #ffffff;
 }*/
+
+#login-dropdown-list {
+    position: absolute;
+    top: 40px;
+    left: -1px;
+}
