@@ -15,3 +15,14 @@
 #login-buttons {
     margin-top: 18px;
 }
+
+.bert-alert.danger {
+  background: #CD071E;
+  color: #fff;
+}
+
+/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-bottom: 5px solid;
+    border-color: #CD071E;
+    background-color: #ffffff;
+}*/
