@@ -1,0 +1,42 @@
+<head>
+	<style>
+	#container{
+		width:40vw;
+		height:300px;
+		position:relative;
+		margin-left:auto;
+		margin-right:auto;
+	}
+	</style>
+</head>
+<body>
+</body>
+
+
+<template name="uploadForm">
+	<div class="container">
+    	<div class="form-group"> 
+              {{#with currentUpload}}
+              Uploading <b>{{file.name}}</b>: 
+              <span id="progress">{{progress.get}}%</span>
+              {{else}}
+              <input id="fileInput" type="file" />
+              <p><small>Upload file in <code>mp4</code> or <code>avi</code> or <code>3gp</code> format, with size less or equal to 2GB</small></p>
+               {{/with}}
+     	</div>
+     	<div class="form-group"> 
+              {{#if uploadedFiles.count}}
+               <ul>
+               {{#each file in uploadedFiles.each}}
+               <li>
+               <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+               </li>
+               {{/each}}
+               </ul>
+               {{else}}
+               <div>No files uploaded, yet</div>
+               {{/if}}
+      </div>
+      </div>
+</template>
+      
