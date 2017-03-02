@@ -8,7 +8,6 @@ accounts-ui-unstyled@1.1.12
 aldeed:autoform@5.8.1
 aldeed:simple-schema@1.1.0
 allow-deny@1.0.5
-autopublish@1.0.7
 autoupdate@1.2.11
 babel-compiler@6.9.1_1
 babel-runtime@0.1.11_1
@@ -85,7 +84,6 @@ reactive-var@1.0.10
 reload@1.1.10
 retry@1.0.8
 routepolicy@1.0.11
-rzymek:fullcalendar@2.7.2
 service-configuration@1.0.10
 session@1.1.6
 sha@1.0.8

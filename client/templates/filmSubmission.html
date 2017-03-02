@@ -18,6 +18,28 @@
                     </select>
                 </div>
                 <div class="form-group">
+                    {{#with currentUpload}}
+                        Uploading <strong>{{file.name}}</strong>: <span id="progress">{{progress.get}}</span>
+                    {{else}}
+                        <label for="fileInput">Upload File</label>
+                        <input type="file" id="fileInput">
+                        <small>Upload file in <code>mp4</code> or <code>avi</code> or <code>3gp</code> format, with size less or equal to 2GB</small>
+                    {{/with}}
+                </div>
+                <div class="form-group">
+                    {{#if uploadedFiles.count}}
+                        <ul>
+                            {{#each file in uploadedFiles.each}}
+                                <li>
+                                    <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+                                </li>
+                            {{/each}}
+                        </ul>
+                    {{else}}
+                        <div>No files uploaded, yet</div>
+                    {{/if}}
+                </div>
+                <div class="form-group">
                     <label for="filmDescription">Short Description of Film</label>
                     <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)"></textarea>
                 </div>
