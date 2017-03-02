@@ -27,5 +27,8 @@
     background-color: #ffffff;
 }*/
 
-
-/*footerCss*/
+#login-dropdown-list {
+    position: absolute;
+    top: 40px;
+    left: -1px;
+}
