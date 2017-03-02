@@ -30,7 +30,7 @@ Template.signUp.onRendered(function() {
     });
 });
 
-   
+
 
 
 
@@ -87,5 +87,3 @@ Template.signUp.events({
 //             }
 //         }
 //     }, "this email is already exist. too bad");
-
-
