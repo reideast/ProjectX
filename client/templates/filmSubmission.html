@@ -20,6 +20,7 @@
                 <div class="form-group">
                     {{#with currentUpload}}
                         Uploading <strong>{{file.name}}</strong>: <span id="progress">{{progress.get}}</span>
+                        <p>// TODO: progress bar</p>
                     {{else}}
                         <label for="fileInput">Upload File</label>
                         <input type="file" id="fileInput">
@@ -30,8 +31,14 @@
                     {{#if uploadedFiles.count}}
                         <ul>
                             {{#each file in uploadedFiles.each}}
+                                <p>file: {{file}}</p>
                                 <li>
-                                    <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+                                    <p>link: {{file.link}}</p>
+                                    <p>name: {{file.name}}</p>
+                                    <p>path: {{file.path}}</p>
+                                    <p>
+                                        <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+                                    </p>
                                 </li>
                             {{/each}}
                         </ul>

@@ -1,5 +1,10 @@
 Template.filmSubmission.helpers({
     uploadedFiles: function () {
+        // console.log("********** LOGGING! **********");
+        // var vids = Videos.find();
+        // vids.forEach(function(item) {
+        //     console.log(item);
+        // });
         return Videos.find();
     }
 });
@@ -33,8 +38,10 @@ Template.filmSubmission.events({
 
                 uploadInstance.on('end', function(error, fileObj) {
                     if (error) {
+                        // TODO: use salert package
                         alert('Error during upload: ' + error.reason);
                     } else {
+                        // TODO: use salert package
                         alert('File "' + fileObj.name + '" successfully uploaded');
                     }
                     template.currentUpload.set(false);
