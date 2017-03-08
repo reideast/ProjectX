@@ -5,7 +5,7 @@ Template.filmSubmission.helpers({
         // vids.forEach(function(item) {
         //     console.log(item);
         // });
-        return Videos.find();
+        return Films.find();
     }
 });
 
@@ -20,13 +20,40 @@ Template.filmSubmission.helpers({
 });
 
 Template.filmSubmission.events({
+    'submit #filmSubmissionForm': function(e) {
+        e.preventDefault();
+
+        console.log(e.target)
+        console.log(e.target.filmTitle)
+        console.log(e.target.filmTitle.value)
+
+        let frm = e.target;
+        let filmData = {
+            title: frm.filmTitle.value,
+            genre: frm.filmGenre.value,
+            length: frm.filmLength.value,
+            fileId: frm.filmFileOption.value,
+            description: frm.filmDescription.value,
+            termsAccepted: frm.filmTermsAccepted.checked
+        };
+
+        Meteor.call('filmSubmit', filmData, function(error, result) {
+            if (error) {
+                console.log("Film submission failed: " + error.reason);
+                return "Film submission failed: " + error.reason;
+            } else {
+                console.log("Film has been submitted");
+                return true;
+            }
+        });
+    },
     'change #fileInput': function (e, template) {
         if (e.currentTarget.files && e.currentTarget.files[0]) {
             // We upload only one file, in case
             // there was multiple files selected
             var file = e.currentTarget.files[0];
             if (file) {
-                var uploadInstance = Videos.insert({
+                var uploadInstance = Films.insert({
                     file: file,
                     streams: 'dynamic',
                     chunkSize: 'dynamic'
@@ -46,7 +73,6 @@ Template.filmSubmission.events({
                     }
                     template.currentUpload.set(false);
                 });
-
 
                 uploadInstance.start();
             }
