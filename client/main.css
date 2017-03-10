@@ -21,11 +21,11 @@
   color: #fff;
 }
 
-/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border-bottom: 5px solid;
     border-color: #CD071E;
     background-color: #ffffff;
-}*/
+}
 
 #login-dropdown-list {
     position: absolute;
