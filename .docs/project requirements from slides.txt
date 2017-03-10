@@ -1,0 +1,11 @@
+Primary features
+ 1) User registration/login – social media i.e. FB, Twitter,
+G+
+ 2) Comments, stored in MongoDB – users can choose to
+be anonymous or public when posting
+ 3) Private message between users, if you are sent a
+private message an email should also be sent to
+registered address of user
+ 4) GIT commits (50+) – link to the repository
+ 5) Bootstrap UI, Semantic UI, Foundation – responsive
+design

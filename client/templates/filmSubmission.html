@@ -1,7 +1,7 @@
 <template name="filmSubmission">
     <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-xs-12">
-            <form action="">
+        <div class="col-sm-8 col-sm-offset-2 col-xs-12">
+            <form id="filmSubmissionForm">
                 <div class="form-group">
                     <label for="filmTitle">Film Title</label>
                     <input type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
@@ -18,12 +18,49 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="filmDescription">Short Description of Film</label>
-                    <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)"></textarea>
+                    {{#with currentUpload}}
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info" style="width: {{progress.get}}%;" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">{{progress.get}}% Complete</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {{else}}
+                        <label for="fileInput">Upload File</label>
+                        <input type="file" id="fileInput">
+                        <small>Upload file in <code>mp4</code> or <code>avi</code> or <code>3gp</code> format, with size less or equal to 2GB</small>
+                    {{/with}}
                 </div>
                 <div class="form-group">
-                    <label for="filmComments">Additional Comments</label>
-                    <textarea name="filmComments" id="filmComments" cols="30" rows="6" class="form-control" placeholder="Additional comments (limit 250 characters)"></textarea>
+                    {{#if uploadedFiles.count}}
+                        <label>Uploaded Film (Select One)</label>
+                        {{#each file in uploadedFiles.each}}
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" name="filmFileOption" id="filmFileOption" value="{{file._id}}" checked><!-- set each one to be checked by default -->
+                                    {{file.name}}
+                                </label>
+                            </div>
+                            <!-- <p>file: {{file}}</p>
+                            <li>
+                                <p>link: {{file.link}}</p>
+                                <p>name: {{file.name}}</p>
+                                <p>path: {{file.path}}</p>
+                                <p>
+                                    <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
+                                </p>
+                            </li> -->
+                        {{/each}}
+                    {{else}}
+                        <div>Please upload a film</div>
+                    {{/if}}
+                </div>
+                <div class="form-group">
+                    <label for="filmDescription">Short Description of Film</label>
+                    <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)"></textarea>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 col-sm-offset-6 col-xs-12">

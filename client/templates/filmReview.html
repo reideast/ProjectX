@@ -57,9 +57,9 @@
                     </div>
                     <div class="col-sm-4 col-xs-12">
                         <h4>Proposed Date</h4>
-                        <button id="calendarButton" class="btn btn-default">
-                            <img src="img/calendarPlaceholder.png" class="img-responsive">
-                        </button>
+                        <div id="calendarButton">
+                            {{> fullcalendar options id="reviewCalendar" }}
+                        </div>
                     </div>
                     <div class="col-sm-4 col-xs-12">
                         <h4>Proposed Venue &amp; Time</h4>
