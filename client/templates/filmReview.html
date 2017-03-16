@@ -8,16 +8,13 @@
                     <div class="col-sm-10 col-sm-offset-1 col-xs-12">
                         <div class="form-group">
                             <h3>{{submittedFilm.title}}</h3>
-                            {{#with video}}
                             <div class="embed-responsive embed-responsive-16by9">
-                                <video src="{{fileURL video}}" autoplay poster="posterimage.jpg">
-                                    Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href="{{submittedFilm.path}}">download it</a> and watch it with your favorite video player!
+                                <video src="{{fileURL film}}" controls preload="auto">
+                                    Sorry, your browser doesn't support embedded videos, but don't worry, you can <a href="{{fileURL film}}?download=true">download it</a> and watch it with your favorite video player!
                                 </video>
-                                <!-- <iframe id="filmPlayer" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&amp;showinfo=0" frameborder="0" allowfullscreen></iframe> -->
                             </div>
-                            {{/with}}
-                            <h3>{{submittedFilm.genre}} - <em>{{submittedFilm.length}} Length Film</em></h3>
-                            <p><strong>Description:</strong> {{submittedFilm.description}}</p>
+                            <h4>{{submittedFilm.genre}} - <em>{{submittedFilm.length}} Length Film</em></h4>
+                            <h5><strong>Description:</strong> {{submittedFilm.description}}</h5>
                         </div>
                         <div class="form-group">
                             <h4>Comments</h4>
