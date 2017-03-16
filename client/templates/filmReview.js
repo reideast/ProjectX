@@ -6,8 +6,8 @@ Template.filmReview.onCreated(function() {
         // subscribe to the published user data (defined in users.js):
         self.subscribe('users.one', usr);
 
-        console.log("INSIDE AUTORUN");
-        console.log('usr=' + usr);
+        // console.log("INSIDE AUTORUN");
+        // console.log('usr=' + usr);
         // let userVideo = Users.find({
         //     _id: FlowRouter.getParam('userId')
         // });
@@ -35,6 +35,17 @@ Template.filmReview.helpers({
         return usrVideo;
     },
     video: function() {
-        // var
+        console.log("INSIDE HELPER video");
+        let userVideo = Users.findOne({ _id: FlowRouter.getParam('userId') });
+        console.log('found:')
+        console.log(userVideo);
+        console.log('userVideo.submittedFilm=')
+        console.log(userVideo.submittedFilm);
+        Meteor.subscribe('files.films.current', userVideo.submittedFilm.fileId);
+        // this.subscribe('files.films.current', userVideo.submittedFilm.fileId);
+        let video = Films.collection.findOne({ _id: userVideo.submittedFilm.fileId});
+        console.log('found:');
+        console.log(video);
+        return video;
     }
 });
