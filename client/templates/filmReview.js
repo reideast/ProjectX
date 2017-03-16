@@ -12,13 +12,14 @@ Template.filmReview.helpers({
     userData: function() {
         // get data:
         // note: despite using "findOne()", this does depend on the Subscription to get the proper user data
+        console.log(Users);
         let userFilm = Users.findOne({
             _id: FlowRouter.getParam('userId')
         }) || {};
+        console.log(userFilm);
         // note: .count() won't work to see if one was retrieved or not: usrVideo.count());
         // TODO: error handling: how to show if attemping to show a video that's not found
         // TODO: show route with slug rather than _id. idea: https://github.com/deborah-ufw/flow-router-dynamic-links-use-slug
-        // console.log(usrVideo);
         console.log(userFilm.submittedFilm.fileId);
         Meteor.subscribe('files.films.current', userFilm.submittedFilm.fileId);
         return userFilm;
@@ -26,8 +27,6 @@ Template.filmReview.helpers({
     film: function() {
         // by calling this template like so: {{#with video submittedFilm}}, i have set the data context
         // and "this" is set to the user that was found
-        // console.log(this);
-        console.log(this.submittedFilm.fileId);
 
         // necessary to have this subscription here in order to get user.submittedFilm.fileId
         // console.log("INSIDE HELPER video");
