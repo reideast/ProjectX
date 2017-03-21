@@ -1,0 +1,10 @@
+<template name="viewFilms">
+    {{#each filmListing}}
+        {{#each emails}}
+            {{address}}
+        {{/each}}
+        <a href="film/{{_id}}">
+            {{submittedFilm.title}}
+        </a>
+    {{/each}}
+</template>
