@@ -23,9 +23,9 @@ Template.filmSubmission.events({
     'submit #filmSubmissionForm': function(e) {
         e.preventDefault();
 
-        console.log(e.target)
-        console.log(e.target.filmTitle)
-        console.log(e.target.filmTitle.value)
+        // console.log(e.target)
+        // console.log(e.target.filmTitle)
+        // console.log(e.target.filmTitle.value)
 
         let frm = e.target;
         let filmData = {
@@ -39,11 +39,11 @@ Template.filmSubmission.events({
 
         Meteor.call('filmSubmit', filmData, function(error, result) {
             if (error) {
-                console.log("Film submission failed: " + error.reason);
-                return "Film submission failed: " + error.reason;
+                sAlert.error("Film submission failed: " + error.reason);
+                // return "Film submission failed: " + error.reason;
             } else {
-                console.log("Film has been submitted");
-                return true;
+                sAlert.success("Film has been submitted");
+                // return true;
             }
         });
     },

@@ -4,6 +4,9 @@
             {{address}}
         {{/each}}
         <a href="film/{{_id}}">
+            <div style="width: 200px;">
+                <img src="{{submittedFilm.thumbnailPath}}" alt="thumbnail" class="img-responsive">
+            </div>
             {{submittedFilm.title}}
         </a>
     {{/each}}
