@@ -65,11 +65,10 @@ Template.filmSubmission.events({
 
                 uploadInstance.on('end', function(error, fileObj) {
                     if (error) {
-                        // TODO: use salert package
-                        console.log('Error during upload: ' + error.reason);
+                        sAlert.error('Error during upload: ' + error.reason);
+
                     } else {
-                        // TODO: use salert package
-                        console.log('File "' + fileObj.name + '" successfully uploaded');
+                        sAlert.success('File "' + fileObj.name + '" successfully uploaded');
                     }
                     template.currentUpload.set(false);
                 });
