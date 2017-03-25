@@ -5,7 +5,11 @@
         {{/each}}
         <a href="film/{{_id}}">
             <div style="width: 200px;">
-                <img src="{{submittedFilm.thumbnailPath}}" alt="thumbnail" class="img-responsive">
+                <!-- <p>{{ thumbURL submittedFilm.fileId }}</p> -->
+                <!-- <p>{{ fileURL fileRef 'thumbnail' }}</p> -->
+                <!-- <p>{{ fileURL fileRef }}</p> -->
+                <!-- <p></p> -->
+                <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
             </div>
             {{submittedFilm.title}}
         </a>

@@ -21,6 +21,7 @@ Template.filmReview.helpers({
         // TODO: error handling: how to show if attemping to show a video that's not found
         // TODO: show route with slug rather than _id. idea: https://github.com/deborah-ufw/flow-router-dynamic-links-use-slug
         console.log(userFilm.submittedFilm.fileId);
+        // TODO: this doesn't currenlty exist as a Published object!!
         Meteor.subscribe('files.films.current', userFilm.submittedFilm.fileId);
         return userFilm;
     },
@@ -35,10 +36,11 @@ Template.filmReview.helpers({
         // console.log(userFilm);
         // console.log('userFilm.submittedFilm=')
         // console.log(userFilm.submittedFilm);
+        // TODO: this doesn't currenlty exist as a Published object!!
         Meteor.subscribe('files.films.current', this.submittedFilm.fileId);
         // this.subscribe('files.films.current', userFilm.submittedFilm.fileId);
         let film = Films.collection.findOne({ _id: this.submittedFilm.fileId});
-        console.log(film);
+        // console.log(film);
         // let video = Films.collection.findOne({ _id: userFilm.submittedFilm.fileId});
         // console.log('found:');
         // console.log(video);
