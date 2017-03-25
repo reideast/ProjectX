@@ -1,3 +1,4 @@
+
 /* global jQuery*/
 /*global $*/
 sAlert.config({
@@ -41,7 +42,7 @@ Template.signUp_reg.events({
         var password = $('[name=password-login]').val();
         Meteor.loginWithPassword(email, password, function (err) {
         if (!err) {
-            FlowRouter.go("/");
+            FlowRouter.go("profilePage");
         }
         else {
             console.log(err);
@@ -85,8 +86,8 @@ Template.signUp_reg.events({
         else {
             sAlert.error("Terms Must be checked");
         }
-        //  FlowRouter.go("homePage");
-        // name: "homePage";
+        FlowRouter.go("homePage");
+        name: "homePage";
     }
 });
 

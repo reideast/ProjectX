@@ -1,3 +1,4 @@
+
 Template.filmSubmission.helpers({
     uploadedFiles: function () {
         // console.log("********** LOGGING! **********");
@@ -36,6 +37,8 @@ Template.filmSubmission.events({
             description: frm.filmDescription.value,
             termsAccepted: frm.filmTermsAccepted.checked
         };
+		
+          FlowRouter.go('profilePage');
 
         Meteor.call('filmSubmit', filmData, function(error, result) {
             if (error) {
@@ -79,3 +82,4 @@ Template.filmSubmission.events({
         }
     }
 });
+
