@@ -1,3 +1,4 @@
+
 /* global jQuery*/
 /*global $*/
 sAlert.config({
