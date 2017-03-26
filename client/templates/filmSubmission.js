@@ -70,6 +70,9 @@ Template.filmSubmission.events({
                 sAlert.success("Film has been submitted");
                 // TODO: router route to new own Profile page
                 // TODO: ok to move {{> sAlert }} to master template?
+
+		// TODO: verify this works (I added it during the diff/merge)
+          	FlowRouter.go('profilePage');
             }
         });
     },
@@ -95,6 +98,7 @@ Template.filmSubmission.events({
                     } else {
                         sAlert.success('File "' + fileObj.name + '" successfully uploaded');
                     }
+                    template.currentUpload.set(false);
                 });
 
                 // start upload!
