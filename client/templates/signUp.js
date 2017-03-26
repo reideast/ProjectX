@@ -20,6 +20,7 @@ Template.signUp.onRendered(function() {
         //console.log("Validation check");
     }, "sorry this email is taken,please try another one");*/
 
+    // TODO: got a "not a function" exception when deployed
     $('#signUp').validate({
         rules: {
             email: {
