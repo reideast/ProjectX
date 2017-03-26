@@ -1,18 +1,23 @@
 <template name="viewFilms">
-    {{#each filmListing}}
-        {{#each emails}}
-            <!-- TODO: make this user name instead? -->
-            {{address}}
-        {{/each}}
-        <a href="film/{{_id}}">
-            <div style="width: 200px;">
-                <!-- <p>{{ thumbURL submittedFilm.fileId }}</p> -->
-                <!-- <p>{{ fileURL fileRef 'thumbnail' }}</p> -->
-                <!-- <p>{{ fileURL fileRef }}</p> -->
-                <!-- <p></p> -->
-                <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+    <div class="row">
+        {{#each filmListing}}
+            <div class="filmItem col-xs-12 col-sm-4 col-md-3">
+                <a href="film/{{_id}}">
+                    <h4>{{submittedFilm.title}}</h4>
+                    <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                </a>
+                {{#each emails}}
+                    <!-- TODO: make this user name instead? -->
+                    <p><em>by {{address}} </em></p>
+                {{/each}}
             </div>
-            {{submittedFilm.title}}
-        </a>
-    {{/each}}
+        {{/each}}
+    </div>
+
+    <style>
+        .filmItem a {
+            text-decoration: none;
+            /*color: #3c3c3c;*/
+        }
+    </style>
 </template>
