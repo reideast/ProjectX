@@ -18,7 +18,7 @@
                     </select>
                 </div>
                 <div class="form-group">
-                    {{#if uploadedFiles.count}}
+                    {{#if uploadedFiles}}
                         <label>Uploaded Film (Select One)</label>
                         {{#each file in uploadedFiles.each}}
                             <div class="radio">
@@ -27,15 +27,6 @@
                                     {{file.name}}
                                 </label>
                             </div>
-                            <!-- <p>file: {{file}}</p>
-                            <li>
-                                <p>link: {{file.link}}</p>
-                                <p>name: {{file.name}}</p>
-                                <p>path: {{file.path}}</p>
-                                <p>
-                                    <a href="{{file.link}}?download=true" download="{{file.name}}">{{file.name}}</a>
-                                </p>
-                            </li> -->
                         {{/each}}
                     {{else}}
                         <div>Please upload a film:</div>
@@ -111,18 +102,4 @@
             </div>
         </div>
     </div>
-
-
-    <script>
-    $(document).ready(function() {
-        $('#filmSubmit').prop('disabled', true).addClass('disabled');
-        $('#filmTermsAccepted').change(function() {
-            if ($(this).is(':checked')) {
-                $('#filmSubmit').prop('disabled', false).removeClass('disabled');
-            } else {
-                $('#filmSubmit').prop('disabled', true).addClass('disabled');
-            }
-        })
-    });
-    </script>
 </template>

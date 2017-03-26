@@ -1,5 +1,6 @@
 // https://kadira.io/academy/meteor-routing-guide/content/subscriptions-and-data-management/with-blaze
-Template.filmReview.onCreated(function() {
+Template.filmReview.onRendered(function() {
+// Template.filmReview.onCreated(function() {
     // subscribe to the published user data (defined in users.js):
     let self = this;
     self.autorun(function() {

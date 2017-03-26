@@ -5,18 +5,54 @@ Template.filmSubmission.helpers({
         // vids.forEach(function(item) {
         //     console.log(item);
         // });
-        return Films.find();
+
+        // TODO: search Users collection for this user's uploadedFile: {}
+        // TODO: only show this file!
+        // let usr = Meteor.userId();
+        // Tracker.flush();
+        // Template.instance().subscribe('files.films.userUploaded', usr);
+        console.log("helper uploadedFiles has run:");
+        Template.instance().uploadDepend.depend();
+        // Tracker.flush();
+        console.log(Template.instance().uploadedFilm.fetch());
+        return Template.instance().uploadedFilm;
+        // return Films.find();
+    },
+    currentUpload: function () {
+        return Template.instance().currentUpload.get();
     }
 });
 
 Template.filmSubmission.onCreated(function () {
     this.currentUpload = new ReactiveVar(false);
-});
 
-Template.filmSubmission.helpers({
-    currentUpload: function () {
-        return Template.instance().currentUpload.get();
-    }
+    this.uploadDepend = new Tracker.Dependency();
+
+    this.uploadedFilm = undefined;
+
+    let self = this;
+    let usr = Meteor.userId();
+    self.subscribe('files.films.userUploaded', usr, function() {
+        self.autorun(function() {
+            // self.uploadDepend.depend();
+            console.log("self.autorun has run:");
+            self.uploadedFilm = Films.find();
+            console.log(self.uploadedFilm.fetch());
+            // self.uploadDepend.changed();
+        });
+    });
+});
+Template.filmSubmission.onRendered(function() {
+    this.hasAcceptedTerms = false;
+    this.hasUploaded = false;
+    this.testEnableSubmit = function() {
+        if (this.hasAcceptedTerms && this.hasUploaded) {
+            $('#filmSubmit').prop('disabled', false).removeClass('disabled');
+        } else {
+            $('#filmSubmit').prop('disabled', true).addClass('disabled');
+        }
+    };
+    this.testEnableSubmit(); // call it now to set the submit button to disabled
 });
 
 Template.filmSubmission.events({
@@ -66,15 +102,28 @@ Template.filmSubmission.events({
                 uploadInstance.on('end', function(error, fileObj) {
                     if (error) {
                         sAlert.error('Error during upload: ' + error.reason);
-
+                        template.hasUploaded = false;
+                        template.testEnableSubmit();
                     } else {
                         sAlert.success('File "' + fileObj.name + '" successfully uploaded');
+                        template.uploadDepend.changed();
+                        template.hasUploaded = true;
                     }
                     template.currentUpload.set(false);
+                    template.testEnableSubmit();
                 });
 
                 uploadInstance.start();
             }
+        }
+    },
+    'change #filmTermsAccepted': function(e, template) {
+        if (e.currentTarget.checked) {
+            template.hasAcceptedTerms = true;
+            template.testEnableSubmit();
+        } else {
+            template.hasAcceptedTerms = false;
+            template.testEnableSubmit();
         }
     }
 });
