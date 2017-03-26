@@ -16,7 +16,6 @@ Template.filmReview.helpers({
         } else {
             return {};
         }
-        // TODO: show route with slug rather than _id. idea: https://github.com/deborah-ufw/flow-router-dynamic-links-use-slug
     },
     film: function() {
         // since we're calling the helper {{.. film}} within a {{#with userData}} helper block,

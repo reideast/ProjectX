@@ -17,36 +17,34 @@
                         <option value="feature">Feature Film</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    {{#if uploadedFiles}}
-                        <label>Uploaded Film (Select One)</label>
-                        {{#each file in uploadedFiles.each}}
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="filmFileOption" id="filmFileOption" value="{{file._id}}" checked><!-- set each one to be checked by default -->
-                                    {{file.name}}
-                                </label>
-                            </div>
-                        {{/each}}
-                    {{else}}
-                        <div>Please upload a film:</div>
-                    {{/if}}
-                </div>
+                {{#with uploadedFile}}
+                    <div class="form-group">
+                        <label>Uploaded Film</label>
+                        <div style="max-width: 200px;">
+                            <input type="hidden" name="filmFileOption" id="filmFileOption" value="{{_id}}">
+                            <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                            <h5>{{name}}</h5>
+                        </div>
+                    </div>
+                {{/with}}
                 <div class="form-group">
                     {{#with currentUpload}}
-                    <div class="row">
-                        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-info" style="width: {{progress.get}}%;" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100">
-                                    <span class="sr-only">{{progress.get}}% Complete</span>
+                        <div class="row">
+                            <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                                <div class="text-center">
+                                    <h5><em>Uploading film...</em></h5>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-info" style="width: {{progress.get}}%;" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100">
+                                        <span class="sr-only">{{progress.get}}% Complete</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     {{else}}
-                    <label for="fileInput">Upload File</label>
-                    <input type="file" id="fileInput">
-                    <small>Upload file in <code>mp4</code> or <code>avi</code> or <code>3gp</code> format, with size less or equal to 2GB</small>
+                        <label for="fileInput">Upload a {{#if uploadedFile}}Different {{/if}}Film</label>
+                        <input type="file" id="fileInput">
+                        <small>Upload file in <code>mp4</code> or <code>avi</code> or <code>3gp</code> format, with size less or equal to 2GB</small>
                     {{/with}}
                 </div>
                 <div class="form-group">

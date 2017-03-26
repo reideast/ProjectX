@@ -1,44 +1,6 @@
-Template.filmSubmission.helpers({
-    uploadedFiles: function () {
-        // console.log("********** LOGGING! **********");
-        // var vids = Videos.find();
-        // vids.forEach(function(item) {
-        //     console.log(item);
-        // });
-
-        let loggedInUser = Users.findOne({});
-        console.log('loggedInUser=');
-        console.log(loggedInUser);
-        if (loggedInUser && loggedInUser.uploadedFile) {
-            return Films.find({ _id: loggedInUser.uploadedFile.filmId });
-        } else {
-            return null;
-        }
-
-        // TODO: search Users collection for this user's uploadedFile: {}
-        // TODO: only show this file!
-        // let usr = Meteor.userId();
-        // Tracker.flush();
-        // Template.instance().subscribe('files.films.userUploaded', usr);
-        // console.log("helper uploadedFiles has run:");
-        // Template.instance().uploadDepend.depend();
-        // Tracker.flush();
-        // console.log(Template.instance().uploadedFilm.fetch());
-        // return Template.instance().uploadedFilm;
-    },
-    currentUpload: function () {
-        return Template.instance().currentUpload.get();
-    }
-});
-
 Template.filmSubmission.onCreated(function () {
-    this.currentUpload = new ReactiveVar(false);
+    this.currentUpload = new ReactiveVar(false); // holds the progress bar info
 
-    // this.uploadDepend = new Tracker.Dependency();
-
-    // this.uploadedFilm = undefined;
-
-    // let self = this;
     // let usr = Meteor.userId();
     let self = this;
     self.autorun(function() {
@@ -59,13 +21,37 @@ Template.filmSubmission.onRendered(function() {
     this.testEnableSubmit(); // call it now to set the submit button to disabled
 });
 
+Template.filmSubmission.helpers({
+    uploadedFile: function () {
+        let loggedInUser = Users.findOne({ _id: Meteor.userId() });
+        if (loggedInUser && loggedInUser.uploadedFile) {
+            if (Template.instance().testEnableSubmit) { // if template has been displayed
+                Template.instance().hasUploaded = true;
+                Template.instance().testEnableSubmit();
+            }
+            return Films.findOne({ _id: loggedInUser.uploadedFile.filmId });
+        } else {
+            if (Template.instance().testEnableSubmit) {
+                Template.instance().hasUploaded = false;
+                Template.instance().testEnableSubmit();
+            }
+            return null;
+        }
+    },
+
+    thumbRef: function() {
+        // the data context ("this") of this function is set by {{#with uploadedFile}} which is the result of a FIlms.findOne()
+        return Films.collection.findOne({ _id: this._id });
+    },
+
+    currentUpload: function () {
+        return Template.instance().currentUpload.get(); // used to show progress bar
+    }
+});
+
 Template.filmSubmission.events({
     'submit #filmSubmissionForm': function(e) {
         e.preventDefault();
-
-        // console.log(e.target)
-        // console.log(e.target.filmTitle)
-        // console.log(e.target.filmTitle.value)
 
         let frm = e.target;
         let filmData = {
@@ -80,20 +66,18 @@ Template.filmSubmission.events({
         Meteor.call('filmSubmit', filmData, function(error, result) {
             if (error) {
                 sAlert.error("Film submission failed: " + error.reason);
-                // return "Film submission failed: " + error.reason;
             } else {
                 sAlert.success("Film has been submitted");
-                // return true;
                 // TODO: router route to new own Profile page
-                // TODO: ok to move {{> sAlert }} to template?
+                // TODO: ok to move {{> sAlert }} to master template?
             }
         });
     },
     'change #fileInput': function (e, template) {
-        if (e.currentTarget.files && e.currentTarget.files[0]) {
-            // We upload only one file, in case there was multiple files selected
-            var file = e.currentTarget.files[0];
+        if (e.currentTarget.files && e.currentTarget.files[0]) { // upload only one file
+            let file = e.currentTarget.files[0];
             if (file) {
+                // add to collection (but don't start upload yet)
                 var uploadInstance = Films.insert({
                     file: file,
                     streams: 'dynamic',
@@ -105,29 +89,25 @@ Template.filmSubmission.events({
                 });
 
                 uploadInstance.on('end', function(error, fileObj) {
+                    template.currentUpload.set(false);
                     if (error) {
                         sAlert.error('Error during upload: ' + error.reason);
-                        template.hasUploaded = false;
                     } else {
                         sAlert.success('File "' + fileObj.name + '" successfully uploaded');
-                        // template.uploadDepend.changed();
-                        template.hasUploaded = true;
                     }
-                    template.currentUpload.set(false);
-                    template.testEnableSubmit();
                 });
 
+                // start upload!
                 uploadInstance.start();
-            }
+
+                // disable submission button until uploadedFile helper allows it
+                template.hasUploaded = false;
+                template.testEnableSubmit();
+            } // else if user hasn't selected a file in the dialog box, do nothing
         }
     },
     'change #filmTermsAccepted': function(e, template) {
-        if (e.currentTarget.checked) {
-            template.hasAcceptedTerms = true;
-            template.testEnableSubmit();
-        } else {
-            template.hasAcceptedTerms = false;
-            template.testEnableSubmit();
-        }
+        template.hasAcceptedTerms = e.currentTarget.checked;
+        template.testEnableSubmit();
     }
 });
