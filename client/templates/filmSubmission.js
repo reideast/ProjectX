@@ -84,6 +84,8 @@ Template.filmSubmission.events({
             } else {
                 sAlert.success("Film has been submitted");
                 // return true;
+                // TODO: router route to new own Profile page
+                // TODO: ok to move {{> sAlert }} to template?
             }
         });
     },

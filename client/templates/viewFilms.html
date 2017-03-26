@@ -1,6 +1,7 @@
 <template name="viewFilms">
     {{#each filmListing}}
         {{#each emails}}
+            <!-- TODO: make this user name instead? -->
             {{address}}
         {{/each}}
         <a href="film/{{_id}}">
