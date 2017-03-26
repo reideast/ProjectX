@@ -2,6 +2,7 @@ Template.viewFilms.onCreated(function() {
     let self = this;
     self.autorun(function() {
         self.subscribe('users.withFilms');
+        self.subscribe('files.films.all');
         console.log("DEBUG: subscribed to all users (who have films)");
     });
 })
@@ -25,6 +26,8 @@ Template.viewFilms.helpers({
     //     }
     // },
     thumbRef: function() {
+        // TODO: this is currently broken. after a "meteor reset" and creating a user, it showed a that user's film
+        // TODO: the problem is that you're searching "this", which gives the logged in user!!
         // if (argId) {
         console.log("inside the thumbURL template helper");
         console.log("this is");

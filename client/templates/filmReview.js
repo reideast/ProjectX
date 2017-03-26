@@ -4,8 +4,10 @@ Template.filmReview.onRendered(function() {
     // subscribe to the published user data (defined in users.js):
     let self = this;
     self.autorun(function() {
-        let usr = FlowRouter.getParam('userId');
-        self.subscribe('users.one', usr);
+        // let usr = FlowRouter.getParam('userId');
+        // self.subscribe('users.one', usr);
+        self.subscribe('users.withFilms');
+        self.subscribe('files.films.all');
     });
 });
 
@@ -13,32 +15,34 @@ Template.filmReview.helpers({
     userData: function() {
         // get data:
         // note: despite using "findOne()", this does depend on the Subscription to get the proper user data
-        console.log(Users);
-        let userFilm = Users.findOne({
-            _id: FlowRouter.getParam('userId')
-        }) || {};
-        console.log(userFilm);
+        // console.log(Users);
+        let userFilm = Users.findOne({ _id: FlowRouter.getParam('userId') });
+        if (userFilm) {
+            return userFilm;
+        } else {
+            return {};
+        }
+        // console.log(userFilm);
         // note: .count() won't work to see if one was retrieved or not: usrVideo.count());
         // TODO: error handling: how to show if attemping to show a video that's not found
         // TODO: show route with slug rather than _id. idea: https://github.com/deborah-ufw/flow-router-dynamic-links-use-slug
-        console.log(userFilm.submittedFilm.fileId);
+        // console.log(userFilm.submittedFilm.fileId);
         // TODO: this doesn't currenlty exist as a Published object!!
-        Meteor.subscribe('files.films.current', userFilm.submittedFilm.fileId);
-        return userFilm;
+        // Meteor.subscribe('files.films.current', userFilm.submittedFilm.fileId);
     },
     film: function() {
-        // by calling this template like so: {{#with video submittedFilm}}, i have set the data context
-        // and "this" is set to the user that was found
-
         // necessary to have this subscription here in order to get user.submittedFilm.fileId
-        // console.log("INSIDE HELPER video");
+        console.log("INSIDE HELPER video");
+        console.log(this);
+        let userFilm = Users.findOne({ _id: FlowRouter.getParam('userId') });
+        console.log(userFilm);
         // let userFilm = Users.findOne({ _id: FlowRouter.getParam('userId') });
         // console.log('found:')
         // console.log(userFilm);
         // console.log('userFilm.submittedFilm=')
         // console.log(userFilm.submittedFilm);
         // TODO: this doesn't currenlty exist as a Published object!!
-        Meteor.subscribe('files.films.current', this.submittedFilm.fileId);
+        // Meteor.subscribe('files.films.current', this.submittedFilm.fileId);
         // this.subscribe('files.films.current', userFilm.submittedFilm.fileId);
         let film = Films.collection.findOne({ _id: this.submittedFilm.fileId});
         // console.log(film);

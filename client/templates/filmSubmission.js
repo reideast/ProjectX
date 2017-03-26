@@ -6,17 +6,25 @@ Template.filmSubmission.helpers({
         //     console.log(item);
         // });
 
+        let loggedInUser = Users.findOne({});
+        console.log('loggedInUser=');
+        console.log(loggedInUser);
+        if (loggedInUser && loggedInUser.uploadedFile) {
+            return Films.find({ _id: loggedInUser.uploadedFile.filmId });
+        } else {
+            return null;
+        }
+
         // TODO: search Users collection for this user's uploadedFile: {}
         // TODO: only show this file!
         // let usr = Meteor.userId();
         // Tracker.flush();
         // Template.instance().subscribe('files.films.userUploaded', usr);
-        console.log("helper uploadedFiles has run:");
-        Template.instance().uploadDepend.depend();
+        // console.log("helper uploadedFiles has run:");
+        // Template.instance().uploadDepend.depend();
         // Tracker.flush();
-        console.log(Template.instance().uploadedFilm.fetch());
-        return Template.instance().uploadedFilm;
-        // return Films.find();
+        // console.log(Template.instance().uploadedFilm.fetch());
+        // return Template.instance().uploadedFilm;
     },
     currentUpload: function () {
         return Template.instance().currentUpload.get();
@@ -26,20 +34,16 @@ Template.filmSubmission.helpers({
 Template.filmSubmission.onCreated(function () {
     this.currentUpload = new ReactiveVar(false);
 
-    this.uploadDepend = new Tracker.Dependency();
+    // this.uploadDepend = new Tracker.Dependency();
 
-    this.uploadedFilm = undefined;
+    // this.uploadedFilm = undefined;
 
+    // let self = this;
+    // let usr = Meteor.userId();
     let self = this;
-    let usr = Meteor.userId();
-    self.subscribe('files.films.userUploaded', usr, function() {
-        self.autorun(function() {
-            // self.uploadDepend.depend();
-            console.log("self.autorun has run:");
-            self.uploadedFilm = Films.find();
-            console.log(self.uploadedFilm.fetch());
-            // self.uploadDepend.changed();
-        });
+    self.autorun(function() {
+        self.subscribe('users.loggedIn');
+        self.subscribe('files.films.all');
     });
 });
 Template.filmSubmission.onRendered(function() {
@@ -85,8 +89,7 @@ Template.filmSubmission.events({
     },
     'change #fileInput': function (e, template) {
         if (e.currentTarget.files && e.currentTarget.files[0]) {
-            // We upload only one file, in case
-            // there was multiple files selected
+            // We upload only one file, in case there was multiple files selected
             var file = e.currentTarget.files[0];
             if (file) {
                 var uploadInstance = Films.insert({
@@ -103,10 +106,9 @@ Template.filmSubmission.events({
                     if (error) {
                         sAlert.error('Error during upload: ' + error.reason);
                         template.hasUploaded = false;
-                        template.testEnableSubmit();
                     } else {
                         sAlert.success('File "' + fileObj.name + '" successfully uploaded');
-                        template.uploadDepend.changed();
+                        // template.uploadDepend.changed();
                         template.hasUploaded = true;
                     }
                     template.currentUpload.set(false);
