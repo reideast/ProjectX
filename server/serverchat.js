@@ -1,5 +1,5 @@
 Meteor.startup(function(){
-   ChatRooms.allow({
+   PrivateMessages.allow({
         insert:function(userId,doc){
             return true;
         },

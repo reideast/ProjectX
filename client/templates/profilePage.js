@@ -1,7 +1,7 @@
 Template.profilePage.onCreated(function() {
     let self = this;
     self.autorun(() => {
-        self.subscribe('chatrooms');
+        self.subscribe('privateMessages.all');
         self.subscribe('users.all');
     });
 });
@@ -9,7 +9,7 @@ Template.profilePage.onCreated(function() {
 Template.profilePage.helpers({
     privateMessageConversations: function() {
         if (Meteor.userId()) {
-            return ChatRooms.find({ to: Meteor.userId() });
+            return PrivateMessages.find({ to: Meteor.userId() });
         } else {
             return {};
         }

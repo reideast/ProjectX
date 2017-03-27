@@ -4,7 +4,7 @@ Template.filmReview.onRendered(function() {
     self.autorun(function() {
         self.subscribe('users.withFilms');
         self.subscribe('files.films.all');
-        self.subscribe('chatrooms');
+        self.subscribe('privateMessages.all');
     });
 });
 
@@ -37,11 +37,11 @@ Template.filmReview.helpers({
     },
     numPrivateMessages: function() {
         if (Meteor.userId() && this._id) { // in the data context of a filmReview template, this is a User document for that filmmaker
-            var rooms = ChatRooms.findOne({ to: this._id, from: Meteor.userId() });
+            var rooms = PrivateMessages.findOne({ to: this._id, from: Meteor.userId() });
             if (rooms) {
                 return rooms.messages.length;
             } else {
-                // no previously created chat found, return nothing
+                // no previously created conversation found, return nothing
                 return '';
             }
         } else {

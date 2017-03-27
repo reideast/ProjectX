@@ -7,8 +7,8 @@ Template.profilePagePrivateMessageReply.events = {
             const messageInputBox = event.target.message;
             const roomid = this._id;
             if (messageInputBox.value !== '') {
-                if (ChatRooms.findOne({ _id: roomid })) {
-                    var de = ChatRooms.update(
+                if (PrivateMessages.findOne({ _id: roomid })) {
+                    var de = PrivateMessages.update(
                         { _id: roomid },
                         { $push: {
                             messages:{
@@ -24,7 +24,7 @@ Template.profilePagePrivateMessageReply.events = {
                 messageInputBox.value = '';
             }
         } else {
-            console.log("ERROR: ONLY LOGGED IN USERS CAN CHAT");
+            console.log("ERROR: ONLY LOGGED IN USERS CAN SEND MESSAGES");
         }
     }
 }
