@@ -8,6 +8,8 @@ Template.privateMessageForm.onCreated(function() {
     dataContext.hasCheckedForExistingChat = false;
     dataContext.needToCreateChat = false;
 
+    dataContext.msgDepend = new Deps.Dependency; // will let us set up a reactive context inside the template helper
+
     // let self = this;
     // self.autorun(function() {
     //     self.subscribe("chatrooms");
@@ -25,16 +27,16 @@ Template.privateMessageForm.onCreated(function() {
             if (chatSubscribeHandle.ready()) {
                 if (Meteor.userId()) {
                     var rooms = ChatRooms.find({ to: dataContext.data._id, from: Meteor.userId() });
-                    console.log("found a room that already exists? count=" + rooms.count());
+                    // console.log("found a room that already exists? count=" + rooms.count());
                     dataContext.hasCheckedForExistingChat = true;
                     if( rooms.count() === 1 ) {
                         //already room exists
                         const id = rooms.fetch()[0]._id;
                         dataContext.roomID = id;
                         dataContext.needToCreateChat = false;
-                        console.log("also, found a room! id=" + dataContext.roomID);
+                        // console.log("also, found a room! id=" + dataContext.roomID);
                     } else if( rooms.count() === 0 ) {
-                        //no room exists
+                        //no room exists, will create it if user submits a message
                         dataContext.needToCreateChat = true;
                     } else {
                         console.log("ERROR: MORE THAN ONE CHATROOM");
@@ -47,25 +49,34 @@ Template.privateMessageForm.onCreated(function() {
 
 Template.privateMessageForm.helpers({
     'msgs': function() {
-        Tracker.autorun(() => {
-            let a = Template.instance().hasCheckedForExistingChat;
-            let b = Template.instance().needToCreateChat;
-            console.log("1");
-            console.log(Template.instance().hasCheckedForExistingChat);
-            console.log(Template.instance().needToCreateChat);
-            if (Template.instance().hasCheckedForExistingChat && !Template.instance().needToCreateChat) {
-                console.log("2");
-                const result = ChatRooms.findOne({
-                    _id: Template.instance().roomID
-                });
-                if (result) {
-                    return result.messages; // note: returns an array
-                }
-            } else {
-                return undefined;
+        // set up a manual Reactive context so this function changes when the collection is freshly created
+        Template.instance().msgDepend.depend();
+
+        // console.log("1");
+        // console.log(Template.instance().hasCheckedForExistingChat);
+        // console.log(Template.instance().needToCreateChat);
+        if (Template.instance().hasCheckedForExistingChat && !Template.instance().needToCreateChat) {
+            // console.log("2");
+            const result = ChatRooms.findOne({
+                _id: Template.instance().roomID
+            });
+            if (result) {
+                // console.log("3");
+                // console.log("result=");
+                // console.log(result);
+                return result;
             }
-        });
-    }
+        } else {
+            return undefined;
+        }
+    },
+    formatTime: function(myTime) {
+        // console.log(myTime);
+        const time = new Date(myTime);
+        return time.toString();
+        // TODO: format nicer. use this as example of functions:
+        // let dateStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + '-' + now.getHours() + '-' + now.getMinutes();
+    },
 });
 
 Template.privateMessageForm.events = {
@@ -86,6 +97,7 @@ Template.privateMessageForm.events = {
                     );
                     template.roomID = newRoom;
                     template.needToCreateChat = false;
+                    template.msgDepend.changed(); // force update of reactive context in template helper
                 }
                 const name = Meteor.user().profile.user.name;
                 const messageInputBox = event.target.message;

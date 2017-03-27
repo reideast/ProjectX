@@ -1,12 +1,45 @@
 <template name = "privateMessageForm">
-    {{#each msgs}}
-        <!-- TODO: format nicer (like profile page) -->
-        <strong>{{name}}:</strong> {{text}} (Time: {{ createdAt }})<br>
-    {{/each}}
-    <form id="privateMessageInputForm" class="form-inline">
-        <div class="form-group">
-            <input type="text" id="message" class="form-control" placeholder="Message...">
+    <style>
+        .panel {
+            margin-bottom: 0;
+        }
+    </style>
+
+    {{#if Template.subscriptionsReady}}
+        <div class="modal-body">
+            {{#with msgs}}
+                {{#each messages}}
+                    <!-- TODO: format nicer (like profile page) -->
+                    <header class="text-left">
+                        <div class="comment-user">
+                            <span class="fa fa-user"></span> {{name}}
+                            <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
+                        </div>
+                    </header>
+                    <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="comment-post">
+                                {{text}}
+                            </div>
+                        </div>
+                    </div>
+                    <footer class="text-right">
+                        <div class="comment-date">
+                            <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
+                        </div>
+                    </footer>
+                {{/each}}
+            {{/with}}
         </div>
-        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-reply" id="fa-reply"></i> Send</button>
-    </form>
+        <div class="modal-footer">
+            <form id="privateMessageInputForm">
+                <div class="form-group">
+                    <input type="text" id="message" class="form-control" placeholder="Message...">
+                </div>
+                <div class="text-right">
+                    <button type="submit" class="btn btn-default"><i class="fa fa-reply"></i> Send</button>
+                </div>
+            </form>
+        </div>
+    {{/if}}
 </template>

@@ -5,6 +5,7 @@ Template.filmReview.onCreated(function() {
     self.autorun(function() {
         let usr = FlowRouter.getParam('userId');
         self.subscribe('users.one', usr);
+        self.subscribe('chatrooms');
     });
 });
 
@@ -45,5 +46,19 @@ Template.filmReview.helpers({
         return film;
 
         // note: by returning the findOne object from the Films collection, you can use the template helper {{fileURL}} inside of a {{#with video}} block
+    },
+    numPrivateMessages: function() {
+        if (Meteor.userId() && this._id) { // in the data context of a filmReview template, this is a User document for that filmmaker
+            var rooms = ChatRooms.findOne({ to: this._id, from: Meteor.userId() });
+            if (rooms) {
+                return rooms.messages.length;
+            } else {
+                // no previously created chat found, return nothing
+                return '';
+            }
+        } else {
+            console.log("ERROR: No user logged in, so cannot show messages count");
+            return '';
+        }
     }
 });

@@ -1,6 +1,10 @@
 <template name="profilePage">
 
 <style>
+.singleMessage { /* over-riding bootstrap's .panel margin */
+    margin-bottom: 0;
+}
+
 .detailBox {
     border:1px solid #bbb;
 }
@@ -80,39 +84,44 @@
 <div class="container" id="personalMessageContainer">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
-            <h2 class="page-header">Personal Messages</h2>
+            <h3 class="page-header">Personal Messages</h3>
             <section class="comment-list">
                 {{#if Template.subscriptionsReady}}
                     {{#each privateMessageConversations }}
-                    <div class="panel panel-default">
-                        <h4>
-                            Conversation With:
-                            {{#with conversationDetails from }}
-                                {{profile.user.name}}
-                            {{/with}}
-                        </h4>
-                        {{#each messages}}
-                            <div class="panel panel-default arrow left">
-                                <div class="panel-body">
-                                    <header class="text-left">
-                                        <div class="comment-user">
-                                            <i class="fa fa-user" id="fa-user">
-                                            </i> {{name}}
-                                        </div>
-                                    </header>
-                                    <time class="comment-date" datetime="16-12-2014 01:05">
-                                        <i class="fa fa-clock-o"></i> {{ formatTime createdAt }}
-                                    </time>
-                                    <div class="comment-post">
-                                        <p>
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class=panel-title>
+                                Conversation With:
+                                {{#with conversationDetails from }}
+                                    {{profile.user.name}}
+                                {{/with}}
+                            </h4>
+                        </div>
+                        <div class="panel-body">
+                            {{#each messages}}
+                                <header class="text-left">
+                                    <div class="comment-user">
+                                        <span class="fa fa-user"></span> {{name}}
+                                        <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
+                                    </div>
+                                </header>
+                                <div class="singleMessage panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="comment-post">
                                             {{text}}
-                                            <!-- TODO: format these messages a bit nicer -->
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {{/each}}
-                      {{> profilePagePrivateMessageReply }}
+                                <footer class="text-right">
+                                    <div class="comment-date">
+                                        <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
+                                    </div>
+                                </footer>
+                            {{/each}}
+                        </div>
+                        <div class="panel-footer">
+                            {{> profilePagePrivateMessageReply }}
+                        </div>
                     </div>
                     {{/each}}
                 {{/if}}
