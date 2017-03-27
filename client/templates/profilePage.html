@@ -13,7 +13,7 @@
 	  margin:0;
 	  display:inline-block;
 	}
-	
+
 	.commentBox {
 		padding:10px;
 		border-top:1px dotted #bbb;
@@ -65,47 +65,53 @@
 		padding:10px;
 	}
 
+  .container-profilePage{
+    padding-top: 90px;
+  }
+
   </style>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-3" col-sm-offset-4 id="readOnly">
-          	<div class="embed-responsive embed-responsive-16by9">
-               {{>viewFilms }}
+      <div class="container-profilePage">
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-3" col-sm-offset-4 id="readOnly">
+            	<div class="embed-responsive embed-responsive-16by9">
+                 {{>viewFilms }}
+              </div>
             </div>
-          </div>
-          <div class="col-sm-5" id="pVideoDisplay"> hello
+            <div class="col-sm-5" id="pVideoDisplay"> hello
+            </div>
           </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8" col-sm-offset-4 id="personalMssg">
-              <h2 class="page-header">Personal Messages</h2>
-                <section class="comment-list">
-                  <!-- First Comment -->
-                  <article class="row">
-                    <div class="col-md-10 col-sm-10">
-                      <div class="panel panel-default arrow left">
-                        <div class="panel-body">
-                          <header class="text-left">
-                            <div class="comment-user">
-                            	<i class="fa fa-user" id="fa-user">
-                                </i> John Doe
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-8" col-sm-offset-4 id="personalMssg">
+                <h2 class="page-header">Personal Messages</h2>
+                  <section class="comment-list">
+                    <!-- First Comment -->
+                    <article class="row">
+                      <div class="col-md-10 col-sm-10">
+                        <div class="panel panel-default arrow left">
+                          <div class="panel-body">
+                            <header class="text-left">
+                              <div class="comment-user">
+                              	<i class="fa fa-user" id="fa-user">
+                                  </i> John Doe
+                              </div>
+                              <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Mar 15, 2017</time>
+                            </header>
+                            <div class="comment-post">
+                              <p>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                              </p>
                             </div>
-                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Mar 15, 2017</time>
-                          </header>
-                          <div class="comment-post">
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
+                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply" id="fa-reply"></i> reply</a></p>
                           </div>
-                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply" id="fa-reply"></i> reply</a></p>
                         </div>
                       </div>
+                    </article>
+                    </section>
                     </div>
-                  </article>
-                  </section>
-                  </div>
+              </div>
             </div>
-          </div>
+      </div>
 </template>
