@@ -16,19 +16,17 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav nav pull-right">
-           {{#if currentUser.submittedFilm}}
-          <li><a href="/viewFilms">View Films</a></li>
-          <li><a href="/profilePage">Profile</a></li>
-           {{/if}}
-
+          {{#if currentUser.submittedFilm}}
+          <li><a href="/viewFilms"><i class="fa fa-film" aria-hidden="true"></i>View Films</a></li>
+          <li><a href="/profilePage"><i class="fa fa-user" aria-hidden="true"></i> Profile</a></li>
+          {{/if}}
 
           {{#if currentUser}}
-          <li><a href="/filmSubmission"><i class="fa fa-film" aria-hidden="true"></i>
- Submit</a></li>
+          <li><a href="/filmSubmission"><i class="fa fa-plus-circle" aria-hidden="true"></i> Submit</a></li>
           <li><a href="#" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
           <li><a href="#" class="logout">{{currentUser.emails.[0].address}}</a></li>
-            {{else}}
-            <li><a href="/signUp_reg"><i class="fa fa-user" aria-hidden="true"></i> SignUp/Login</a></li>
+          {{else}}
+          <li><a href="/signUp_reg"><i class="fa fa-user" aria-hidden="true"></i> SignUp/Login</a></li>
           {{/if}}
         </ul>
 
