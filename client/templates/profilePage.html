@@ -84,16 +84,15 @@
 <div class="container" id="personalMessageContainer">
     <div class="row">
         <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
-            <h3 class="page-header">Personal Messages</h3>
+            <h3 class="page-header">Private Messages</h3>
             <section class="comment-list">
                 {{#if Template.subscriptionsReady}}
                     {{#each privateMessageConversations }}
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h4 class=panel-title>
-                                Conversation With:
                                 {{#with conversationDetails from }}
-                                    {{profile.user.name}}
+                                    Conversation with {{profile.user.name}}
                                 {{/with}}
                             </h4>
                         </div>
