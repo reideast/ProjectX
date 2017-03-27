@@ -26,6 +26,7 @@ Template.privateMessageForm.onCreated(function() {
                 if (Meteor.userId()) {
                     var rooms = ChatRooms.find({ to: dataContext.data._id, from: Meteor.userId() });
                     console.log("found a room that already exists? count=" + rooms.count());
+                    dataContext.hasCheckedForExistingChat = true;
                     if( rooms.count() === 1 ) {
                         //already room exists
                         const id = rooms.fetch()[0]._id;
@@ -39,7 +40,6 @@ Template.privateMessageForm.onCreated(function() {
                         console.log("ERROR: MORE THAN ONE CHATROOM");
                     }
                 }
-                dataContext.hasCheckedForExistingChat = true;
             }
         });
     });
@@ -47,16 +47,24 @@ Template.privateMessageForm.onCreated(function() {
 
 Template.privateMessageForm.helpers({
     'msgs': function() {
-        if (Template.instance().hasCheckedForExistingChat && !Template.instance().needToCreateChat) {
-            const result = ChatRooms.findOne({
-                _id: Template.instance().roomID
-            });
-            if (result) {
-                return result.messages; // note: returns an array
+        Tracker.autorun(() => {
+            let a = Template.instance().hasCheckedForExistingChat;
+            let b = Template.instance().needToCreateChat;
+            console.log("1");
+            console.log(Template.instance().hasCheckedForExistingChat);
+            console.log(Template.instance().needToCreateChat);
+            if (Template.instance().hasCheckedForExistingChat && !Template.instance().needToCreateChat) {
+                console.log("2");
+                const result = ChatRooms.findOne({
+                    _id: Template.instance().roomID
+                });
+                if (result) {
+                    return result.messages; // note: returns an array
+                }
+            } else {
+                return undefined;
             }
-        } else {
-            return undefined;
-        }
+        });
     }
 });
 
