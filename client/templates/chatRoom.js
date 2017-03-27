@@ -1,56 +1,66 @@
-//
 // Tracker.autorun(function(){
-//     Meteor.subscribe("chatrooms");
-//     Meteor.subscribe("onlusers");
+// Meteor.subscribe("chatrooms");
+// Meteor.subscribe("onlusers");
 // });
 
 // CHANGED added the onRendered function to MANUALLY set an ID for the chatroom
 // TODO:
-Template.sidebar.onRendered(function() {
-    let self = this;
-    self.autorun(function() {
-        self.subscribe("chatrooms");
-        self.subscribe("onlusers");
-    });
+Template.chatRoom.onCreated(function() {
+    // let self = this;
+    // self.autorun(function() {
+    //     self.subscribe("chatrooms");
+    //     self.subscribe("onlusers");
+    // });
+    this.autorun(() => {
+        const chatSubscribeHandle = this.subscribe('chatrooms')
+        // console.log("subscribed to chatrooms");
+        // this.subscribe("onlusers");
 
-    console.log("onRendered");
-    let toUserID = "pionFpKYEvqwK3rfu";
-    // Session.set('roomid', toUserID);
-    // var count = ChatRooms.find( { _id: toUserID } ).count(); // REMOVED: now we're gonna find by id
-    console.log(toUserID);
-    console.log(Meteor.userId());
-    if (Meteor.userId()) {
-        // var count = ChatRooms.find( { to: toUserID, from: Meteor.userId() } ).count();
-        // var count = ChatRooms.find({to: "pionFpKYEvqwK3rfu", from: "YdZarLQ6mLyHDazTf"})
-        var count = ChatRooms.find();
-        while (count.hasNext()) {
-            log(count.next());
-        }
-        console.log("found a room that already exists? count=");
-        console.log(count);
-        if( count !== 0 ) {
-            //already room exists
-            Session.set("roomid", toUserID);
-        }
-        else {
-            //no room exists
-            var newRoom = ChatRooms.insert(
-                {
-                    // _id: toUserID, // CHANGED: commented out, so ID will be auto-generated
-                    to: toUserID,
-                    from: Meteor.userId(),
-                    messages: [
-                        {
-                            "name": "test dude",
-                            "text": "dude's msg",
-                            "createdAt": Date.now()
-                        }
-                    ]
+        Tracker.autorun(() => {
+            // const isReady = chatSubscribeHandle.ready();
+            // console.log("ready?");
+            // console.log(isReady);
+            if (chatSubscribeHandle.ready()) {
+                let toUserID = "pionFpKYEvqwK3rfu";
+                // Session.set('roomid', toUserID);
+                // var count = ChatRooms.find( { _id: toUserID } ).count(); // REMOVED: now we're gonna find by id
+                // console.log(toUserID);
+                // console.log(Meteor.userId());
+                if (Meteor.userId()) {
+                    var rooms = ChatRooms.find({ to: toUserID, from: Meteor.userId() });
+                    console.log("found a room that already exists? count=");
+                    console.log(rooms.count());
+                    if( rooms.count() === 1 ) {
+                        //already room exists
+                        const id = rooms.fetch()[0]._id;
+                        Session.set("roomid", id);
+                        console.log("from sessions:");
+                        console.log(Session.get('roomid'));
+                    } else if( rooms.count() === 0 ) {
+                        //no room exists
+                        var newRoom = ChatRooms.insert(
+                            {
+                                // _id: toUserID, // CHANGED: commented out, so ID will be auto-generated
+                                to: toUserID,
+                                from: Meteor.userId(),
+                                messages: [
+                                    {
+                                        "name": "test dude",
+                                        "text": "dude's msg",
+                                        "createdAt": Date.now()
+                                    }
+                                ]
+                            }
+                        );
+                        Session.set('roomid',newRoom);
+                    } else {
+                        console.log("ERROR: MORE THAN ONE CHATROOM");
+                    }
                 }
-            );
-            Session.set('roomid',newRoom);
-        }
-    }
+
+            }
+        });
+    });
 });
 
 Template.sidebar.helpers({
@@ -69,7 +79,7 @@ Template.messages.helpers({
     'msgs':function(){
         var result=ChatRooms.findOne({_id:Session.get('roomid')});
         if(result){
-          return result.messages;
+            return result.messages;
         }
     }
 });
