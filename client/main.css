@@ -33,7 +33,13 @@ body {
     text-decoration: none;
 }
 
-.btn-success, .btn-success:hover {
+.btn-success {
+    color: #fff;
+    background-color: #CD071E;
+    border-color: #CD071E;
+}
+
+.btn-success:hover {
     color: #CD071E;
     background-color: #ffffff;
     border-color: #CD071E;
