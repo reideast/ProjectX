@@ -1,5 +1,4 @@
 # ProjectX - Web App for JFF (Junior Film Fleadh)#
-[![Build Status](https://travis-ci.com/davedodea/ProjectX.svg?token=mSbTyy1sJpCTYfpkhqUw&branch=master)](https://travis-ci.com/davedodea/ProjectX)
 
 ![Screenshot](buildPass.png)
 ![Screenshot](JFFLogo.png)
