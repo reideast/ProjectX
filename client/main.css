@@ -1,18 +1,21 @@
 /* CSS declarations go here */
-body { padding-top: 55px; }
 
-.bert-alert.danger {
-  background: #CD071E;
-  color: #fff;
+body {
+    padding-top: 50px;
 }
 
-/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border-bottom: 5px solid;
-    border-color: #CD071E;
-}*/
+.bert-alert.danger {
+    background: #CD071E;
+    color: #fff;
+}
 
 .navbar-default-whiteBG {
-  background-color: #ffffff;
+    background-color: #ffffff;
+    border-bottom: 1px solid;
+    border-color: #CD071E;
+    -webkit-box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
+    -moz-box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
+    box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
 }
 
 .navbar-nav>li>a {
@@ -21,9 +24,8 @@ body { padding-top: 55px; }
     color: #CD071E;
 }
 
-
-.navbar-brand, .navbar-brand:hover{
-  color: #CD071E;
+.navbar-brand, .navbar-brand:hover {
+    color: #CD071E;
 }
 
 a {
@@ -35,4 +37,30 @@ a {
     color: #CD071E;
     background-color: #ffffff;
     border-color: #CD071E;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: red !important;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: white;
+    border-radius: 1px;
+}
+
+.logo-img, .navbar-left {
+  width: 20px;
+  height: : 20px;
 }
