@@ -3,7 +3,6 @@
         {{#with userData}}
         <!-- this is submittedFilm.path fileRef??: {{submittedFilm.path fileRef}}
         this is {{submittedFilm.path.title}}? -->
-            <form action="">
                 <div class="row">
                     <div class="col-sm-10 col-sm-offset-1 col-xs-12">
                         <div class="form-group">
@@ -16,6 +15,13 @@
                             <h4>{{submittedFilm.genre}} - <em>{{submittedFilm.length}} Length Film</em></h4>
                             <h5><strong>Description:</strong> {{submittedFilm.description}}</h5>
                         </div>
+                       {{#if currentUser}}
+                            <div class="row">
+                                <!-- TODO: put this into a modal dialog -->
+                                <h3>Send PM</h3>
+                                {{> privateMessageForm }}
+                            </div>
+                        {{/if}}
                         <div class="form-group">
                             <h4>Comments</h4>
                             <textarea name="comments" id="comments" cols="30" rows="6" class="form-control" placeholder="Reviewer comments"></textarea>
@@ -78,7 +84,6 @@
                         </div>
                     </div>
                 </div>
-            </form>
 
 
             <style>

@@ -1,0 +1,12 @@
+<template name = "privateMessageForm">
+    {{#each msgs}}
+        <!-- TODO: format nicer (like profile page) -->
+        <strong>{{name}}:</strong> {{text}} (Time: {{ createdAt }})<br>
+    {{/each}}
+    <form id="privateMessageInputForm" class="form-inline">
+        <div class="form-group">
+            <input type="text" id="message" class="form-control" placeholder="Message...">
+        </div>
+        <button type="submit" class="btn btn-default btn-sm"><i class="fa fa-reply" id="fa-reply"></i> Send</button>
+    </form>
+</template>
