@@ -1,49 +1,37 @@
 // https://kadira.io/academy/meteor-routing-guide/content/subscriptions-and-data-management/with-blaze
-Template.filmReview.onCreated(function() {
-    // subscribe to the published user data (defined in users.js):
+Template.filmReview.onRendered(function() {
     let self = this;
     self.autorun(function() {
-        let usr = FlowRouter.getParam('userId');
-        self.subscribe('users.one', usr);
+        self.subscribe('users.withFilms');
+        self.subscribe('files.films.all');
     });
 });
 
 Template.filmReview.helpers({
     userData: function() {
         // get data:
-        // note: despite using "findOne()", this does depend on the Subscription to get the proper user data
-        console.log(Users);
-        let userFilm = Users.findOne({
-            _id: FlowRouter.getParam('userId')
-        }) || {};
-        console.log(userFilm);
-        // note: .count() won't work to see if one was retrieved or not: usrVideo.count());
-        // TODO: error handling: how to show if attemping to show a video that's not found
-        // TODO: show route with slug rather than _id. idea: https://github.com/deborah-ufw/flow-router-dynamic-links-use-slug
-        console.log(userFilm.submittedFilm.fileId);
-        Meteor.subscribe('files.films.current', userFilm.submittedFilm.fileId);
-        return userFilm;
+        let userFilm = Users.findOne({ _id: FlowRouter.getParam('userId') });
+        if (userFilm) {
+            return userFilm;
+        } else {
+            return {};
+        }
     },
     film: function() {
-        // by calling this template like so: {{#with video submittedFilm}}, i have set the data context
-        // and "this" is set to the user that was found
-
-        // necessary to have this subscription here in order to get user.submittedFilm.fileId
-        // console.log("INSIDE HELPER video");
-        // let userFilm = Users.findOne({ _id: FlowRouter.getParam('userId') });
-        // console.log('found:')
-        // console.log(userFilm);
-        // console.log('userFilm.submittedFilm=')
-        // console.log(userFilm.submittedFilm);
-        Meteor.subscribe('files.films.current', this.submittedFilm.fileId);
-        // this.subscribe('files.films.current', userFilm.submittedFilm.fileId);
-        let film = Films.collection.findOne({ _id: this.submittedFilm.fileId});
-        console.log(film);
-        // let video = Films.collection.findOne({ _id: userFilm.submittedFilm.fileId});
-        // console.log('found:');
-        // console.log(video);
-        return film;
-
-        // note: by returning the findOne object from the Films collection, you can use the template helper {{fileURL}} inside of a {{#with video}} block
+        // since we're calling the helper {{.. film}} within a {{#with userData}} helper block,
+        // "this" is set to the value returned from {{userData}} namely, the result of Users.findOne(url param userId)
+        // so, we can search the Films collection for that user's submitted film without consulting the User collection again
+        if (this.submittedFilm) {
+            return Films.collection.findOne({ _id: this.submittedFilm.fileId});
+        } else {
+            return {};
+        }
+    },
+    titlecase: function(str) {
+        if (str) {
+            return str.toLowerCase().split(' ').map((word) => (word.charAt(0).toUpperCase() + word.slice(1))).join(' '); // method from https://medium.freecodecamp.com/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27
+        } else {
+            return "";
+        }
     }
 });

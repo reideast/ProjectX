@@ -6,3 +6,15 @@ import {sAlert} from 'meteor/templating';
 
 import './main.html';
 
+// Note: this is already in signUp.html
+// sAlert.config({
+//     effect: 'scale',
+//     position: 'bottom',
+//     timeout: 5000,
+//     html: false,
+//     onRouteClose: true,
+//     stack: true,
+//     offset: 0,
+//     beep: false,
+//     onClose: _.noop
+// });
