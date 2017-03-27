@@ -24,7 +24,7 @@
           {{#if currentUser}}
           <li><a href="/filmSubmission"><i class="fa fa-plus-circle" aria-hidden="true"></i> Submit</a></li>
           <li><a href="#" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
-          <li><a href="#" class="logout">{{currentUser.emails.[0].address}}</a></li>
+          <li><a class="logout">| {{currentUser.profile.user.name}} |</a></li>
           {{else}}
           <li><a href="/signUp_reg"><i class="fa fa-user" aria-hidden="true"></i> SignUp/Login</a></li>
           {{/if}}
