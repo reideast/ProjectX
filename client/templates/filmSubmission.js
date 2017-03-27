@@ -37,7 +37,7 @@ Template.filmSubmission.events({
             description: frm.filmDescription.value,
             termsAccepted: frm.filmTermsAccepted.checked
         };
-		
+
           FlowRouter.go('profilePage');
 
         Meteor.call('filmSubmit', filmData, function(error, result) {

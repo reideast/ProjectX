@@ -1,10 +1,6 @@
 Template.profilePagePrivateMessageReply.events = {
-    // 'keydown input#message' : function (event) {
     'submit form' : function (event) {
         event.preventDefault();
-
-        console.log("inside submit event, this=");
-        console.log(this);
 
         if (Meteor.user()) {
             const name = Meteor.user().profile.user.name;
