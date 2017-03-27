@@ -34,7 +34,7 @@ Template.chatRoom.onCreated(function() {
                         //already room exists
                         const id = rooms.fetch()[0]._id;
                         Session.set("roomid", id);
-                        console.log("from sessions:");
+                        console.log("from session:");
                         console.log(Session.get('roomid'));
                     } else if( rooms.count() === 0 ) {
                         //no room exists
@@ -44,11 +44,11 @@ Template.chatRoom.onCreated(function() {
                                 to: toUserID,
                                 from: Meteor.userId(),
                                 messages: [
-                                    {
-                                        "name": "test dude",
-                                        "text": "dude's msg",
-                                        "createdAt": Date.now()
-                                    }
+                                    // {
+                                    //     "name": "test dude",
+                                    //     "text": "dude's msg",
+                                    //     "createdAt": Date.now()
+                                    // }
                                 ]
                             }
                         );
@@ -63,70 +63,58 @@ Template.chatRoom.onCreated(function() {
     });
 });
 
-Template.sidebar.helpers({
-    'onlusr':function(){
-        return Meteor.users.find({ "status.online": true , _id: {$ne: Meteor.userId()} });
-    }
-});
-
-Template.sidebar.events({
-    'click .user':function(){
-        Session.set('currentId',this._id);
-    }
-});
+// Template.sidebar.helpers({
+//     'onlusr':function(){
+//         return Meteor.users.find({ "status.online": true , _id: {$ne: Meteor.userId()} });
+//     }
+// });
+//
+// Template.sidebar.events({
+//     'click .user':function(){
+//         Session.set('currentId',this._id);
+//     }
+// });
 
 Template.messages.helpers({
-    'msgs':function(){
-        var result=ChatRooms.findOne({_id:Session.get('roomid')});
-        if(result){
-            return result.messages;
+    'msgs': function() {
+        const result = ChatRooms.findOne({
+            _id: Session.get('roomid')
+        });
+        if (result) {
+            return result.messages; // note: returns an array
         }
     }
 });
 
 Template.input.events = {
     'keydown input#message' : function (event) {
-        console.log("1");
-
-        if (event.which == 13) {
-            console.log("2");
+        if (event.which == 13) { // if key is {enter}
             if (Meteor.user())
             {
-                console.log("3");
-                var name = Meteor.user().profile.user.name; // CHANGED to profile.user.name
-                console.log(Meteor.user());
-                console.log(name);
-                var message = document.getElementById('message').value; // CHANGED TO value
-                console.log(message);
+                var name = Meteor.user().profile.user.name;
+                var messageInputBox = document.getElementById('message');
                 var roomid = Session.get("roomid")
-                console.log(roomid);
-
-                console.log("4");
-                if (message.value !== '') {
-                    console.log("5");
-                    if (ChatRooms.findOne({ _id: roomid })) { // CHANGED: how the update works
+                if (messageInputBox.value !== '') {
+                    if (ChatRooms.findOne({ _id: roomid })) {
                         var de = ChatRooms.update(
                             { _id: roomid },
                             {
                                 $push: {
                                     messages:{
                                         name: name,
-                                        text: message,
+                                        text: messageInputBox.value,
                                         createdAt: Date.now()
                                     }
                                 }
                             }
                         );
                     }
-                    console.log(de);
-                    console.log("6");
-                    document.getElementById('message').value = '';
-                    message.value = '';
+
+                    // reset form
+                    messageInputBox.value = '';
                 }
-            }
-            else
-            {
-                alert("login to chat");
+            } else {
+                console.log("ERROR: ONLY LOGGED IN USERS CAN CHAT");
             }
 
         }
