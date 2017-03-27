@@ -1,6 +1,6 @@
 <template name="signUp_reg">
 
-	<div class="container">
+	<div class="container-logIn">
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 				<div class="panel panel-login">
@@ -40,7 +40,7 @@
 										<div class="row">
 											<div class="col-lg-12">
 												<div class="text-center">
-													<a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a>
+													<!-- <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a> -->
 												</div>
 											</div>
 										</div>
@@ -70,12 +70,12 @@
                                     <input type="radio" name="person" value="Teacher">Teacher
                                     </label>
 										</div>
-										
+
 										<div class="terms-checkboxes">
 												<input type="checkbox" name="filmTermsAccepted" id="filmTermsAccepted">
 												<label for="filmTermsAccepted">I have read JFF's <a data-toggle="modal" href="#terms">terms and privacy policy</a></label>
 											</div>
-										
+
 										</div>
 									<div class="form-group">
 										<div class="row">
@@ -142,7 +142,7 @@
 				</div>
 			</div>
 		</div>
-	
+
 	</div>
 	 {{> sAlert}}
 
@@ -150,38 +150,42 @@
 
 <style>
 	/*signup/reg*/
-	
+
+	.container-logIn{
+		padding-top: 75px;
+	}
+
 	.terms-checkboxes label {
     text-align: left;
     float: none;
     font-weight:normal;
-     
-   
-      
+
+
+
 }
 
 .terms-checkboxes input[type=checkbox] {
     margin-left: 20px;
 }
-	
+
 	/*body {*/
 	/*	padding-top: none;*/
 	/*}*/
-	
+
 	.panel-login {
 		border-color: #ccc;
 		-webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 		-moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 		box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
 	}
-	
+
 	.panel-login>.panel-heading {
 		color: #00415d;
 		background-color: #fff;
 		border-color: #fff;
 		text-align: center;
 	}
-	
+
 	.panel-login>.panel-heading a {
 		text-decoration: none;
 		color: #666;
@@ -191,12 +195,12 @@
 		-moz-transition: all 0.1s linear;
 		transition: all 0.1s linear;
 	}
-	
+
 	.panel-login>.panel-heading a.active {
 		color: #cd071e;
 		font-size: 18px;
 	}
-	
+
 	.panel-login>.panel-heading hr {
 		margin-top: 10px;
 		margin-bottom: 0px;
@@ -208,7 +212,7 @@
 		background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
 		background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
 	}
-	
+
 	.panel-login input[type="text"],
 	.panel-login input[type="email"],
 	.panel-login input[type="password"] {
@@ -219,7 +223,7 @@
 		-moz-transition: all 0.1s linear;
 		transition: all 0.1s linear;
 	}
-	
+
 	.panel-login input:hover,
 	.panel-login input:focus {
 		outline: none;
@@ -228,7 +232,7 @@
 		box-shadow: none;
 		border-color: #ccc;
 	}
-	
+
 	.btn-login {
 		background-color: #cd071e;
 		outline: none;
@@ -240,25 +244,25 @@
 		text-transform: uppercase;
 		border-color: #59B2E6;
 	}
-	
+
 	.btn-login:hover,
 	.btn-login:focus {
 		color: #fff;
 		background-color: #1CA347;
 		border-color: #53A3CD;
 	}
-	
+
 	.forgot-password {
 		text-decoration: underline;
 		color: #888;
 	}
-	
+
 	.forgot-password:hover,
 	.forgot-password:focus {
 		text-decoration: underline;
 		color: #666;
 	}
-	
+
 	.btn-block {
 		background-color: #cd071e;
 		outline: none;
@@ -270,7 +274,7 @@
 		text-transform: uppercase;
 		border-color: #1CB94A;
 	}
-	
+
 	.btn-block:hover,
 	.btn-block:focus {
 		color: #fff;
@@ -281,7 +285,7 @@
 
 <script>
 
- 
+
     $(document).ready(function() {
         $('#filmSubmit').prop('disabled', true).addClass('disabled');
         $('#filmTermsAccepted').change(function() {

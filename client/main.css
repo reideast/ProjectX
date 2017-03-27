@@ -1,34 +1,38 @@
-.navbar .nav.pull-right {
-    float: right;
-    margin-right: 160px;
-    /*set margin this way in your custom styesheet*/
-}
-
-
 /* CSS declarations go here */
-
-
-/*.signUpBtns {
-    padding-top: 10px;
-  }*/
-
-#login-buttons {
-    margin-top: 18px;
-}
+body { padding-top: 55px; }
 
 .bert-alert.danger {
   background: #CD071E;
   color: #fff;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+/*.navbar-default .navbar-collapse, .navbar-default .navbar-form {
     border-bottom: 5px solid;
     border-color: #CD071E;
-    background-color: #ffffff;
+}*/
+
+.navbar-default-whiteBG {
+  background-color: #ffffff;
 }
 
-#login-dropdown-list {
-    position: absolute;
-    top: 40px;
-    left: -1px;
+.navbar-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #CD071E;
+}
+
+
+.navbar-brand, .navbar-brand:hover{
+  color: #CD071E;
+}
+
+a {
+    color: #CD071E;
+    text-decoration: none;
+}
+
+.btn-success, .btn-success:hover {
+    color: #CD071E;
+    background-color: #ffffff;
+    border-color: #CD071E;
 }
