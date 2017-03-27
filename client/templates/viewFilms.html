@@ -1,22 +1,22 @@
 <template name="viewFilms">
     <div class="container-viewFilms">
-      <div class="col-xs-12 col-md-3 col-sm-4">
-        <div class="row">
-            {{#each filmListing}}
-                <div class="filmItem col-xs-12 col-sm-4 col-md-3">
-                    <a href="film/{{_id}}">
-                        <h4>{{submittedFilm.title}}</h4>
-                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                    </a>
-                    {{#each emails}}
-                        <!-- TODO: make this user name instead? -->
-                        <p><em>by {{address}} </em></p>
-                    {{/each}}
-                </div>
-            {{/each}}
-        </div>
+      <div class="row">
+      {{#each filmListing}}
+          <div class="filmItem col-xs-12 col-sm-4 col-md-3">
+              <a href="film/{{_id}}">
+                  <h4>{{submittedFilm.title}}</h4>
+                  <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+              </a>
+              {{#each emails}}
+                  <!-- TODO: make this user name instead? -->
+                  <p><em>by {{address}} </em></p>
+              {{/each}}
+          </div>
+      {{/each}}
       </div>
     </div>
+      {{> footer}}
+
 
     <style>
         .filmItem a {
