@@ -1,111 +1,132 @@
 <template name="profilePage">
 
-  <style>
-	.detailBox {
-    border:1px solid #bbb;
-	}
-	.titleBox {
-		background-color:#fdfdfd;
-		padding:10px;
-	}
-	.titleBox label{
-	  color:#444;
-	  margin:0;
-	  display:inline-block;
-	}
-	
-	.commentBox {
-		padding:10px;
-		border-top:1px dotted #bbb;
-	}
-	.commentBox .form-group:first-child, .actionBox .form-group:first-child {
-		width:80%;
-	}
-	.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
-		width:18%;
-	}
-	.actionBox .form-group * {
-		width:100%;
-	}
-	.taskDescription {
-		margin-top:10px 0;
-	}
-	.commentList {
-		padding:0;
-		list-style:none;
-		max-height:200px;
-		overflow:auto;
-	}
-	.commentList li {
-		margin:0;
-		margin-top:10px;
-	}
-	.commentList li > div {
-		display:table-cell;
-	}
-	.commenterImage {
-		width:30px;
-		margin-right:5px;
-		height:100%;
-		float:left;
-	}
-	.commenterImage img {
-		width:100%;
-		border-radius:50%;
-	}
-	.commentText p {
-		margin:0;
-	}
-	.sub-text {
-		color:#aaa;
-		font-family:verdana;
-		font-size:11px;
-	}
-	.actionBox {
-		padding:10px;
-	}
+<style>
+.singleMessage { /* over-riding bootstrap's .panel margin */
+    margin-bottom: 0;
+}
 
-  </style>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-3" col-sm-offset-4 id="readOnly">
-          	<div class="embed-responsive embed-responsive-16by9">
-               {{>viewFilms }}
+.detailBox {
+    border:1px solid #bbb;
+}
+.titleBox {
+    background-color:#fdfdfd;
+    padding:10px;
+}
+.titleBox label{
+    color:#444;
+    margin:0;
+    display:inline-block;
+}
+
+.commentBox {
+    padding:10px;
+    border-top:1px dotted #bbb;
+}
+.commentBox .form-group:first-child, .actionBox .form-group:first-child {
+    width:80%;
+}
+.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+    width:18%;
+}
+.actionBox .form-group * {
+    width:100%;
+}
+.taskDescription {
+    margin-top:10px 0;
+}
+.commentList {
+    padding:0;
+    list-style:none;
+    max-height:200px;
+    overflow:auto;
+}
+.commentList li {
+    margin:0;
+    margin-top:10px;
+}
+.commentList li > div {
+    display:table-cell;
+}
+.commenterImage {
+    width:30px;
+    margin-right:5px;
+    height:100%;
+    float:left;
+}
+.commenterImage img {
+    width:100%;
+    border-radius:50%;
+}
+.commentText p {
+    margin:0;
+}
+.sub-text {
+    color:#aaa;
+    font-family:verdana;
+    font-size:11px;
+}
+.actionBox {
+    padding:10px;
+}
+
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3" col-sm-offset-4 id="readOnly">
+            <div class="embed-responsive embed-responsive-16by9">
+                {{>viewFilms }}
             </div>
-          </div>
-          <div class="col-sm-5" id="pVideoDisplay"> hello
-          </div>
         </div>
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-8" col-sm-offset-4 id="personalMssg">
-              <h2 class="page-header">Personal Messages</h2>
-                <section class="comment-list">
-                  <!-- First Comment -->
-                  <article class="row">
-                    <div class="col-md-10 col-sm-10">
-                      <div class="panel panel-default arrow left">
-                        <div class="panel-body">
-                          <header class="text-left">
-                            <div class="comment-user">
-                            	<i class="fa fa-user" id="fa-user">
-                                </i> John Doe
-                            </div>
-                            <time class="comment-date" datetime="16-12-2014 01:05"><i class="fa fa-clock-o"></i> Mar 15, 2017</time>
-                          </header>
-                          <div class="comment-post">
-                            <p>
-                              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            </p>
-                          </div>
-                          <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply" id="fa-reply"></i> reply</a></p>
+        <div class="col-sm-5" id="pVideoDisplay"> hello
+        </div>
+    </div>
+</div>
+<div class="container" id="personalMessageContainer">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
+            <h3 class="page-header">Personal Messages</h3>
+            <section class="comment-list">
+                {{#if Template.subscriptionsReady}}
+                    {{#each privateMessageConversations }}
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4 class=panel-title>
+                                Conversation With:
+                                {{#with conversationDetails from }}
+                                    {{profile.user.name}}
+                                {{/with}}
+                            </h4>
                         </div>
-                      </div>
+                        <div class="panel-body">
+                            {{#each messages}}
+                                <header class="text-left">
+                                    <div class="comment-user">
+                                        <span class="fa fa-user"></span> {{name}}
+                                        <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
+                                    </div>
+                                </header>
+                                <div class="singleMessage panel panel-default">
+                                    <div class="panel-body">
+                                        <div class="comment-post">
+                                            {{text}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <footer class="text-right">
+                                    <div class="comment-date">
+                                        <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
+                                    </div>
+                                </footer>
+                            {{/each}}
+                        </div>
+                        <div class="panel-footer">
+                            {{> profilePagePrivateMessageReply }}
+                        </div>
                     </div>
-                  </article>
-                  </section>
-                  </div>
-            </div>
-          </div>
+                    {{/each}}
+                {{/if}}
+            </section>
+        </div>
+    </div>
+</div>
 </template>
