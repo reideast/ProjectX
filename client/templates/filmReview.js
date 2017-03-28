@@ -48,5 +48,15 @@ Template.filmReview.helpers({
             console.log("ERROR: No user logged in, so cannot show messages count");
             return '';
         }
+    },
+    notSelfUser: function() {
+        // this helper, called with {{#if notSelfUser }}, will hide html content if this user is viewing their own Film page
+        if (Meteor.userId() && this._id) { // in the data context of a filmReview template, this is a User document for that filmmaker
+            if (Meteor.userId() !== this._id) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 });

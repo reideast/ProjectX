@@ -15,28 +15,30 @@
                         <h5><strong>Description:</strong> {{submittedFilm.description}}</h5>
                     </div>
                    {{#if currentUser}}
-                       <!-- TODO: hide private message box if this is your own page -->
-                        <div class="form-group">
-                            <h3>Your Private Messages to Filmmaker</h3>
-                            <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
-                                <i class="glyphicon glyphicon-envelope"></i> Messages
-                                <span class="badge">{{ numPrivateMessages }}</span>
-                            </button>
-                        </div>
-                        <!-- Terms modal dialog (hidden) -->
-                        <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h3 class="modal-title">Send a Private Message to Filmmaker</h3>
+                       {{#if notSelfUser }}
+                           <!-- TODO: hide private message box if this is your own page -->
+                            <div class="form-group">
+                                <h3>Your Private Messages to Filmmaker</h3>
+                                <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
+                                    <i class="glyphicon glyphicon-envelope"></i> Messages
+                                    <span class="badge">{{ numPrivateMessages }}</span>
+                                </button>
+                            </div>
+                            <!-- Terms modal dialog (hidden) -->
+                            <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h3 class="modal-title">Send a Private Message to Filmmaker</h3>
+                                        </div>
+                                        {{> privateMessageForm }}
+                                        <!-- <button class="btn btn-default" type="button" data-dismiss="modal">Close</button> -->
                                     </div>
-                                    {{> privateMessageForm }}
-                                    <!-- <button class="btn btn-default" type="button" data-dismiss="modal">Close</button> -->
                                 </div>
                             </div>
-                        </div>
-                        <!-- end hidden modal -->
+                            <!-- end hidden modal -->
+                        {{/if}}
                     {{/if}}
                     <div class="form-group">
                         <h4>Comments</h4>
