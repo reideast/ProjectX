@@ -104,12 +104,12 @@
                                 </div>
                                 <div class="panel-body">
                                     {{#each messages}}
-                                        <header class="text-left">
+                                        <div class="text-left">
                                             <div class="comment-user">
                                                 <span class="fa fa-user"></span> {{name}}
                                                 <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
                                             </div>
-                                        </header>
+                                        </div>
                                         <div class="singleMessage panel panel-default">
                                             <div class="panel-body">
                                                 <div class="comment-post">
@@ -117,11 +117,11 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <footer class="text-right">
+                                        <div class="text-right">
                                             <div class="comment-date">
                                                 <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
                                             </div>
-                                        </footer>
+                                        </div>
                                     {{/each}}
                                 </div>
                                 <div class="panel-footer">

@@ -11,7 +11,7 @@ Template.profilePage.helpers({
         if (Meteor.userId()) {
             return PrivateMessages.find({ to: Meteor.userId() });
         } else {
-            return {};
+            return undefined;
         }
     },
     formatTime: function(myTime) {

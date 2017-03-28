@@ -9,12 +9,12 @@
             {{#with msgs}}
                 {{#each messages}}
                     <!-- TODO: format nicer (like profile page) -->
-                    <header class="text-left">
+                    <div class="text-left">
                         <div class="comment-user">
                             <span class="fa fa-user"></span> {{name}}
                             <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
                         </div>
-                    </header>
+                    </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div class="comment-post">
@@ -22,11 +22,11 @@
                             </div>
                         </div>
                     </div>
-                    <footer class="text-right">
+                    <div class="text-right">
                         <div class="comment-date">
                             <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
                         </div>
-                    </footer>
+                    </div>
                 {{/each}}
             {{/with}}
         </div>
