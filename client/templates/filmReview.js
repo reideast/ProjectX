@@ -59,26 +59,40 @@ Template.filmReview.helpers({
             }
         }
     },
-
-    // TODO: make a helper that finds if the user has already voted, and select that radio button
+    hasReviewerChecked: function(val) {
+        // TODO: make a helper that finds if the user has already voted, and select that radio button
+        
+    }
 });
 
 Template.filmReview.events({
     'change .ratingRadio': function(e) {
-        // TODO: I need to do "if selected" here, don't I
+        // note: don't need to verify that e.target.checked is true, because Meteor's event handling code seems to only call the 'change' event for the positively selected one
 
-        console.log("changed!");
-        console.log(e.target.value);
+        // console.log("changed!");
+        // console.log(e);
         // console.log(e);
         // console.log(e.target.parentNode.parentNode);
 
         // add visual class to ratings radio when selected
         $('.list-group-item').removeClass('active');
-        const elem = $(e.target);
-        const label = $(e.target.parentNode.parentNode);
-        // console.log(label);
-        label.addClass('active');
+        $(e.target.parentNode.parentNode).addClass('active');
 
-        // TODO: update to database
+        // console.log("this");
+        // console.log(this);
+        // console.log("userId");
+        // console.log(Meteor.userId());
+        // console.log("rating");
+        // console.log(e.target.value);
+        const filmmakerId = this._id;
+        const reviewerId = Meteor.userId();
+        const rating = e.target.value;
+        Meteor.call('setRating', filmmakerId, reviewerId, rating, function(error, result) {
+            if (error) {
+                sAlert.error("Rating failed: " + error.reason);
+            } else {
+                sAlert.success("Your rating has been counted!");
+            }
+        });
     }
 });

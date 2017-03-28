@@ -16,7 +16,6 @@
                     </div>
                    {{#if currentUser}}
                        {{#if notSelfUser }}
-                           <!-- TODO: hide private message box if this is your own page -->
                             <div class="form-group">
                                 <h3>Your Private Messages to Filmmaker</h3>
                                 <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
@@ -54,12 +53,12 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
+                                                        <input {{ hasReviewerChecked 1 }} type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
                                             <div class="col-xs-6">
-                                                Like
+                                                Liked
                                             </div>
                                             <div class="col-xs-3">
                                                 <span class="glyphicon glyphicon-upload"></span>
@@ -69,7 +68,7 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
+                                                        <input {{ hasReviewerChecked 0 }} type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
@@ -84,12 +83,12 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
+                                                        <input {{ hasReviewerChecked -1 }} type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
                                             <div class="col-xs-6">
-                                                Dislike
+                                                Disliked
                                             </div>
                                             <div class="col-xs-3">
                                                 <span class="glyphicon glyphicon-download"></span>
@@ -141,6 +140,7 @@
                     </div>
                 </div>
             </div>
+            {{> sAlert }}
 
 
             <style>
@@ -171,16 +171,6 @@
                     text-align: left;
                 }
             </style>
-
-            <script>
-                // $(document).ready(function() {
-                //     // add visual class to ratings radio when selected
-                //     $('.list-group-item').click(function() {
-                //         $('.list-group-item').removeClass('active');
-                //         $(this).addClass('active');
-                //     });
-                // });
-            </script>
         {{/with}}
     {{else}}
         <p>Loading...</p>
