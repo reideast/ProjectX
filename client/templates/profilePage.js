@@ -66,6 +66,12 @@ Template.profilePage.helpers({
             }
         });
         return options;
+    },
+    thumbRef: function() {
+        if (this.fileId) {
+            let film = Films.collection.findOne({ _id: this.fileId});
+            return film;
+        }
     }
 });
 Template.profilePage.events({
