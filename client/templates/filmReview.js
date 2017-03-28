@@ -4,6 +4,7 @@ Template.filmReview.onRendered(function() {
     self.autorun(function() {
         self.subscribe('users.withFilms');
         self.subscribe('files.films.all');
+        self.subscribe('privateMessages.all');
     });
 });
 
@@ -32,6 +33,20 @@ Template.filmReview.helpers({
             return str.toLowerCase().split(' ').map((word) => (word.charAt(0).toUpperCase() + word.slice(1))).join(' '); // method from https://medium.freecodecamp.com/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27
         } else {
             return "";
+        }
+    },
+    numPrivateMessages: function() {
+        if (Meteor.userId() && this._id) { // in the data context of a filmReview template, this is a User document for that filmmaker
+            var rooms = PrivateMessages.findOne({ to: this._id, from: Meteor.userId() });
+            if (rooms) {
+                return rooms.messages.length;
+            } else {
+                // no previously created conversation found, return nothing
+                return '';
+            }
+        } else {
+            console.log("ERROR: No user logged in, so cannot show messages count");
+            return '';
         }
     }
 });

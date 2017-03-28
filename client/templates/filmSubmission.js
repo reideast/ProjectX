@@ -92,7 +92,6 @@ Template.filmSubmission.events({
                 });
 
                 uploadInstance.on('end', function(error, fileObj) {
-                    template.currentUpload.set(false);
                     if (error) {
                         sAlert.error('Error during upload: ' + error.reason);
                     } else {
