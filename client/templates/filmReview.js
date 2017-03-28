@@ -58,5 +58,27 @@ Template.filmReview.helpers({
                 return false;
             }
         }
+    },
+
+    // TODO: make a helper that finds if the user has already voted, and select that radio button
+});
+
+Template.filmReview.events({
+    'change .ratingRadio': function(e) {
+        // TODO: I need to do "if selected" here, don't I
+
+        console.log("changed!");
+        console.log(e.target.value);
+        // console.log(e);
+        // console.log(e.target.parentNode.parentNode);
+
+        // add visual class to ratings radio when selected
+        $('.list-group-item').removeClass('active');
+        const elem = $(e.target);
+        const label = $(e.target.parentNode.parentNode);
+        // console.log(label);
+        label.addClass('active');
+
+        // TODO: update to database
     }
 });
