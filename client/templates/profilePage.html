@@ -1,131 +1,138 @@
 <template name="profilePage">
+    <style>
+        .singleMessage { /* over-riding bootstrap's .panel margin */
+            margin-bottom: 0;
+        }
 
-<style>
-.singleMessage { /* over-riding bootstrap's .panel margin */
-    margin-bottom: 0;
-}
+        .detailBox {
+            border:1px solid #bbb;
+        }
+        .titleBox {
+            background-color:#fdfdfd;
+            padding:10px;
+        }
+        .titleBox label{
+            color:#444;
+            margin:0;
+            display:inline-block;
+        }
 
-.detailBox {
-    border:1px solid #bbb;
-}
-.titleBox {
-    background-color:#fdfdfd;
-    padding:10px;
-}
-.titleBox label{
-    color:#444;
-    margin:0;
-    display:inline-block;
-}
+        .commentBox {
+            padding:10px;
+            border-top:1px dotted #bbb;
+        }
+        .commentBox .form-group:first-child, .actionBox .form-group:first-child {
+            width:80%;
+        }
+        .commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
+            width:18%;
+        }
+        .actionBox .form-group * {
+            width:100%;
+        }
+        .taskDescription {
+            margin-top:10px 0;
+        }
+        .commentList {
+            padding:0;
+            list-style:none;
+            max-height:200px;
+            overflow:auto;
+        }
+        .commentList li {
+            margin:0;
+            margin-top:10px;
+        }
+        .commentList li > div {
+            display:table-cell;
+        }
+        .commenterImage {
+            width:30px;
+            margin-right:5px;
+            height:100%;
+            float:left;
+        }
+        .commenterImage img {
+            width:100%;
+            border-radius:50%;
+        }
+        .commentText p {
+            margin:0;
+        }
+        .sub-text {
+            color:#aaa;
+            font-family:verdana;
+            font-size:11px;
+        }
+        .actionBox {
+            padding:10px;
+        }
 
-.commentBox {
-    padding:10px;
-    border-top:1px dotted #bbb;
-}
-.commentBox .form-group:first-child, .actionBox .form-group:first-child {
-    width:80%;
-}
-.commentBox .form-group:nth-child(2), .actionBox .form-group:nth-child(2) {
-    width:18%;
-}
-.actionBox .form-group * {
-    width:100%;
-}
-.taskDescription {
-    margin-top:10px 0;
-}
-.commentList {
-    padding:0;
-    list-style:none;
-    max-height:200px;
-    overflow:auto;
-}
-.commentList li {
-    margin:0;
-    margin-top:10px;
-}
-.commentList li > div {
-    display:table-cell;
-}
-.commenterImage {
-    width:30px;
-    margin-right:5px;
-    height:100%;
-    float:left;
-}
-.commenterImage img {
-    width:100%;
-    border-radius:50%;
-}
-.commentText p {
-    margin:0;
-}
-.sub-text {
-    color:#aaa;
-    font-family:verdana;
-    font-size:11px;
-}
-.actionBox {
-    padding:10px;
-}
-
-</style>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-3" col-sm-offset-4 id="readOnly">
-            <div class="embed-responsive embed-responsive-16by9">
-                {{>viewFilms }}
+        .container-profilePage{
+            padding-top:90px;
+        }
+    </style>
+    <div class="container-profilePage">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3" col-sm-offset-4 id="readOnly">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <!-- TODO: switch to viewing THIS USERS FILM -->
+                        {{>viewFilms }}
+                    </div>
+                </div>
+                <div class="col-sm-5" id="pVideoDisplay"> hello
+                </div>
             </div>
         </div>
-        <div class="col-sm-5" id="pVideoDisplay"> hello
-        </div>
     </div>
-</div>
-<div class="container" id="personalMessageContainer">
-    <div class="row">
-        <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
-            <h3 class="page-header">Private Messages</h3>
-            <section class="comment-list">
-                {{#if Template.subscriptionsReady}}
-                    {{#each privateMessageConversations }}
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4 class=panel-title>
-                                {{#with conversationDetails from }}
-                                    Conversation with {{profile.user.name}}
-                                {{/with}}
-                            </h4>
-                        </div>
-                        <div class="panel-body">
-                            {{#each messages}}
-                                <header class="text-left">
-                                    <div class="comment-user">
-                                        <span class="fa fa-user"></span> {{name}}
-                                        <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
-                                    </div>
-                                </header>
-                                <div class="singleMessage panel panel-default">
-                                    <div class="panel-body">
-                                        <div class="comment-post">
-                                            {{text}}
-                                        </div>
-                                    </div>
+    <!-- </div> -->
+    <div class="container" id="personalMessageContainer">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
+                <h3 class="page-header">Private Messages</h3>
+                <section class="comment-list">
+                    {{#if Template.subscriptionsReady}}
+                        {{#each privateMessageConversations }}
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <h4 class=panel-title>
+                                        {{#with conversationDetails from }}
+                                            Conversation with {{profile.user.name}}
+                                        {{/with}}
+                                    </h4>
                                 </div>
-                                <footer class="text-right">
-                                    <div class="comment-date">
-                                        <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
-                                    </div>
-                                </footer>
-                            {{/each}}
-                        </div>
-                        <div class="panel-footer">
-                            {{> profilePagePrivateMessageReply }}
-                        </div>
-                    </div>
-                    {{/each}}
-                {{/if}}
-            </section>
+                                <div class="panel-body">
+                                    {{#each messages}}
+                                        <header class="text-left">
+                                            <div class="comment-user">
+                                                <span class="fa fa-user"></span> {{name}}
+                                                <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
+                                            </div>
+                                        </header>
+                                        <div class="singleMessage panel panel-default">
+                                            <div class="panel-body">
+                                                <div class="comment-post">
+                                                    {{text}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <footer class="text-right">
+                                            <div class="comment-date">
+                                                <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
+                                            </div>
+                                        </footer>
+                                    {{/each}}
+                                </div>
+                                <div class="panel-footer">
+                                    {{> profilePagePrivateMessageReply }}
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{/if}}
+                </section>
+            </div>
         </div>
     </div>
-</div>
+    {{> footer}}
 </template>

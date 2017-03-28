@@ -1,34 +1,93 @@
-.navbar .nav.pull-right {
-    float: right;
-    margin-right: 160px;
-    /*set margin this way in your custom styesheet*/
-}
-
-
 /* CSS declarations go here */
 
-
-/*.signUpBtns {
-    padding-top: 10px;
-  }*/
-
-#login-buttons {
-    margin-top: 18px;
+body {
+    padding-top: 50px;
 }
 
 .bert-alert.danger {
-  background: #CD071E;
-  color: #fff;
+    background: #CD071E;
+    color: #fff;
 }
 
-.navbar-default .navbar-collapse, .navbar-default .navbar-form {
-    border-bottom: 5px solid;
-    border-color: #CD071E;
+.navbar-default-whiteBG {
     background-color: #ffffff;
+    border-bottom: 1px solid;
+    border-color: #CD071E;
+    -webkit-box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
+    -moz-box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
+    box-shadow: 0px 9px 5px 0px rgba(205, 7, 30, 1);
 }
 
-#login-dropdown-list {
+.navbar-nav>li>a {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: #62040F  ;
+}
+
+.navbar-brand, .navbar-brand:hover {
+    color: #CD071E;
+}
+
+.a {
+    color: #CD071E;
+    text-decoration: none;
+}
+
+.btn-success:hover {
+    color: #CD071E;
+    background-color: #ffffff;
+    border-color: #CD071E;
+}
+
+.navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 9px 10px;
+    margin-top: 8px;
+    margin-right: 15px;
+    margin-bottom: 8px;
+    background-color: #62040F;
+    background-image: none;
+    border: 1px solid #62040F;
+    border-radius: 4px;
+}
+
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: white;
+    border-radius: 1px;
+}
+
+.logo-img, .navbar-left {
+  width: 20px;
+  height: : 20px;
+}
+ .jumbotron {
+   background: url('/img/crowd.jpg') no-repeat center center;
+   min-height: 700px;
+   padding-bottom: 5px;
+ }
+ .currentBG{
+   background-color: #62040f;
+ }
+
+.btn-success {
+  background-color: #62040F;
+}
+
+.text-center {
+  color: #62040f;
+}
+
+#portfolio .portfolio-item .portfolio-link .caption {
+    background: #62040f;
     position: absolute;
-    top: 40px;
-    left: -1px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: all ease .5s;
+    -webkit-transition: all ease .5s;
+    -moz-transition: all ease .5s;
 }

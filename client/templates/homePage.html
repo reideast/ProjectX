@@ -1,6 +1,11 @@
 <template name="homePage">
     {{> callToAction}}
-    <h2>Current Submissions</h2>
+    {{> gallery}}
+    <div class="col-md-3 col-md-offset-5">
+      <h2>Current Submissions</h2>
+    </div>
     {{> viewFilms}}
-    {{> footer}}
+    <div>
+      {{> footer}}
+    </div>
 </template>
