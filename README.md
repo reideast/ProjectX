@@ -1,8 +1,7 @@
 # ProjectX - Web App for JFF (Junior Film Fleadh)#
-[![Build Status](https://travis-ci.com/davedodea/ProjectX.svg?token=mSbTyy1sJpCTYfpkhqUw&branch=master)](https://travis-ci.com/davedodea/ProjectX)
 
-![] (https://csatunibackups.s3-eu-west-1.amazonaws.com/original/1X/4e38ab68cdd720f318630d668ef012d395a9c09b.png)
-
+![Screenshot](buildPass.png)
+![Screenshot](JFFLogo.png)
 ### CT216 Software engineering I - Group Project.
 
 

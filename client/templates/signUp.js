@@ -1,3 +1,4 @@
+
 /* global jQuery*/
 /*global $*/
 sAlert.config({
@@ -20,6 +21,7 @@ Template.signUp.onRendered(function() {
         //console.log("Validation check");
     }, "sorry this email is taken,please try another one");*/
 
+    // TODO: got a "not a function" exception when deployed
     $('#signUp').validate({
         rules: {
             email: {
@@ -34,15 +36,31 @@ Template.signUp.onRendered(function() {
 
 
 
-Template.signUp.events({
-    'submit form': function(event) {
+Template.signUp_reg.events({
+    'submit #login-form': function(event){
         event.preventDefault();
-        if (event.target.terms.checked) {
+        var email = $('[name=email-login]').val();
+        var password = $('[name=password-login]').val();
+        Meteor.loginWithPassword(email, password, function (err) {
+        if (!err) {
+            FlowRouter.go("profilePage");
+        }
+        else {
+            console.log(err);
+            sAlert.error("Error: Email or password is incorrect");
+        }
+        });
+            console.log("form submitted");
+    },
+    
+    'submit #register-form': function(event) {
+        event.preventDefault();
+        if (event.target.filmTermsAccepted.checked) {
             console.log(event.target.person.value);
             // var emailvar=event.find('#email').value;
             var emailvar = event.target.email.value;
             var passwordvar = event.target.password.value;
-            var namevar = event.target.name.value;
+            var namevar = event.target.username.value;
             var contactNovar = event.target.contactNo.value;
             console.log("Form submitted.");
             Accounts.createUser({
@@ -50,25 +68,55 @@ Template.signUp.events({
                 password: passwordvar,
                 profile: {
                     user: {
-                        terms: event.target.terms.checked,
+                        filmTermsAccepted: event.target.filmTermsAccepted.checked,
                         name: namevar,
                         telephone: contactNovar,
                         person: event.target.person.value,
-
+                       
                     }
+                    
                 }
+                
             }, function(error) {
                 if (error) {
                     sAlert.error(error.reason);
                 }
+                 console.log("createuser.");
         });
         }
         else {
-            alert("Must be checked");
+            sAlert.error("Terms Must be checked");
         }
+        FlowRouter.go("homePage");
         name: "homePage";
     }
 });
+
+
+
+Template.nav.events({
+    'click .logout': function(event){
+        event.preventDefault();
+         Meteor.logout();
+          FlowRouter.go('homePage');
+    }
+});
+
+
+// Meteor.publish("user", function() {
+//     return Meteor.users.find();
+// });
+
+// Meteor.subscribe('user');
+
+Template.nav.helpers({
+    users: function() {
+        var user = Meteor.users.find();
+        return user;
+    },
+});
+
+
 
 // jQuery.validator.addMethod("doesEmailExist", function(value, element) {
 //     Template.tmp_signup.events({

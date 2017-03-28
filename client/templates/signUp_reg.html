@@ -1,0 +1,324 @@
+<template name="signUp_reg">
+	<div class="container-logIn">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="panel panel-login">
+					<div class="panel-heading">
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="#" class="active" id="login-form-link">Login</a>
+							</div>
+							<div class="col-xs-6">
+								<a href="#" id="register-form-link">SignUp</a>
+							</div>
+						</div>
+						<hr>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-lg-12">
+								<form id="login-form" role="form" style="display: block;">
+									<div class="form-group">
+										<input type="email" name="email-login" tabindex="1" class="form-control" placeholder="email" value="">
+									</div>
+									<div class="form-group">
+										<input type="password" name="password-login"  tabindex="2" class="form-control" placeholder="Password">
+									</div>
+									<!--<div class="form-group text-center">-->
+									<!--	<input type="checkbox" tabindex="3" class="" name="remember" id="remember">-->
+									<!--	<label for="remember"> Remember Me</label>-->
+									<!--</div>-->
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+												<input type="submit" name="login-submit" tabindex="4" class="form-control btn btn-login" value="Log In">
+											</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-lg-12">
+												<div class="text-center">
+													<!-- <a href="http://phpoll.com/recover" tabindex="5" class="forgot-password">Forgot Password?</a> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</form>
+								<form id="register-form"  role="form" style="display: none;">
+									<div class="form-group">
+										<input type="text" name="username"  tabindex="1" class="form-control" placeholder="Name" value="" required>
+									</div>
+									<div class="form-group">
+										<input type="email" name="email"  tabindex="1" class="form-control" placeholder="Email Address" value="" required>
+									</div>
+									<div class="form-group">
+										<input type="password" name="password"  tabindex="2" class="form-control" placeholder="Password" required>
+									</div>
+									<div class="form-group">
+										<input type="tel" name="contactNo"  tabindex="2" class="form-control" placeholder="Contact No." required>
+									</div>
+									<div class="form-group">
+										<div class="checkbox">
+											<label>
+                                    <input type="radio" name="person" value="Student" checked>Student
+                                    </label>
+										</div>
+										<div class="checkbox">
+											<label>
+                                    <input type="radio" name="person" value="Teacher">Teacher
+                                    </label>
+										</div>
+
+										<div class="terms-checkboxes">
+												<input type="checkbox" name="filmTermsAccepted" id="filmTermsAccepted">
+												<label for="filmTermsAccepted">I have read JFF's <a data-toggle="modal" href="#terms">terms and privacy policy</a></label>
+											</div>
+
+										</div>
+									<div class="form-group">
+										<div class="row">
+											<div class="col-sm-6 col-sm-offset-3">
+											<button type="submit" id="register-submit" name="register-submit" class="btn btn-primary btn-block">SignUp</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="terms" class="modal" role="dialog" tabindex="-2">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h3 class="modal-title">Terms and Privacy Policy</h3>
+				</div>
+				<div class="modal-body">
+					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque leo massa, facilisis sed gravida eget, egestas sit amet odio. Aliquam dapibus tempus nunc, non rhoncus diam bibendum ac. Praesent sed ex at elit ornare vestibulum. Aenean non dui
+						vitae ante molestie pulvinar nec nec nisi. Quisque venenatis, augue vel tincidunt blandit, nunc urna ultricies leo, quis suscipit dolor ante sit amet erat. Praesent porttitor mauris quis tristique pharetra. Vestibulum ante ipsum primis in faucibus
+						orci luctus et ultrices posuere cubilia Curae; Integer iaculis erat sit amet tincidunt viverra. Vivamus libero urna, vulputate a consequat ac, congue in odio. Curabitur dapibus pellentesque tortor eget fermentum. Morbi a imperdiet sapien, a auctor
+						urna. Proin tincidunt lacus neque, quis tincidunt tellus efficitur eu. Donec magna nunc, condimentum quis fringilla in, laoreet eu mi. Fusce vestibulum risus ac nisi accumsan, quis porttitor ipsum bibendum.</p>
+					<p>Sed luctus nibh elit, non interdum neque sodales blandit. Etiam pellentesque enim eros, in convallis tellus aliquet ac. Vestibulum tempor nisi id orci iaculis, vitae hendrerit nisl hendrerit. Maecenas id volutpat magna. Praesent ornare sit amet eros
+						ac pharetra. Aliquam sed ante eu tellus commodo dignissim. Ut vel justo lacus. Duis turpis orci, auctor eu nisl in, molestie auctor massa. Aliquam pharetra porta quam, ac condimentum est sodales sed. Aliquam facilisis ante nec egestas posuere. In
+						facilisis non risus id auctor.</p>
+					<p>Morbi vulputate bibendum sem. Suspendisse scelerisque turpis a sodales consectetur. Vivamus et finibus ante. Vivamus suscipit vulputate nibh, id tempor felis. Donec quis luctus dui, et pretium mi. Morbi est mi, fermentum et orci a, lobortis sollicitudin
+						erat. In auctor et arcu nec sodales. Praesent molestie, lectus sit amet interdum interdum, metus purus scelerisque nibh, sed lobortis lectus odio sit amet magna.</p>
+					<p>Nunc enim ante, vulputate ut enim in, vehicula blandit erat. Integer euismod auctor arcu, et hendrerit felis accumsan eu. Nunc venenatis semper risus, eget sollicitudin elit euismod ac. Nullam lorem sem, feugiat ac odio ut, pharetra tempor eros.
+						Nulla pharetra eget elit sed commodo. Ut consectetur justo ultrices suscipit eleifend. In in consequat sem, a pharetra erat. Donec interdum felis lacinia nibh aliquet ullamcorper. Maecenas blandit pellentesque pretium. Cras vehicula dui eget gravida
+						lacinia. Suspendisse aliquet varius tempus. Maecenas vehicula, arcu vitae facilisis finibus, leo enim molestie metus, nec vehicula metus nunc sit amet nisl. Curabitur dignissim vehicula odio, ut tempor urna scelerisque at. Morbi eget nulla risus.</p>
+					<p>Nullam porttitor mattis erat, sit amet ornare purus dictum ut. Nulla sagittis eleifend viverra. Maecenas vel varius leo. Praesent viverra in dolor at tempor. Pellentesque nec ipsum odio. Nulla in pellentesque diam. Sed id congue sem. Suspendisse
+						rhoncus elementum ultrices. Ut in pulvinar nisl. Mauris gravida, tellus a condimentum venenatis, augue turpis venenatis leo, non porta nibh odio eget nulla. Nullam vel eros in velit vestibulum finibus vitae ac magna. Suspendisse potenti. Nunc condimentum,
+						quam et semper fermentum, ante mi mattis libero, a facilisis ligula quam in arcu. Integer aliquam gravida dui.</p>
+					<p>Phasellus non lorem ut dolor porta mattis eget vitae dolor. Maecenas interdum augue eu erat venenatis, ut aliquam mi efficitur. Suspendisse potenti. Aliquam fringilla ante vitae mauris varius pellentesque. Aliquam arcu dui, porta rutrum arcu ut,
+						consectetur ullamcorper lorem. Mauris porta elit ut ante ullamcorper interdum. Nullam a mi at nunc varius dictum. Nulla in nulla id neque semper fringilla. Aliquam venenatis efficitur sollicitudin. Mauris cursus libero non leo accumsan suscipit.
+						Sed sapien nunc, convallis non leo dictum, malesuada sollicitudin mi.</p>
+					<p>Morbi ullamcorper eu turpis nec blandit. Maecenas tristique diam sit amet eros imperdiet gravida. Aliquam mattis est a eros mattis pulvinar. Donec quis vulputate eros. Vestibulum sed erat ac ligula pharetra scelerisque. Praesent volutpat dui diam,
+						at lacinia nisi vestibulum ac. Proin pellentesque efficitur lacus id ullamcorper. Phasellus tempor, arcu sed ornare efficitur, nibh ipsum tincidunt justo, et suscipit lorem risus nec massa. Donec aliquam sapien vitae quam tempus laoreet. Sed iaculis
+						mi in eros rhoncus ultrices. Duis egestas porttitor purus, fringilla iaculis elit cursus id. Mauris facilisis, felis nec volutpat venenatis, purus eros malesuada ligula, laoreet dignissim sem nibh vel purus.</p>
+					<p>Donec lobortis ultricies felis, quis tempor mi condimentum at. Pellentesque suscipit felis in odio mollis volutpat. In hac habitasse platea dictumst. In volutpat in lectus vitae dignissim. Praesent sem elit, scelerisque vitae nisl ac, tristique scelerisque
+						mi. Donec bibendum sed augue ut aliquam. Praesent nec arcu libero. Nullam consectetur urna vel risus imperdiet semper ac at ipsum. Vivamus consequat velit neque, ut vehicula massa suscipit in. Suspendisse non scelerisque tortor. Fusce pulvinar justo
+						lobortis, vestibulum dolor nec, luctus ante. Proin rutrum urna vel arcu varius aliquet.</p>
+					<p>Maecenas eros leo, faucibus quis sollicitudin vel, dictum ut dolor. Donec sed efficitur est, nec pretium lectus. Quisque nec diam purus. Curabitur a mi mollis, ornare purus non, suscipit mi. Nunc fringilla, arcu a vehicula varius, felis metus viverra
+						sapien, eu feugiat ex neque sit amet diam. Integer interdum, ante a accumsan pellentesque, lacus tortor dictum ligula, non pulvinar ligula orci non leo. Pellentesque nec lorem nec nulla posuere egestas nec eget tortor. Nulla non scelerisque arcu.
+						Etiam quis viverra mauris. Nullam quis eros nec dolor pulvinar porta nec eu turpis.</p>
+					<p>Morbi non ante leo. Donec et placerat dolor. Fusce ultrices mauris elit, eget posuere neque commodo quis. Fusce in lorem dui. Maecenas in ante eu erat mattis fermentum. Fusce commodo arcu eget diam placerat, a commodo eros venenatis. Pellentesque
+						sit amet enim vel nisi tristique ultricies.</p>
+					<p>Ut laoreet elementum justo et venenatis. Etiam fringilla leo nec felis pellentesque, ac volutpat justo pellentesque. Morbi iaculis pellentesque ante. Aliquam luctus egestas erat, id tincidunt turpis pharetra at. Nulla facilisi. Fusce porta tortor
+						mauris, ac luctus est fermentum ac. Donec sagittis ultrices urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed interdum mauris vitae tortor malesuada, at ornare dui varius. Donec quis consectetur lectus.
+						Quisque condimentum quam et commodo posuere. Vivamus vulputate rhoncus ipsum, sit amet congue est dignissim ornare. Aliquam fringilla eleifend velit, ac tincidunt quam dignissim at. Phasellus efficitur suscipit dui nec egestas. Etiam sem lacus,
+						pulvinar quis nunc vitae, imperdiet fermentum dolor. Ut ultrices turpis metus.</p>
+					<p>Phasellus dictum, lorem nec auctor vulputate, neque lorem placerat ipsum, vel facilisis enim nibh sagittis massa. In tristique, magna at rutrum iaculis, odio augue pretium leo, eget efficitur leo nisl sed nisi. Nulla pulvinar, urna vel malesuada
+						iaculis, erat sem mattis odio, id feugiat lectus nisi et justo. Duis rhoncus dui erat, ac finibus tortor ultricies vel. Aliquam mattis luctus sapien, commodo elementum nisi aliquet a. Proin in suscipit elit. Vestibulum ante ipsum primis in faucibus
+						orci luctus et ultrices posuere cubilia Curae; Curabitur dignissim finibus magna, iaculis commodo diam feugiat sed.</p>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	{{> footer}}
+	 {{> sAlert}}
+
+
+
+<style>
+	/*signup/reg*/
+
+	.container-logIn{
+		padding-top: 90px;
+	}
+
+	.terms-checkboxes label {
+    text-align: left;
+    float: none;
+    font-weight:normal;
+
+
+
+}
+
+.terms-checkboxes input[type=checkbox] {
+    margin-left: 20px;
+}
+
+	/*body {*/
+	/*	padding-top: none;*/
+	/*}*/
+
+	.panel-login {
+		border-color: #ccc;
+		-webkit-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+		-moz-box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+		box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+	}
+
+	.panel-login>.panel-heading {
+		color: #00415d;
+		background-color: #fff;
+		border-color: #fff;
+		text-align: center;
+	}
+
+	.panel-login>.panel-heading a {
+		text-decoration: none;
+		color: #666;
+		font-weight: bold;
+		font-size: 15px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+
+	.panel-login>.panel-heading a.active {
+		color: #62040f;
+		font-size: 18px;
+	}
+
+	.panel-login>.panel-heading hr {
+		margin-top: 10px;
+		margin-bottom: 0px;
+		clear: both;
+		border: 0;
+		height: 1px;
+		background-image: -webkit-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+		background-image: -moz-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+		background-image: -ms-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+		background-image: -o-linear-gradient(left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0));
+	}
+
+	.panel-login input[type="text"],
+	.panel-login input[type="email"],
+	.panel-login input[type="password"] {
+		height: 45px;
+		border: 1px solid #ddd;
+		font-size: 16px;
+		-webkit-transition: all 0.1s linear;
+		-moz-transition: all 0.1s linear;
+		transition: all 0.1s linear;
+	}
+
+	.panel-login input:hover,
+	.panel-login input:focus {
+		outline: none;
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		border-color: #ccc;
+	}
+
+	.btn-login {
+		background-color: #62040F;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #62040F;
+	}
+
+	.btn-login:hover,
+	.btn-login:focus {
+		color: #62040F;
+		background-color: #fff;
+		border-color: #62040F;
+		font-size: 16px;
+	}
+
+	.forgot-password {
+		text-decoration: underline;
+		color: #888;
+	}
+
+	.forgot-password:hover,
+	.forgot-password:focus {
+		text-decoration: underline;
+		color: #666;
+	}
+
+	.btn-block {
+		background-color: #62040f;
+		outline: none;
+		color: #fff;
+		font-size: 14px;
+		height: auto;
+		font-weight: normal;
+		padding: 14px 0;
+		text-transform: uppercase;
+		border-color: #62040f;
+	}
+
+	.btn-block:hover,
+	.btn-block:focus {
+		color: #62040f;
+		background-color: #fff;
+		border-color: #62040f;
+		font-size: 16px;
+	}
+</style>
+
+<script>
+
+
+    $(document).ready(function() {
+        $('#filmSubmit').prop('disabled', true).addClass('disabled');
+        $('#filmTermsAccepted').change(function() {
+            if ($(this).is(':checked')) {
+                $('#filmSubmit').prop('disabled', false).removeClass('disabled');
+            } else {
+                $('#filmSubmit').prop('disabled', true).addClass('disabled');
+            }
+        });
+    });
+
+
+
+	$(function() {
+
+		$('#login-form-link').click(function(e) {
+			$("#login-form").delay(100).fadeIn(100);
+			$("#register-form").fadeOut(100);
+			$('#register-form-link').removeClass('active');
+			$(this).addClass('active');
+			e.preventDefault();
+		});
+		$('#register-form-link').click(function(e) {
+			$("#register-form").delay(100).fadeIn(100);
+			$("#login-form").fadeOut(100);
+			$('#login-form-link').removeClass('active');
+			$(this).addClass('active');
+			e.preventDefault();
+		});
+
+	});
+</script>
+
+</template>
