@@ -38,10 +38,10 @@
                         </div>
                         <!-- end hidden modal -->
                     {{/if}}
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <h4>Comments</h4>
                         <textarea name="comments" id="comments" cols="30" rows="6" class="form-control" placeholder="Reviewer comments"></textarea>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div id="ratings" class="col-sm-4 col-xs-12">
                             <h4>Rating</h4>
@@ -86,8 +86,9 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Comments HTML Start -->
                     <div class="row">
-                      <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                      <div class="col-xs-12 col-md-8 col-md-offset-2">
                         <h4 class="page-header">Add Comment</h4>
                         <form id="add-comment">
                           <div class="form-group">
@@ -103,7 +104,7 @@
                         <h4 class="page-header">Comments</h4>
                         {{#each comments}}
                           <div class="panel panel-default">
-                            <div class="panel-heading"><strong>{{author}}</strong> {{humanDate date}}</div>
+                            <div class="panel-heading"><strong>{{author}}</strong> {{date}}</div>
                             <div class="panel-body">
                               {{content}}
                             </div>
@@ -113,6 +114,7 @@
                         {{/each}}
                     </div>
                     </div>
+                    <!-- Comments HTML End -->
                     <div class="row form-group">
                         <div class="col-sm-6 col-sm-offset-6 col-xs-12">
                             <div class="row">
