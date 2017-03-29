@@ -72,21 +72,60 @@
             padding-top:90px;
         }
     </style>
-    <div class="container-profilePage">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-3" col-sm-offset-4 id="readOnly">
-                    <div class="embed-responsive embed-responsive-16by9">
-                        <!-- TODO: switch to viewing THIS USERS FILM -->
-                        {{>viewFilms }}
-                    </div>
-                </div>
-                <div class="col-sm-5" id="pVideoDisplay"> hello
-                </div>
-            </div>
-        </div>
+    <div class="container" id="profileUpdateContainer">
+        {{#if Template.subscriptionsReady}}
+           {{#if currentUser}}
+               {{#with currentUser}}
+                   {{#with submittedFilm}}
+                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                        <div class="row">
+                            <form id="filmEditForm">
+                                <div class="form-group">
+                                    <label for="filmTitle">Film Title</label>
+                                    <input value="{{title}}" type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
+                                </div>
+                                <div class="form-group">
+                                    <label for="filmGenre">Genre</label>
+                                    <select name="filmGenre" id="filmGenre" class="form-control">
+                                        {{#each optionsGenres }}
+                                            <option value="{{value}}" {{selected}}>{{value}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filmLength">Length</label>
+                                    <select name="filmLength" id="filmLength" class="form-control">
+                                        {{#each optionsLength }}
+                                            <option value="{{value}}" {{selected}}>{{text}}</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="filmDescription">Short Description of Film</label>
+                                    <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)">{{description}}</textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+                                        <div class="row spacer">
+                                            <div class="col-xs-12">
+                                                <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="spacer">
+                                </div>
+                                {{> sAlert}}
+                                <!-- TODO: move to {{> footer}}, once that's properly templatized -->
+                            </form>
+                        </div>
+                    {{/with}}
+                {{/with}}
+            {{/if}}
+        {{else}}
+            <p>Loading...</p>
+        {{/if}}
     </div>
-    <!-- </div> -->
     <div class="container" id="personalMessageContainer">
         <div class="row">
             <div class="col-sm-8 col-sm-offset-2" id="personalMssg">

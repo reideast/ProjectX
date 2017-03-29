@@ -15,54 +15,60 @@
                         <h5><strong>Description:</strong> {{submittedFilm.description}}</h5>
                     </div>
                    {{#if currentUser}}
-                       <!-- TODO: hide private message box if this is your own page -->
-                        <div class="form-group">
-                            <h3>Your Private Messages to Filmmaker</h3>
-                            <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
-                                <i class="glyphicon glyphicon-envelope"></i> Messages
-                                <span class="badge">{{ numPrivateMessages }}</span>
-                            </button>
-                        </div>
-                        <!-- Terms modal dialog (hidden) -->
-                        <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h3 class="modal-title">Send a Private Message to Filmmaker</h3>
+                       {{#if notSelfUser }}
+                            <div class="form-group">
+                                <h3>Your Private Messages to Filmmaker</h3>
+                                <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
+                                    <i class="glyphicon glyphicon-envelope"></i> Messages
+                                    <span class="badge">{{ numPrivateMessages }}</span>
+                                </button>
+                            </div>
+                            <!-- Private Messages modal dialog (hidden) -->
+                            <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h3 class="modal-title">Send a Private Message to Filmmaker</h3>
+                                        </div>
+                                        {{> privateMessageForm }}
+                                        <!-- <button class="btn btn-default" type="button" data-dismiss="modal">Close</button> -->
                                     </div>
-                                    {{> privateMessageForm }}
-                                    <!-- <button class="btn btn-default" type="button" data-dismiss="modal">Close</button> -->
                                 </div>
                             </div>
-                        </div>
-                        <!-- end hidden modal -->
+                            <!-- end hidden modal -->
+                        {{/if}}
                     {{/if}}
-                    <!-- <div class="form-group">
-                        <h4>Comments</h4>
-                        <textarea name="comments" id="comments" cols="30" rows="6" class="form-control" placeholder="Reviewer comments"></textarea>
-                    </div> -->
                     <div class="row">
                         <div id="ratings" class="col-sm-4 col-xs-12">
                             <h4>Rating</h4>
+                            <h5>Aggregate Score: {{ reviewScore }}</h5>
                             <div class="row">
                                 <div class="col-xs-8 col-xs-offset-2 col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1">
                                     <div class="list-group">
                                         <label class="list-group-item row">
-                                            <div class="col-xs-3">
-                                                <input type="radio" name="rating" id="ratingLike" value="1">
-                                            </div>
+                                           {{#if currentUser}}
+                                               {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 1 }}" type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
+                                                    </div>
+                                                {{/if}}
+                                            {{/if}}
                                             <div class="col-xs-6">
-                                                Like
+                                                Liked
                                             </div>
                                             <div class="col-xs-3">
                                                 <span class="glyphicon glyphicon-upload"></span>
                                             </div>
                                         </label>
                                         <label class="list-group-item row">
-                                            <div class="col-xs-3">
-                                                <input type="radio" name="rating" id="ratingNeutral" value="0">
-                                            </div>
+                                           {{#if currentUser}}
+                                               {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 0 }}" type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
+                                                    </div>
+                                                {{/if}}
+                                            {{/if}}
                                             <div class="col-xs-6">
                                                 Neutral
                                             </div>
@@ -71,11 +77,15 @@
                                             </div>
                                         </label>
                                         <label class="list-group-item row">
-                                            <div class="col-xs-3">
-                                                <input type="radio" name="rating" id="ratingDislike" value="-1">
-                                            </div>
+                                           {{#if currentUser}}
+                                               {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked -1 }}" type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
+                                                    </div>
+                                                {{/if}}
+                                            {{/if}}
                                             <div class="col-xs-6">
-                                                Dislike
+                                                Disliked
                                             </div>
                                             <div class="col-xs-3">
                                                 <span class="glyphicon glyphicon-download"></span>
@@ -115,20 +125,9 @@
                     </div>
                     </div>
                     <!-- Comments HTML End -->
-                    <div class="row form-group">
-                        <div class="col-sm-6 col-sm-offset-6 col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button type="cancel" class="btn btn-default btn-block">Discard Changes</button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Save Review</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
+            {{> sAlert }}
 
 
             <style>
@@ -158,14 +157,18 @@
                 #ratings div:last-child {
                     text-align: left;
                 }
-            </style>
+                .listGroup input:checked {
 
+                }
+            </style>
             <script>
                 $(document).ready(function() {
-                    // add visual class to ratings radio when selected
-                    $('.list-group-item').click(function() {
-                        $('.list-group-item').removeClass('active');
-                        $(this).addClass('active');
+                    // this is for radio boxes that are found from the db, to set the visual cue
+                    // it happens ONCE, when the page loads, and only adds the class to the pre-selected radio
+                    $('.list-group-item').each(function(i, item) {
+                        if($(item).find('input:checked').length) {
+                            $(item).addClass('active');
+                        }
                     });
                 });
             </script>
