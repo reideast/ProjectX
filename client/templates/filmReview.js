@@ -87,15 +87,15 @@ Template.filmReview.helpers({
 
     // helpers for Comments
     comments() {
-        console.log("this=");
-        console.log(this);
-        console.log(this._id);
-
+        // console.log("this=");
+        // console.log(this);
+        // console.log(this._id);
+        //
         let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
-        console.log("found, count=");
-        console.log(comments.count());
-        console.log(comments.fetch());
-
+        // console.log("found, count=");
+        // console.log(comments.count());
+        // console.log(comments.fetch());
+        //
         if ( comments ) {
             return comments;
         }
