@@ -69,45 +69,36 @@ Template.filmReview.helpers({
     hasReviewerChecked: function(thisRadioButtonScore) {
         const reviewerId = Meteor.userId();
         if (reviewerId) {
-            const ratingsArray = this.submittedFilm.ratings;
-            const filtered = ratingsArray.filter((item) => {
-                return item.reviewerId == reviewerId;
-            });
-            if (filtered.length === 1) {
-                return (filtered[0].rating == thisRadioButtonScore);
-            } else {
-                console.log("Info: No review yet submitted");
+            if ('ratings' in this.submittedFilm) {
+                const ratingsArray = this.submittedFilm.ratings;
+                const filtered = ratingsArray.filter((item) => {
+                    return item.reviewerId == reviewerId;
+                });
+                if (filtered.length === 1) {
+                    return (filtered[0].rating == thisRadioButtonScore);
+                }
             }
         }
         return false;
     },
     reviewScore: function() {
-        return this.submittedFilm.ratingScore;
+        if (this.submittedFilm) {
+            if ('ratingScore' in this.submittedFilm) {
+                return this.submittedFilm.ratingScore;
+            } else {
+                return "No ratings yet";
+            }
+        }
+        return "n/a"; // if the object is not available, provide graceful error message to user
     },
 
     // helpers for Comments
     comments() {
-        // console.log("this=");
-        // console.log(this);
-        // console.log(this._id);
-        //
         let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
-        // console.log("found, count=");
-        // console.log(comments.count());
-        // console.log(comments.fetch());
-        //
         if ( comments ) {
             return comments;
         }
     },
-    // post() {
-    //   let post = Users.findOne();
-    //
-    //   if ( post ) {
-    //     return post;
-    //   }
-    // },
-
 });
 
 Template.filmReview.events({

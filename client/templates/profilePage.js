@@ -68,10 +68,8 @@ Template.profilePage.helpers({
         return options;
     },
     thumbRef: function() {
-        console.log("THUMBREF");
         if (this.fileId) {
             let film = Films.collection.findOne({ _id: this.fileId});
-            console.log(film);
             return film;
         }
     }
