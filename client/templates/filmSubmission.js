@@ -46,7 +46,39 @@ Template.filmSubmission.helpers({
 
     currentUpload: function () {
         return Template.instance().currentUpload.get(); // used to show progress bar
-    }
+    },
+
+
+    optionsGenres: function() {
+        return [
+            { value: "Action/Adventure", selected: "" },
+            { value: "Comedy", selected: "" },
+            { value: "Coming of Age", selected: "" },
+            { value: "Culinary", selected: "" },
+            { value: "Dark Comedy", selected: "" },
+            { value: "Documentary", selected: "" },
+            { value: "Drama", selected: "" },
+            { value: "Family Film", selected: "" },
+            { value: "Fantasy", selected: "" },
+            { value: "Galway is Film 2017", selected: "" },
+            { value: "Horror", selected: "" },
+            { value: "Human Rights", selected: "" },
+            { value: "New Irish Cinema", selected: "" },
+            { value: "Period Piece", selected: "" },
+            { value: "Romance", selected: "" },
+            { value: "SciFi", selected: "" },
+            { value: "Silent Film", selected: "" },
+            { value: "Thriller/Suspense", selected: "" },
+            { value: "World Cinema", selected: "" },
+            { value: "Women in Film", selected: "" },
+        ];
+    },
+    optionsLength: function() {
+        return [
+            { value: "short", text: "Short Film", selected: "" },
+            { value: "feature", text: "Feature Film", selected: "" },
+        ];
+    },
 });
 
 Template.filmSubmission.events({
