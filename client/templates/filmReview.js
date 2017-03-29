@@ -73,6 +73,9 @@ Template.filmReview.helpers({
             }
         }
         return false;
+    },
+    reviewScore: function() {
+        return this.submittedFilm.ratingScore;
     }
 });
 
@@ -80,21 +83,11 @@ Template.filmReview.events({
     'change .ratingRadio': function(e) {
         // note: don't need to verify that e.target.checked is true, because Meteor's event handling code seems to only call the 'change' event for the positively selected one
 
-        // console.log("changed!");
-        // console.log(e);
-        // console.log(e);
-        // console.log(e.target.parentNode.parentNode);
-
         // add visual class to ratings radio when selected
         $('.list-group-item').removeClass('active');
         $(e.target.parentNode.parentNode).addClass('active');
 
-        // console.log("this");
-        // console.log(this);
-        // console.log("userId");
-        // console.log(Meteor.userId());
-        // console.log("rating");
-        // console.log(e.target.value);
+        // update the db
         const filmmakerId = this._id;
         const reviewerId = Meteor.userId();
         const rating = e.target.value;
