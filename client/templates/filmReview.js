@@ -60,40 +60,20 @@ Template.filmReview.helpers({
         }
     },
     hasReviewerChecked: function(val) {
-        // TODO: make a helper that finds if the user has already voted, and select that radio button
-        console.log('hasReviewerChecked');
-        console.log(this);
-        const filmmakerId = this._id;
         const reviewerId = Meteor.userId();
-        // AUGH can't use the .$ operation in MiniMongo projections (yet): https://docs.meteor.com/api/collections.html
-        // const existingReview = Users.findOne({
-        //     _id: filmmakerId,
-        //     'submittedFilm.ratings.reviewerId': reviewerId
-        // },{
-        //     fields: { // projection
-        //         'submittedFilm.ratings.$': 1
-        //     }
-        // });
-        const existingReview = Users.findOne({
-            _id: filmmakerId,
-            'submittedFilm.ratings.reviewerId': reviewerId
-        });
-        console.log("found:");
-        console.log(existingReview);
-        if (existingReview) {
-            const ratingsArray = existingReview.submittedFilm.ratings;
-            console.log("found rating=");
-            console.log(ratingsArray);
-            // CAN'T find the specific array item yet, so have to .forEach it!
-            return ratingsArray.some((item) => {
-                return (item.reviewerId == reviewerId) && (item.rating == val); // note: note using === because one could be a string where the other is a Number
-            }) ? "checked" : "";
-            console.log("Error: Should have found the user's review, since the query returned it.");
-            // didn't find it, so return false
-        } // else no review already submitted, do not check anything
-        return "";
+        if (reviewerId) {
+            const ratingsArray = this.submittedFilm.ratings;
+            const filtered = ratingsArray.filter((item) => {
+                return item.reviewerId == reviewerId;
+            });
+            if (filtered.length === 1) {
+                return (filtered[0].rating == val);
+            } else {
+                console.log("Info: No review yet submitted");
+            }
+        }
+        return false;
     }
-    // TODO: move this to a #with context to avoid 3xQuery
 });
 
 Template.filmReview.events({

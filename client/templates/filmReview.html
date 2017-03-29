@@ -53,7 +53,7 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input {{ hasReviewerChecked 1 }} type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
+                                                        <input checked="{{ hasReviewerChecked 1 }}" type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
@@ -68,7 +68,7 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input {{ hasReviewerChecked 0 }} type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
+                                                        <input checked="{{ hasReviewerChecked 0 }}" type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
@@ -83,7 +83,7 @@
                                            {{#if currentUser}}
                                                {{#if notSelfUser }}
                                                     <div class="col-xs-3">
-                                                        <input {{ hasReviewerChecked -1 }} type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
+                                                        <input checked="{{ hasReviewerChecked -1 }}" type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
                                                     </div>
                                                 {{/if}}
                                             {{/if}}
@@ -170,7 +170,20 @@
                 #ratings div:last-child {
                     text-align: left;
                 }
+                .listGroup input:checked {
+
+                }
             </style>
+            <script>
+                $(document).ready(function() {
+                    // this is for radio boxes that are found from the db, to set the visual cue
+                    $('.list-group-item').each(function(i, item) {
+                        if($(item).find('input:checked').length) {
+                            $(item).addClass('active');
+                        }
+                    });
+                });
+            </script>
         {{/with}}
     {{else}}
         <p>Loading...</p>
