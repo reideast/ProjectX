@@ -5,6 +5,9 @@ Template.filmReview.onRendered(function() {
         self.subscribe('users.withFilms');
         self.subscribe('files.films.all');
         self.subscribe('privateMessages.all');
+        // let postId = FlowRouter.current().params._id;
+        self.subscribe( 'post', FlowRouter.getParam('userId') );
+        self.subscribe( 'comments' );
     });
 });
 
@@ -100,3 +103,68 @@ Template.filmReview.events({
         });
     }
 });
+
+// Template.filmReview.onCreated( function() {
+//   let postId = FlowRouter.current().params._id;
+//   Template.instance().subscribe( 'post', postId );
+// });
+
+
+Template.filmReview.events({
+  'submit #add-comment' ( event, template ) {
+    event.preventDefault();
+
+    let comment = {
+      postId: this._id,
+      author: template.find( "[name='author']" ).value,
+      content: template.find( "[name='content']" ).value,
+      date: new Date
+    };
+
+
+
+    Meteor.call( 'addComment', comment, ( error, response ) => {
+      if ( error ) {
+        Bert.alert( error.reason, "warning" );
+      }
+    });
+  }
+});
+
+Template.filmReview.helpers({
+  // post() {
+  //   let post = Users.findOne();
+  //
+  //   if ( post ) {
+  //     return post;
+  //   }
+  // },
+  comments() {
+    console.log("this=");
+    console.log(this);
+    console.log(this._id);
+
+    let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
+    console.log("found, count=");
+    console.log(comments.count());
+    console.log(comments.fetch());
+
+    if ( comments ) {
+      return comments;
+    }
+  }
+});
+
+// Meteor.publish( 'comments', function(postId) {
+//      return Comments.find({}, {sort: {date: -1}});
+//      console.log("EXEC!");
+// });
+
+
+// Template.filmReview.helpers({
+//   commen: function () {
+//     return Comments.find({}, {
+//       sort: { date: -1 }
+//     });
+//   }
+// });
