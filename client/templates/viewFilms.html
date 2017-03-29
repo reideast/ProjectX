@@ -2,20 +2,22 @@
     <div class="container-viewFilms">
         <div class="row">
             {{#each filmListing}}
-                <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4 col-md-offset-1">
-                  <div class="well">
-                    <a href="film/{{_id}}">
-                        <div class="well">
-                          <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
-                        </div>
-                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                    </a>
+
+                  <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4">
+                    <div class="well">
+                      <a href="film/{{_id}}">
+                          <div class="well">
+                            <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                          </div>
+                          <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                      </a>
+                  </div>
                 </div>
-              </div>
+                
             {{/each}}
         </div>
     </div>
-    
+
 
     <style>
       	.container-viewFilms{
