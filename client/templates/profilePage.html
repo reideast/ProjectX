@@ -14,7 +14,8 @@
                {{#if currentUser}}
                    {{#with currentUser}}
                        {{#with submittedFilm}}
-                            <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                            <!-- <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive"> -->
+                            {{> filmPlayer }}
                             <div class="row">
                                 <form id="filmEditForm">
                                     <div class="form-group">
