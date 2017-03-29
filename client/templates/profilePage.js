@@ -5,7 +5,15 @@ Template.profilePage.onCreated(function() {
         self.subscribe('users.all');
     });
 });
-
+Template.profilePage.helpers({
+	thumbRef: function() {
+        if (this.fileId) {
+            let film = Films.collection.findOne({ _id: this.fileId});
+            return film;
+        }
+    },
+});
+	
 Template.profilePage.helpers({
     privateMessageConversations: function() {
         if (Meteor.userId()) {
@@ -14,6 +22,7 @@ Template.profilePage.helpers({
             return undefined;
         }
     },
+	
     formatTime: function(myTime) {
         const time = new Date(myTime);
         return time.toString();

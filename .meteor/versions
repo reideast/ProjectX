@@ -22,6 +22,7 @@ caching-html-compiler@1.0.7
 callback-hook@1.0.9
 cfs:graphicsmagick@0.0.18
 check@1.2.3
+classcraft:imagemagick@0.9.1
 coffeescript@1.1.4
 ddp@1.2.5
 ddp-client@1.2.9
@@ -67,6 +68,7 @@ modules-runtime@0.7.6_1
 momentjs:moment@2.10.6
 mongo@1.1.12_1
 mongo-id@1.0.5
+mrt:imagemagick@0.1.2
 npm-bcrypt@0.9.1_1
 npm-mongo@1.5.50
 oauth@1.1.11
