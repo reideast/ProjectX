@@ -5,7 +5,6 @@ Template.profilePage.onCreated(function() {
         self.subscribe('users.all');
     });
 });
-
 Template.profilePage.helpers({
     privateMessageConversations: function() {
         if (Meteor.userId()) {
