@@ -99,6 +99,12 @@ Template.filmReview.helpers({
             return comments;
         }
     },
+    formatTime: function(myTime) {
+        const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const time = new Date(myTime);
+        return weekday[time.getDay()] + ' ' + month[time.getMonth()] + ' ' + time.getDate() + ', ' + time.getFullYear() + ' ' + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+    },
 });
 
 Template.filmReview.events({

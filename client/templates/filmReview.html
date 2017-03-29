@@ -114,7 +114,7 @@
                         <h4 class="page-header">Comments</h4>
                         {{#each comments}}
                           <div class="panel panel-default">
-                            <div class="panel-heading"><strong>{{author}}</strong> {{date}}</div>
+                            <div class="panel-heading"><strong>{{author}}</strong> {{ formatTime date }}</div>
                             <div class="panel-body">
                               {{content}}
                             </div>
