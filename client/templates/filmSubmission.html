@@ -1,119 +1,153 @@
 <template name="filmSubmission">
-    <div class="container-submissionForm">
-      <div class="row">
-          <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 ">
-              <form id="filmSubmissionForm">
-                  <div class="form-group">
-                      <label for="filmTitle">Film Title</label>
-                      <input type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
-                  </div>
-                  <div class="form-group">
-                      <label for="filmGenre">Genre</label>
-                      <select name="filmGenre" id="filmGenre" class="form-control">
-                          {{#each optionsGenres }}
-                              <option value="{{value}}" {{selected}}>{{value}}</option>
-                          {{/each}}
-                      </select>
-                  </div>
-                  <div class="form-group">
-                      <label for="filmLength">Length</label>
-                      <select name="filmLength" id="filmLength" class="form-control">
-                          {{#each optionsLength }}
-                              <option value="{{value}}" {{selected}}>{{text}}</option>
-                          {{/each}}
-                      </select>
-                  </div>
-                  {{#with uploadedFile}}
-                      <div class="form-group">
-                          <label>Uploaded Film</label>
-                          <div style="max-width: 200px;">
-                              <input type="hidden" name="filmFileOption" id="filmFileOption" value="{{_id}}">
-                              <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                              <h5>{{name}}</h5>
-                          </div>
-                      </div>
-                  {{/with}}
-                  <div class="form-group">
-                      {{#with currentUpload}}
-                          <div class="row">
-                              <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
-                                  <div class="text-center">
-                                      <h5><em>Uploading film...</em></h5>
-                                  </div>
-                                  <div class="progress">
-                                      <div class="progress-bar progress-bar-info" style="width: {{progress.get}}%;" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100">
-                                          <span class="sr-only">{{progress.get}}% Complete</span>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      {{else}}
-                          <label for="fileInput">Upload a {{#if uploadedFile}}Different {{/if}}Film</label>
-                          <input type="file" id="fileInput">
-                          <small>Upload <code>mp4</code> or <code>avi</code> or <code>3gp</code> file less than 2GB</small>
-                      {{/with}}
-                  </div>
-                  <div class="form-group">
-                      <label for="filmDescription">Short Description of Film</label>
-                      <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)"></textarea>
-                  </div>
-                  <div class="row">
-                      <div class="col-sm-6 col-sm-offset-6 col-xs-12">
-                          <div class="row">
-                              <div class="text-center">
-                                  <input type="checkbox" name="filmTermsAccepted" id="filmTermsAccepted">
-                                  <label for="filmTermsAccepted">I have read JFF's <a data-toggle="modal" href="#terms">terms and privacy policy</a></label>
-                              </div>
-                          </div>
-                          <div class="row spacer">
-                              <div class="col-xs-12">
-                                  <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Submit</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="spacer">
-                  </div>
-                  {{> sAlert}}
-                  <!-- TODO: move to {{> footer}}, once that's properly templatized -->
-              </form>
-          </div>
-      </div>
-    </div>
-
-    <!-- Terms modal dialog (hidden) -->
-    <div id="terms" class="modal" role="dialog" tabindex="-2">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Terms and Privacy Policy</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque leo massa, facilisis sed gravida eget, egestas sit amet odio. Aliquam dapibus tempus nunc, non rhoncus diam bibendum ac. Praesent sed ex at elit ornare vestibulum. Aenean non dui vitae ante molestie pulvinar nec nec nisi. Quisque venenatis, augue vel tincidunt blandit, nunc urna ultricies leo, quis suscipit dolor ante sit amet erat. Praesent porttitor mauris quis tristique pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer iaculis erat sit amet tincidunt viverra. Vivamus libero urna, vulputate a consequat ac, congue in odio. Curabitur dapibus pellentesque tortor eget fermentum. Morbi a imperdiet sapien, a auctor urna. Proin tincidunt lacus neque, quis tincidunt tellus efficitur eu. Donec magna nunc, condimentum quis fringilla in, laoreet eu mi. Fusce vestibulum risus ac nisi accumsan, quis porttitor ipsum bibendum.</p>
-                    <p>Sed luctus nibh elit, non interdum neque sodales blandit. Etiam pellentesque enim eros, in convallis tellus aliquet ac. Vestibulum tempor nisi id orci iaculis, vitae hendrerit nisl hendrerit. Maecenas id volutpat magna. Praesent ornare sit amet eros ac pharetra. Aliquam sed ante eu tellus commodo dignissim. Ut vel justo lacus. Duis turpis orci, auctor eu nisl in, molestie auctor massa. Aliquam pharetra porta quam, ac condimentum est sodales sed. Aliquam facilisis ante nec egestas posuere. In facilisis non risus id auctor.</p>
-                    <p>Morbi vulputate bibendum sem. Suspendisse scelerisque turpis a sodales consectetur. Vivamus et finibus ante. Vivamus suscipit vulputate nibh, id tempor felis. Donec quis luctus dui, et pretium mi. Morbi est mi, fermentum et orci a, lobortis sollicitudin erat. In auctor et arcu nec sodales. Praesent molestie, lectus sit amet interdum interdum, metus purus scelerisque nibh, sed lobortis lectus odio sit amet magna.</p>
-                    <p>Nunc enim ante, vulputate ut enim in, vehicula blandit erat. Integer euismod auctor arcu, et hendrerit felis accumsan eu. Nunc venenatis semper risus, eget sollicitudin elit euismod ac. Nullam lorem sem, feugiat ac odio ut, pharetra tempor eros. Nulla pharetra eget elit sed commodo. Ut consectetur justo ultrices suscipit eleifend. In in consequat sem, a pharetra erat. Donec interdum felis lacinia nibh aliquet ullamcorper. Maecenas blandit pellentesque pretium. Cras vehicula dui eget gravida lacinia. Suspendisse aliquet varius tempus. Maecenas vehicula, arcu vitae facilisis finibus, leo enim molestie metus, nec vehicula metus nunc sit amet nisl. Curabitur dignissim vehicula odio, ut tempor urna scelerisque at. Morbi eget nulla risus.</p>
-                    <p>Nullam porttitor mattis erat, sit amet ornare purus dictum ut. Nulla sagittis eleifend viverra. Maecenas vel varius leo. Praesent viverra in dolor at tempor. Pellentesque nec ipsum odio. Nulla in pellentesque diam. Sed id congue sem. Suspendisse rhoncus elementum ultrices. Ut in pulvinar nisl. Mauris gravida, tellus a condimentum venenatis, augue turpis venenatis leo, non porta nibh odio eget nulla. Nullam vel eros in velit vestibulum finibus vitae ac magna. Suspendisse potenti. Nunc condimentum, quam et semper fermentum, ante mi mattis libero, a facilisis ligula quam in arcu. Integer aliquam gravida dui.</p>
-                    <p>Phasellus non lorem ut dolor porta mattis eget vitae dolor. Maecenas interdum augue eu erat venenatis, ut aliquam mi efficitur. Suspendisse potenti. Aliquam fringilla ante vitae mauris varius pellentesque. Aliquam arcu dui, porta rutrum arcu ut, consectetur ullamcorper lorem. Mauris porta elit ut ante ullamcorper interdum. Nullam a mi at nunc varius dictum. Nulla in nulla id neque semper fringilla. Aliquam venenatis efficitur sollicitudin. Mauris cursus libero non leo accumsan suscipit. Sed sapien nunc, convallis non leo dictum, malesuada sollicitudin mi.</p>
-                    <p>Morbi ullamcorper eu turpis nec blandit. Maecenas tristique diam sit amet eros imperdiet gravida. Aliquam mattis est a eros mattis pulvinar. Donec quis vulputate eros. Vestibulum sed erat ac ligula pharetra scelerisque. Praesent volutpat dui diam, at lacinia nisi vestibulum ac. Proin pellentesque efficitur lacus id ullamcorper. Phasellus tempor, arcu sed ornare efficitur, nibh ipsum tincidunt justo, et suscipit lorem risus nec massa. Donec aliquam sapien vitae quam tempus laoreet. Sed iaculis mi in eros rhoncus ultrices. Duis egestas porttitor purus, fringilla iaculis elit cursus id. Mauris facilisis, felis nec volutpat venenatis, purus eros malesuada ligula, laoreet dignissim sem nibh vel purus.</p>
-                    <p>Donec lobortis ultricies felis, quis tempor mi condimentum at. Pellentesque suscipit felis in odio mollis volutpat. In hac habitasse platea dictumst. In volutpat in lectus vitae dignissim. Praesent sem elit, scelerisque vitae nisl ac, tristique scelerisque mi. Donec bibendum sed augue ut aliquam. Praesent nec arcu libero. Nullam consectetur urna vel risus imperdiet semper ac at ipsum. Vivamus consequat velit neque, ut vehicula massa suscipit in. Suspendisse non scelerisque tortor. Fusce pulvinar justo lobortis, vestibulum dolor nec, luctus ante. Proin rutrum urna vel arcu varius aliquet.</p>
-                    <p>Maecenas eros leo, faucibus quis sollicitudin vel, dictum ut dolor. Donec sed efficitur est, nec pretium lectus. Quisque nec diam purus. Curabitur a mi mollis, ornare purus non, suscipit mi. Nunc fringilla, arcu a vehicula varius, felis metus viverra sapien, eu feugiat ex neque sit amet diam. Integer interdum, ante a accumsan pellentesque, lacus tortor dictum ligula, non pulvinar ligula orci non leo. Pellentesque nec lorem nec nulla posuere egestas nec eget tortor. Nulla non scelerisque arcu. Etiam quis viverra mauris. Nullam quis eros nec dolor pulvinar porta nec eu turpis.</p>
-                    <p>Morbi non ante leo. Donec et placerat dolor. Fusce ultrices mauris elit, eget posuere neque commodo quis. Fusce in lorem dui. Maecenas in ante eu erat mattis fermentum. Fusce commodo arcu eget diam placerat, a commodo eros venenatis. Pellentesque sit amet enim vel nisi tristique ultricies.</p>
-                    <p>Ut laoreet elementum justo et venenatis. Etiam fringilla leo nec felis pellentesque, ac volutpat justo pellentesque. Morbi iaculis pellentesque ante. Aliquam luctus egestas erat, id tincidunt turpis pharetra at. Nulla facilisi. Fusce porta tortor mauris, ac luctus est fermentum ac. Donec sagittis ultrices urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed interdum mauris vitae tortor malesuada, at ornare dui varius. Donec quis consectetur lectus. Quisque condimentum quam et commodo posuere. Vivamus vulputate rhoncus ipsum, sit amet congue est dignissim ornare. Aliquam fringilla eleifend velit, ac tincidunt quam dignissim at. Phasellus efficitur suscipit dui nec egestas. Etiam sem lacus, pulvinar quis nunc vitae, imperdiet fermentum dolor. Ut ultrices turpis metus.</p>
-                    <p>Phasellus dictum, lorem nec auctor vulputate, neque lorem placerat ipsum, vel facilisis enim nibh sagittis massa. In tristique, magna at rutrum iaculis, odio augue pretium leo, eget efficitur leo nisl sed nisi. Nulla pulvinar, urna vel malesuada iaculis, erat sem mattis odio, id feugiat lectus nisi et justo. Duis rhoncus dui erat, ac finibus tortor ultricies vel. Aliquam mattis luctus sapien, commodo elementum nisi aliquet a. Proin in suscipit elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur dignissim finibus magna, iaculis commodo diam feugiat sed.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+    {{#if Template.subscriptionsReady}}
+        {{#if currentUser}}
+            <div class="container-submissionForm">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 ">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">Notice:</h4>
+                            </div>
+                            <div class="panel-body">
+                                <small>
+                                    <p>Your film will not be eligibie for screening at the Film Fleadh until you verify your email.</p>
+                                    <p>?resend link??</p>
+                                </small>
+                            </div>
+                        </div>
+                        <form id="filmSubmissionForm">
+                            <div class="form-group">
+                                <label for="filmTitle">Film Title</label>
+                                <input type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
+                            </div>
+                            <div class="form-group">
+                                <label for="filmGenre">Genre</label>
+                                <select name="filmGenre" id="filmGenre" class="form-control">
+                                    {{#each optionsGenres }}
+                                        <option value="{{value}}" {{selected}}>{{value}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="filmLength">Length</label>
+                                <select name="filmLength" id="filmLength" class="form-control">
+                                    {{#each optionsLength }}
+                                        <option value="{{value}}" {{selected}}>{{text}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            {{#with uploadedFile}}
+                                <div class="form-group">
+                                    <label>Uploaded Film</label>
+                                    <div style="max-width: 200px;">
+                                        <input type="hidden" name="filmFileOption" id="filmFileOption" value="{{_id}}">
+                                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                                        <h5>{{name}}</h5>
+                                    </div>
+                                </div>
+                            {{/with}}
+                            <div class="form-group">
+                                {{#with currentUpload}}
+                                    <div class="row">
+                                        <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+                                            <div class="text-center">
+                                                <h5><em>Uploading film...</em></h5>
+                                            </div>
+                                            <div class="progress">
+                                                <div class="progress-bar progress-bar-info" style="width: {{progress.get}}%;" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100">
+                                                    <span class="sr-only">{{progress.get}}% Complete</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{else}}
+                                    <label for="fileInput">Upload a {{#if uploadedFile}}Different {{/if}}Film</label>
+                                    <input type="file" id="fileInput">
+                                    <small>Upload <code>mp4</code> or <code>avi</code> or <code>3gp</code> file less than 2GB</small>
+                                {{/with}}
+                            </div>
+                            <div class="form-group">
+                                <label for="filmDescription">Short Description of Film</label>
+                                <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)"></textarea>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+                                    <div class="row">
+                                        <div class="text-center">
+                                            <input type="checkbox" name="filmTermsAccepted" id="filmTermsAccepted">
+                                            <label for="filmTermsAccepted">I have read JFF's <a data-toggle="modal" href="#terms">terms and privacy policy</a></label>
+                                        </div>
+                                    </div>
+                                    <div class="row spacer">
+                                        <div class="col-xs-12">
+                                            <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="spacer">
+                            </div>
+                            {{> sAlert}}
+                            <!-- TODO: move to {{> footer}}, once that's properly templatized -->
+                        </form>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+
+            <!-- Terms modal dialog (hidden) -->
+            <div id="terms" class="modal" role="dialog" tabindex="-2">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h3 class="modal-title">Terms and Privacy Policy</h3>
+                        </div>
+                        <div class="modal-body">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque leo massa, facilisis sed gravida eget, egestas sit amet odio. Aliquam dapibus tempus nunc, non rhoncus diam bibendum ac. Praesent sed ex at elit ornare vestibulum. Aenean non dui vitae ante molestie pulvinar nec nec nisi. Quisque venenatis, augue vel tincidunt blandit, nunc urna ultricies leo, quis suscipit dolor ante sit amet erat. Praesent porttitor mauris quis tristique pharetra. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Integer iaculis erat sit amet tincidunt viverra. Vivamus libero urna, vulputate a consequat ac, congue in odio. Curabitur dapibus pellentesque tortor eget fermentum. Morbi a imperdiet sapien, a auctor urna. Proin tincidunt lacus neque, quis tincidunt tellus efficitur eu. Donec magna nunc, condimentum quis fringilla in, laoreet eu mi. Fusce vestibulum risus ac nisi accumsan, quis porttitor ipsum bibendum.</p>
+                            <p>Sed luctus nibh elit, non interdum neque sodales blandit. Etiam pellentesque enim eros, in convallis tellus aliquet ac. Vestibulum tempor nisi id orci iaculis, vitae hendrerit nisl hendrerit. Maecenas id volutpat magna. Praesent ornare sit amet eros ac pharetra. Aliquam sed ante eu tellus commodo dignissim. Ut vel justo lacus. Duis turpis orci, auctor eu nisl in, molestie auctor massa. Aliquam pharetra porta quam, ac condimentum est sodales sed. Aliquam facilisis ante nec egestas posuere. In facilisis non risus id auctor.</p>
+                            <p>Morbi vulputate bibendum sem. Suspendisse scelerisque turpis a sodales consectetur. Vivamus et finibus ante. Vivamus suscipit vulputate nibh, id tempor felis. Donec quis luctus dui, et pretium mi. Morbi est mi, fermentum et orci a, lobortis sollicitudin erat. In auctor et arcu nec sodales. Praesent molestie, lectus sit amet interdum interdum, metus purus scelerisque nibh, sed lobortis lectus odio sit amet magna.</p>
+                            <p>Nunc enim ante, vulputate ut enim in, vehicula blandit erat. Integer euismod auctor arcu, et hendrerit felis accumsan eu. Nunc venenatis semper risus, eget sollicitudin elit euismod ac. Nullam lorem sem, feugiat ac odio ut, pharetra tempor eros. Nulla pharetra eget elit sed commodo. Ut consectetur justo ultrices suscipit eleifend. In in consequat sem, a pharetra erat. Donec interdum felis lacinia nibh aliquet ullamcorper. Maecenas blandit pellentesque pretium. Cras vehicula dui eget gravida lacinia. Suspendisse aliquet varius tempus. Maecenas vehicula, arcu vitae facilisis finibus, leo enim molestie metus, nec vehicula metus nunc sit amet nisl. Curabitur dignissim vehicula odio, ut tempor urna scelerisque at. Morbi eget nulla risus.</p>
+                            <p>Nullam porttitor mattis erat, sit amet ornare purus dictum ut. Nulla sagittis eleifend viverra. Maecenas vel varius leo. Praesent viverra in dolor at tempor. Pellentesque nec ipsum odio. Nulla in pellentesque diam. Sed id congue sem. Suspendisse rhoncus elementum ultrices. Ut in pulvinar nisl. Mauris gravida, tellus a condimentum venenatis, augue turpis venenatis leo, non porta nibh odio eget nulla. Nullam vel eros in velit vestibulum finibus vitae ac magna. Suspendisse potenti. Nunc condimentum, quam et semper fermentum, ante mi mattis libero, a facilisis ligula quam in arcu. Integer aliquam gravida dui.</p>
+                            <p>Phasellus non lorem ut dolor porta mattis eget vitae dolor. Maecenas interdum augue eu erat venenatis, ut aliquam mi efficitur. Suspendisse potenti. Aliquam fringilla ante vitae mauris varius pellentesque. Aliquam arcu dui, porta rutrum arcu ut, consectetur ullamcorper lorem. Mauris porta elit ut ante ullamcorper interdum. Nullam a mi at nunc varius dictum. Nulla in nulla id neque semper fringilla. Aliquam venenatis efficitur sollicitudin. Mauris cursus libero non leo accumsan suscipit. Sed sapien nunc, convallis non leo dictum, malesuada sollicitudin mi.</p>
+                            <p>Morbi ullamcorper eu turpis nec blandit. Maecenas tristique diam sit amet eros imperdiet gravida. Aliquam mattis est a eros mattis pulvinar. Donec quis vulputate eros. Vestibulum sed erat ac ligula pharetra scelerisque. Praesent volutpat dui diam, at lacinia nisi vestibulum ac. Proin pellentesque efficitur lacus id ullamcorper. Phasellus tempor, arcu sed ornare efficitur, nibh ipsum tincidunt justo, et suscipit lorem risus nec massa. Donec aliquam sapien vitae quam tempus laoreet. Sed iaculis mi in eros rhoncus ultrices. Duis egestas porttitor purus, fringilla iaculis elit cursus id. Mauris facilisis, felis nec volutpat venenatis, purus eros malesuada ligula, laoreet dignissim sem nibh vel purus.</p>
+                            <p>Donec lobortis ultricies felis, quis tempor mi condimentum at. Pellentesque suscipit felis in odio mollis volutpat. In hac habitasse platea dictumst. In volutpat in lectus vitae dignissim. Praesent sem elit, scelerisque vitae nisl ac, tristique scelerisque mi. Donec bibendum sed augue ut aliquam. Praesent nec arcu libero. Nullam consectetur urna vel risus imperdiet semper ac at ipsum. Vivamus consequat velit neque, ut vehicula massa suscipit in. Suspendisse non scelerisque tortor. Fusce pulvinar justo lobortis, vestibulum dolor nec, luctus ante. Proin rutrum urna vel arcu varius aliquet.</p>
+                            <p>Maecenas eros leo, faucibus quis sollicitudin vel, dictum ut dolor. Donec sed efficitur est, nec pretium lectus. Quisque nec diam purus. Curabitur a mi mollis, ornare purus non, suscipit mi. Nunc fringilla, arcu a vehicula varius, felis metus viverra sapien, eu feugiat ex neque sit amet diam. Integer interdum, ante a accumsan pellentesque, lacus tortor dictum ligula, non pulvinar ligula orci non leo. Pellentesque nec lorem nec nulla posuere egestas nec eget tortor. Nulla non scelerisque arcu. Etiam quis viverra mauris. Nullam quis eros nec dolor pulvinar porta nec eu turpis.</p>
+                            <p>Morbi non ante leo. Donec et placerat dolor. Fusce ultrices mauris elit, eget posuere neque commodo quis. Fusce in lorem dui. Maecenas in ante eu erat mattis fermentum. Fusce commodo arcu eget diam placerat, a commodo eros venenatis. Pellentesque sit amet enim vel nisi tristique ultricies.</p>
+                            <p>Ut laoreet elementum justo et venenatis. Etiam fringilla leo nec felis pellentesque, ac volutpat justo pellentesque. Morbi iaculis pellentesque ante. Aliquam luctus egestas erat, id tincidunt turpis pharetra at. Nulla facilisi. Fusce porta tortor mauris, ac luctus est fermentum ac. Donec sagittis ultrices urna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Sed interdum mauris vitae tortor malesuada, at ornare dui varius. Donec quis consectetur lectus. Quisque condimentum quam et commodo posuere. Vivamus vulputate rhoncus ipsum, sit amet congue est dignissim ornare. Aliquam fringilla eleifend velit, ac tincidunt quam dignissim at. Phasellus efficitur suscipit dui nec egestas. Etiam sem lacus, pulvinar quis nunc vitae, imperdiet fermentum dolor. Ut ultrices turpis metus.</p>
+                            <p>Phasellus dictum, lorem nec auctor vulputate, neque lorem placerat ipsum, vel facilisis enim nibh sagittis massa. In tristique, magna at rutrum iaculis, odio augue pretium leo, eget efficitur leo nisl sed nisi. Nulla pulvinar, urna vel malesuada iaculis, erat sem mattis odio, id feugiat lectus nisi et justo. Duis rhoncus dui erat, ac finibus tortor ultricies vel. Aliquam mattis luctus sapien, commodo elementum nisi aliquet a. Proin in suscipit elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Curabitur dignissim finibus magna, iaculis commodo diam feugiat sed.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-default" type="button" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {{else}}
+            <p>You cannot submit a film if you are not logged in</p>
+        {{/if}} <!-- if currentuser -->
+    {{else}}
+            <p>Loading...</p>
+    {{/if}} <!-- subscriptions ready -->
+
     {{> footer}}
 
     <style>
-    	.container-submissionForm{
-    		padding-top: 70px;
-    	}
-      </style>
+    .container-submissionForm{
+        padding-top: 70px;
+    }
+
+    .panel-info {
+        border-color: #62040F;
+    }
+    .panel-info > .panel-heading {
+        background-color: #62040F;
+        border-color: #62040F;
+        color: white;
+    }
+    .panel-info > .panel-body p {
+        color: #62040F;
+        font-size: 16px;
+    }
+    </style>
 </template>
