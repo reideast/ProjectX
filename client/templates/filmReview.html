@@ -23,7 +23,7 @@
                                     <span class="badge">{{ numPrivateMessages }}</span>
                                 </button>
                             </div>
-                            <!-- Terms modal dialog (hidden) -->
+                            <!-- Private Messages modal dialog (hidden) -->
                             <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
                                 <div class="modal-dialog" role="document">
                                     <div class="modal-content">
@@ -39,10 +39,6 @@
                             <!-- end hidden modal -->
                         {{/if}}
                     {{/if}}
-                    <!-- <div class="form-group">
-                        <h4>Comments</h4>
-                        <textarea name="comments" id="comments" cols="30" rows="6" class="form-control" placeholder="Reviewer comments"></textarea>
-                    </div> -->
                     <div class="row">
                         <div id="ratings" class="col-sm-4 col-xs-12">
                             <h4>Rating</h4>
@@ -129,18 +125,6 @@
                     </div>
                     </div>
                     <!-- Comments HTML End -->
-                    <div class="row form-group">
-                        <div class="col-sm-6 col-sm-offset-6 col-xs-12">
-                            <div class="row">
-                                <div class="col-xs-6">
-                                    <button type="cancel" class="btn btn-default btn-block">Discard Changes</button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Save Review</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
             {{> sAlert }}
@@ -180,6 +164,7 @@
             <script>
                 $(document).ready(function() {
                     // this is for radio boxes that are found from the db, to set the visual cue
+                    // it happens ONCE, when the page loads, and only adds the class to the pre-selected radio
                     $('.list-group-item').each(function(i, item) {
                         if($(item).find('input:checked').length) {
                             $(item).addClass('active');

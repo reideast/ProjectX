@@ -33,11 +33,13 @@ Template.filmReview.helpers({
     },
     titlecase: function(str) {
         if (str) {
-            return str.toLowerCase().split(' ').map((word) => (word.charAt(0).toUpperCase() + word.slice(1))).join(' '); // method from https://medium.freecodecamp.com/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27
+            return str.toLowerCase().split(' ').map((word) => (word.charAt(0).toUpperCase() + word.slice(1))).join(' '); // FreeCodeCamp! This method from https://medium.freecodecamp.com/three-ways-to-title-case-a-sentence-in-javascript-676a9175eb27
         } else {
             return "";
         }
     },
+
+    // Helpers for Private Messages
     numPrivateMessages: function() {
         if (Meteor.userId() && this._id) { // in the data context of a filmReview template, this is a User document for that filmmaker
             var rooms = PrivateMessages.findOne({ to: this._id, from: Meteor.userId() });
@@ -62,7 +64,9 @@ Template.filmReview.helpers({
             }
         }
     },
-    hasReviewerChecked: function(val) {
+
+    // helpers for Ratings
+    hasReviewerChecked: function(thisRadioButtonScore) {
         const reviewerId = Meteor.userId();
         if (reviewerId) {
             const ratingsArray = this.submittedFilm.ratings;
@@ -70,7 +74,7 @@ Template.filmReview.helpers({
                 return item.reviewerId == reviewerId;
             });
             if (filtered.length === 1) {
-                return (filtered[0].rating == val);
+                return (filtered[0].rating == thisRadioButtonScore);
             } else {
                 console.log("Info: No review yet submitted");
             }
@@ -79,10 +83,35 @@ Template.filmReview.helpers({
     },
     reviewScore: function() {
         return this.submittedFilm.ratingScore;
-    }
+    },
+
+    // helpers for Comments
+    comments() {
+        console.log("this=");
+        console.log(this);
+        console.log(this._id);
+
+        let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
+        console.log("found, count=");
+        console.log(comments.count());
+        console.log(comments.fetch());
+
+        if ( comments ) {
+            return comments;
+        }
+    },
+    // post() {
+    //   let post = Users.findOne();
+    //
+    //   if ( post ) {
+    //     return post;
+    //   }
+    // },
+
 });
 
 Template.filmReview.events({
+    // Ratings events:
     'change .ratingRadio': function(e) {
         // note: don't need to verify that e.target.checked is true, because Meteor's event handling code seems to only call the 'change' event for the positively selected one
 
@@ -101,16 +130,9 @@ Template.filmReview.events({
                 sAlert.success("Your rating has been counted!");
             }
         });
-    }
-});
+    },
 
-// Template.filmReview.onCreated( function() {
-//   let postId = FlowRouter.current().params._id;
-//   Template.instance().subscribe( 'post', postId );
-// });
-
-
-Template.filmReview.events({
+  // Comments events:
   'submit #add-comment' ( event, template ) {
     event.preventDefault();
 
@@ -121,8 +143,6 @@ Template.filmReview.events({
       date: new Date
     };
 
-
-
     Meteor.call( 'addComment', comment, ( error, response ) => {
       if ( error ) {
         Bert.alert( error.reason, "warning" );
@@ -130,41 +150,3 @@ Template.filmReview.events({
     });
   }
 });
-
-Template.filmReview.helpers({
-  // post() {
-  //   let post = Users.findOne();
-  //
-  //   if ( post ) {
-  //     return post;
-  //   }
-  // },
-  comments() {
-    console.log("this=");
-    console.log(this);
-    console.log(this._id);
-
-    let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
-    console.log("found, count=");
-    console.log(comments.count());
-    console.log(comments.fetch());
-
-    if ( comments ) {
-      return comments;
-    }
-  }
-});
-
-// Meteor.publish( 'comments', function(postId) {
-//      return Comments.find({}, {sort: {date: -1}});
-//      console.log("EXEC!");
-// });
-
-
-// Template.filmReview.helpers({
-//   commen: function () {
-//     return Comments.find({}, {
-//       sort: { date: -1 }
-//     });
-//   }
-// });
