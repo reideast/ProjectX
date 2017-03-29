@@ -4,7 +4,8 @@
             {{#each filmListing}}
                 <div class="filmItem col-xs-12 col-sm-4 col-md-3">
                     <a href="film/{{_id}}">
-                        <h4>{{submittedFilm.title}}<small><em> by {{profile.user.name}}</em></small></h4>
+                        <h4>{{submittedFilm.title}}
+                            <br><small><em> by {{profile.user.name}}</em></small></h4>
                         <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
                     </a>
                 </div>
