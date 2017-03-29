@@ -1,27 +1,38 @@
 <template name="viewFilms">
-    <div class="container-viewFilms">
+    <section>
         <div class="row">
-            {{#each filmListing}}
-
-                  <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4">
-                    <div class="well">
-                      <a href="film/{{_id}}">
-                          <div class="well">
-                            <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
-                          </div>
-                          <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                      </a>
-                  </div>
-                </div>
-                
-            {{/each}}
+            <!-- <div class="col-md-3 col-md-offset-5"> -->
+            <div class="text-center col-md-12">
+                <h2>Current Submissions</h2>
+                <hr>
+            </div>
         </div>
-    </div>
+        <div class="container container-viewFilms">
+            <div class="row">
+                {{#each filmListing}}
+
+                      <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4 col-md-offset-0">
+                        <div class="well">
+                          <a href="film/{{_id}}">
+                              <div class="well">
+                                <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                              </div>
+                              <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                          </a>
+                      </div>
+                    </div>
+
+                {{/each}}
+            </div>
+        </div>
+    </section>
+    
+    {{> footer}}
 
     <style>
-      	.container-viewFilms{
-      		padding-top: 90px;
-      	}
+      	/*.container-viewFilms{
+      		padding-top: 40px;
+      	}*/
 
         /*.filmWell {
           background-color: #fff;
