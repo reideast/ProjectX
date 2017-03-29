@@ -44,7 +44,7 @@ Template.signUp_reg.events({
         var password = $('[name=password-login]').val();
         Meteor.loginWithPassword(email, password, function (err) {
             if (!err) {
-                FlowRouter.go("profilePage");
+                FlowRouter.go("homePage");
             }
             else {
                 console.log(err);
