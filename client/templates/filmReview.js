@@ -129,21 +129,25 @@ Template.filmReview.events({
         });
     },
 
-  // Comments events:
-  'submit #add-comment' ( event, template ) {
-    event.preventDefault();
+    // Comments events:
+    'submit #add-comment' ( event, template ) {
+        event.preventDefault();
 
-    let comment = {
-      postId: this._id,
-      author: template.find( "[name='author']" ).value,
-      content: template.find( "[name='content']" ).value,
-      date: new Date
-    };
+        let comment = {
+            postId: this._id,
+            author: template.find( "[name='author']" ).value,
+            content: template.find( "[name='content']" ).value,
+            date: new Date
+        };
 
-    Meteor.call( 'addComment', comment, ( error, response ) => {
-      if ( error ) {
-        Bert.alert( error.reason, "warning" );
-      }
-    });
-  }
+        Meteor.call( 'addComment', comment, ( error, response ) => {
+            if ( error ) {
+                Bert.alert( error.reason, "warning" );
+            } else {
+                Bert.alert( 'Your comment has been posted', 'success', 'growl-top-right');
+                template.find( "[name='author']" ).value = '';
+                template.find( "[name='content']" ).value = '';
+            }
+        });
+    }
 });
