@@ -2,10 +2,12 @@
     <div class="container-viewFilms">
         <div class="row">
             {{#each filmListing}}
-                <div class="filmItem col-xs-12 col-md-4 col-md-offset-1">
+                <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4 col-md-offset-1">
                   <div class="well">
                     <a href="film/{{_id}}">
-                        <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                        <div class="filmWell">
+                          <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                        </div>
                         <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
                     </a>
                 </div>
@@ -20,5 +22,8 @@
       		padding-top: 90px;
       	}
 
+        .filmWell {
+          color: #62040F;
+        }
     </style>
 </template>
