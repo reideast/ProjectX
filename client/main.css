@@ -5,7 +5,7 @@ body {
 }
 
 .bert-alert.danger {
-    background: #CD071E;
+    background: #62040F;
     color: #fff;
 }
 
@@ -80,6 +80,7 @@ body {
 .text-center {
   color: #62040f;
 }
+
 
 #portfolio .portfolio-item .portfolio-link .caption {
     background: #62040f;

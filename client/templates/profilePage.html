@@ -1,5 +1,123 @@
 <template name="profilePage">
+  <div class="container">
+    <!-- <div class="container-fluid">
+      <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#messages">Messages</a></li>
+        <li role="presentation"><a href="#">Profile</a></li>
+        <li role="presentation"><a href="#">Messages</a></li>
+      </ul>
+    </div> -->
+      <div class="container" id="profileUpdateContainer">
+          <div class="col-md-offset-1 col-md-10">
+            <h3 class="page-header">Your submission details</h3>
+            {{#if Template.subscriptionsReady}}
+               {{#if currentUser}}
+                   {{#with currentUser}}
+                       {{#with submittedFilm}}
+                            <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                            <div class="row">
+                                <form id="filmEditForm">
+                                    <div class="form-group">
+                                        <label for="filmTitle">Film Title</label>
+                                        <input value="{{title}}" type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filmGenre">Genre</label>
+                                        <select name="filmGenre" id="filmGenre" class="form-control">
+                                            {{#each optionsGenres }}
+                                                <option value="{{value}}" {{selected}}>{{value}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filmLength">Length</label>
+                                        <select name="filmLength" id="filmLength" class="form-control">
+                                            {{#each optionsLength }}
+                                                <option value="{{value}}" {{selected}}>{{text}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="filmDescription">Short Description of Film</label>
+                                        <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)">{{description}}</textarea>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-6 col-sm-offset-6 col-xs-12">
+                                            <div class="row spacer">
+                                                <div class="col-xs-12">
+                                                    <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="spacer">
+                                    </div>
+                                    {{> sAlert}}
+                                    <!-- TODO: move to {{> footer}}, once that's properly templatized -->
+                                </form>
+                            </div>
+                        {{/with}}
+                    {{/with}}
+                {{/if}}
+            {{else}}
+                <p>Loading...</p>
+            {{/if}}
+          </div>
+      </div>
+    <section id="messages">
+      <div class="container" id="personalMessageContainer">
+          <div class="row">
+              <div class="col-md-offset-1 col-md-10" id="personalMssg">
+                  <h3 class="page-header">Private Messages</h3>
+                  <section class="comment-list">
+                      {{#if Template.subscriptionsReady}}
+                          {{#each privateMessageConversations }}
+                              <div class="panel panel-primary">
+                                  <div class="panel-heading">
+                                      <h4 class=panel-title>
+                                          {{#with conversationDetails from }}
+                                              Conversation with {{profile.user.name}}
+                                          {{/with}}
+                                      </h4>
+                                  </div>
+                                  <div class="panel-body">
+                                      {{#each messages}}
+                                          <div class="text-left">
+                                              <div class="comment-user">
+                                                  <span class="fa fa-user"></span> {{name}}
+                                                  <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
+                                              </div>
+                                          </div>
+                                          <div class="singleMessage panel panel-default">
+                                              <div class="panel-body">
+                                                  <div class="comment-post">
+                                                      {{text}}
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="text-right">
+                                              <div class="comment-date">
+                                                  <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
+                                              </div>
+                                          </div>
+                                      {{/each}}
+                                  </div>
+                                  <div class="panel-footer">
+                                      {{> profilePagePrivateMessageReply }}
+                                  </div>
+                              </div>
+                          {{/each}}
+                      {{/if}}
+                  </section>
+              </div>
+          </div>
+      </div>
+    </section>
+  </div>
+    {{> footer}}
+
     <style>
+
         .singleMessage { /* over-riding bootstrap's .panel margin */
             margin-bottom: 0;
         }
@@ -69,107 +187,36 @@
         }
 
         .container-profilePage{
-            padding-top:90px;
+            padding-top:0px;
+        }
+
+        .btn-success {
+            color: #fff;
+            background-color: #62040f;
+            border-color: #62040f;
+        }
+
+        .btn-success:hover {
+            color: #CD071E;
+            background-color: #ffffff;
+            border-color: #CD071E;
+        }
+
+        .page-header {
+          padding-bottom: 9px;
+          margin: 40px 0 20px;
+          border-bottom: 1px solid #eee;
+          color: #62040f;
+        }
+
+        .panel-primary {
+          color: #212121;
+          background-color: #fff;
+          border-color: #62040f;
+        }
+
+        .panel-primary>.panel-heading {
+          background-color: #62040f;
         }
     </style>
-    <div class="container" id="profileUpdateContainer">
-        {{#if Template.subscriptionsReady}}
-           {{#if currentUser}}
-               {{#with currentUser}}
-                   {{#with submittedFilm}}
-                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                        <div class="row">
-                            <form id="filmEditForm">
-                                <div class="form-group">
-                                    <label for="filmTitle">Film Title</label>
-                                    <input value="{{title}}" type="text" class="form-control" id="filmTitle" name="filmTitle" required placeholder="Film title">
-                                </div>
-                                <div class="form-group">
-                                    <label for="filmGenre">Genre</label>
-                                    <select name="filmGenre" id="filmGenre" class="form-control">
-                                        {{#each optionsGenres }}
-                                            <option value="{{value}}" {{selected}}>{{value}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="filmLength">Length</label>
-                                    <select name="filmLength" id="filmLength" class="form-control">
-                                        {{#each optionsLength }}
-                                            <option value="{{value}}" {{selected}}>{{text}}</option>
-                                        {{/each}}
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="filmDescription">Short Description of Film</label>
-                                    <textarea name="filmDescription" id="filmDescription" cols="30" rows="6" class="form-control" placeholder="Short description (limit 250 characters)">{{description}}</textarea>
-                                </div>
-                                <div class="row">
-                                    <div class="col-sm-6 col-sm-offset-6 col-xs-12">
-                                        <div class="row spacer">
-                                            <div class="col-xs-12">
-                                                <button type="submit" class="btn btn-success btn-block" id="filmSubmit">Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="spacer">
-                                </div>
-                            </form>
-                        </div>
-                    {{/with}}
-                {{/with}}
-            {{/if}}
-        {{else}}
-            <p>Loading...</p>
-        {{/if}}
-    </div>
-    <div class="container" id="personalMessageContainer">
-        <div class="row">
-            <div class="col-sm-8 col-sm-offset-2" id="personalMssg">
-                <h3 class="page-header">Private Messages</h3>
-                <section class="comment-list">
-                    {{#if Template.subscriptionsReady}}
-                        {{#each privateMessageConversations }}
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">
-                                    <h4 class=panel-title>
-                                        {{#with conversationDetails from }}
-                                            Conversation with {{profile.user.name}}
-                                        {{/with}}
-                                    </h4>
-                                </div>
-                                <div class="panel-body">
-                                    {{#each messages}}
-                                        <div class="text-left">
-                                            <div class="comment-user">
-                                                <span class="fa fa-user"></span> {{name}}
-                                                <!-- <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small> -->
-                                            </div>
-                                        </div>
-                                        <div class="singleMessage panel panel-default">
-                                            <div class="panel-body">
-                                                <div class="comment-post">
-                                                    {{text}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <div class="comment-date">
-                                                <small><em><span class="fa fa-clock-o"></span> {{ formatTime createdAt }}</em></small>
-                                            </div>
-                                        </div>
-                                    {{/each}}
-                                </div>
-                                <div class="panel-footer">
-                                    {{> profilePagePrivateMessageReply }}
-                                </div>
-                            </div>
-                        {{/each}}
-                    {{/if}}
-                </section>
-            </div>
-        </div>
-    </div>
-    {{> footer}}
 </template>

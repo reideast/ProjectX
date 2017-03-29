@@ -2,13 +2,18 @@
     <div class="container-viewFilms">
         <div class="row">
             {{#each filmListing}}
-                <div class="filmItem col-xs-12 col-sm-4 col-md-3">
-                    <a href="film/{{_id}}">
-                        <h4>{{submittedFilm.title}}
-                            <br><small><em> by {{profile.user.name}}</em></small></h4>
-                        <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
-                    </a>
+
+                  <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4">
+                    <div class="well">
+                      <a href="film/{{_id}}">
+                          <div class="well">
+                            <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                          </div>
+                          <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                      </a>
+                  </div>
                 </div>
+                
             {{/each}}
         </div>
     </div>
@@ -17,5 +22,11 @@
       	.container-viewFilms{
       		padding-top: 90px;
       	}
+
+        /*.filmWell {
+          background-color: #fff;
+          border: 2px solid;
+          border-color: #62040f;
+        }*/
     </style>
 </template>
