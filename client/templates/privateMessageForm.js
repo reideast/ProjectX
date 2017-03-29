@@ -42,7 +42,7 @@ Template.privateMessageForm.helpers({
         if (Template.instance().hasCheckedForExistingConversation && !Template.instance().needToCreateConversation) {
             const result = PrivateMessages.findOne({
                 _id: Template.instance().conversationID
-            });
+            }, { sort: { "date": -1 } });
             if (result) {
                 return result;
             } else {

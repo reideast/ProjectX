@@ -9,7 +9,7 @@ Template.profilePage.onCreated(function() {
 Template.profilePage.helpers({
     privateMessageConversations: function() {
         if (Meteor.userId()) {
-            return PrivateMessages.find({ to: Meteor.userId() });
+            return PrivateMessages.find({ to: Meteor.userId() }, { sort: { "date": -1 } });
         } else {
             return undefined;
         }
