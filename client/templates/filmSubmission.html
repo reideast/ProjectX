@@ -4,17 +4,19 @@
             <div class="container-submissionForm">
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2 col-xs-10 col-xs-offset-1 ">
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h4 class="panel-title">Notice:</h4>
+                        {{#unless currentUser.emails.[0].verified}}
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">Notice:</h4>
+                                </div>
+                                <div class="panel-body">
+                                    <small>
+                                        <p>Your film will not be eligible for screening at the Film Fleadh until you verify your email.</p>
+                                        <p>Would you like to <a href="" class="resend-verification-link">resend verification link?</a></p>
+                                    </small>
+                                </div>
                             </div>
-                            <div class="panel-body">
-                                <small>
-                                    <p>Your film will not be eligibie for screening at the Film Fleadh until you verify your email.</p>
-                                    <p>?resend link??</p>
-                                </small>
-                            </div>
-                        </div>
+                        {{/unless}}
                         <form id="filmSubmissionForm">
                             <div class="form-group">
                                 <label for="filmTitle">Film Title</label>
@@ -134,7 +136,7 @@
 
     <style>
     .container-submissionForm{
-        padding-top: 70px;
+        padding-top: 40px;
     }
 
     .panel-info {
