@@ -125,9 +125,9 @@ Template.filmReview.events({
         const rating = e.target.value;
         Meteor.call('setRating', filmmakerId, reviewerId, rating, function(error, result) {
             if (error) {
-                sAlert.error("Rating failed: " + error.reason);
+                Bert.alert("Rating failed: " + error.reason, 'danger', 'growl-top-right');
             } else {
-                sAlert.success("Your rating has been counted!");
+                Bert.alert("Your rating has been counted!", 'success', 'growl-top-right');
             }
         });
     },

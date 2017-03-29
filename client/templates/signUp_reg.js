@@ -1,18 +1,6 @@
 
 /* global jQuery*/
 /*global $*/
-// TODO: move sAlert to main.js
-sAlert.config({
-  effect: 'scale',
-  position: 'bottom',
-  timeout: 5000,
-  html: false,
-  onRouteClose: true,
-  stack: true,
-  offset: 0, // in px - will be added to first alert (bottom or top - depends of the position in config)
-  beep: false,
-  onClose: _.noop
-});
 
 // Template.signUp.onRendered(function() {
 //
@@ -47,23 +35,19 @@ Template.signUp_reg.events({
                 FlowRouter.go("homePage");
             }
             else {
-                console.log(err);
-                sAlert.error("Error: Email or password is incorrect");
+                Bert.alert("Error: Email or password is incorrect", 'danger', 'growl-top-right');
             }
         });
-        console.log("form submitted");
     },
 
     'submit #register-form': function(event) {
         event.preventDefault();
         if (event.target.filmTermsAccepted.checked) {
-            console.log(event.target.person.value);
             // var emailvar=event.find('#email').value;
             var emailvar = event.target.email.value;
             var passwordvar = event.target.password.value;
             var namevar = event.target.username.value;
             var contactNovar = event.target.contactNo.value;
-            console.log("Form submitted.");
             Accounts.createUser({
                 email: emailvar,
                 password: passwordvar,
@@ -78,13 +62,12 @@ Template.signUp_reg.events({
                 }
             }, function(error) {
                 if (error) {
-                    sAlert.error(error.reason);
+                    Bert.alert(error.reason, 'danger', 'growl-top-right');
                 }
-                console.log("createuser.");
             });
         }
         else {
-            sAlert.error("Terms Must be checked");
+            Bert.alert("Terms Must be checked", 'danger', 'growl-top-right');
         }
         FlowRouter.go("homePage");
         // name: "homePage";

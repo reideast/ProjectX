@@ -90,9 +90,9 @@ Template.profilePage.events({
 
         Meteor.call('filmUpdate', filmData, function(error, result) {
             if (error) {
-                sAlert.error("Film update failed: " + error.reason);
+                Bert.alert("Film update failed: " + error.reason, 'danger', 'growl-top-right');
             } else {
-                sAlert.success("Film has been updated");
+                Bert.alert("Film has been updated", 'success', 'growl-top-right');
             }
         });
     }
