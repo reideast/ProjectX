@@ -3,6 +3,9 @@ Template.nav.events({
         event.preventDefault();
         Meteor.logout();
         FlowRouter.go('homePage');
+    },
+    'click .navbar-collapse a': function(event){
+        $(".navbar-collapse").collapse('hide');
     }
 });
 
