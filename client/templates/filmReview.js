@@ -84,7 +84,13 @@ Template.filmReview.helpers({
     reviewScore: function() {
         if (this.submittedFilm) {
             if ('ratingScore' in this.submittedFilm) {
-                return this.submittedFilm.ratingScore;
+                let score = this.submittedFilm.ratingScore;
+                if (score < 0) {
+                    score = '<span class="glyphicon glyphicon-thumbs-up"></span> ' + score;
+                } else {
+                    score = '<span class="glyphicon glyphicon-thumbs-down"></span> ' + score;
+                }
+                return score;
             } else {
                 return "No ratings yet";
             }
