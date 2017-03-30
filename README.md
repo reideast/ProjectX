@@ -1,7 +1,7 @@
-# ProjectX - Web App for JFF (Junior Film Fleadh) #
+# ProjectX - Web App for JFF (Junior Film Fleadh)#
 
-![] (https://csatunibackups.s3-eu-west-1.amazonaws.com/original/1X/4e38ab68cdd720f318630d668ef012d395a9c09b.png)
-
+![Screenshot](buildPass.png)
+![Screenshot](JFFLogo.png)
 ### CT216 Software engineering I - Group Project.
 
 
@@ -25,7 +25,11 @@
   - Schedule and meta data can be exported from database to send to graphic design firm to create festival program.
   
 ## Minimum Viable Product
-  - The minimum functionality to be a success to our client is to implement the film submission and festival workshop booking portions of the product.
+  The minimum functionality to be a success to our client is to implement:
+  - user creation,
+  - film submissions,
+  - submission reviews,
   
-## Existing Web Design
+  
+## Existing Website
 - http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/

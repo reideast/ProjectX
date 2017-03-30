@@ -1,0 +1,39 @@
+{
+        "_id" : "3c7k5ndkzAjh3vSqt",
+        "createdAt" : ISODate("2017-03-09T12:07:31.061Z"),
+        "services" : {
+                "password" : {
+                        "bcrypt" : "$2a$10$3LARCI1fgDrfWmIhWxwp8eDb8rz7EM1HDrkmB40Etl1R2oEAdZiRG"
+                },
+                "resume" : {
+                        "loginTokens" : [
+                                {
+                                        "when" : ISODate("2017-03-09T13:59:49.088Z"),
+                                        "hashedToken" : "eamBZoySU+HLb5KmxrlfjM0NZPtjmpZ21pTv+o0UY/0="
+                                }
+                        ]
+                }
+        },
+        "emails" : [
+                {
+                        "address" : "a@a.com",
+                        "verified" : false
+                }
+        ],
+        "uploadedFile" : [
+                {
+                        "filmId" : "ooZfgziSPFjnED9ob",
+                        "submitted" : ISODate("2017-03-10T13:52:39.533Z"),
+                        "path" : "assets\\app\\uploads\\films\\userid_3c7k5ndkzAjh3vSqt_date_2017-3-10-13-52.mp4"
+                }
+        ],
+        "submittedFilm" : {
+                "title" : "t",
+                "genre" : "g",
+                "length" : "short",
+                "fileId" : "ooZfgziSPFjnED9ob",
+                "description" : "sags",
+                "termsAccepted" : true,
+                "path" : "assets\\app\\uploads\\films\\userid_3c7k5ndkzAjh3vSqt_date_2017-3-10-13-52.mp4"
+        }
+}
