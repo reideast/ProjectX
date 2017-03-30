@@ -6,7 +6,11 @@ Template.nav.events({
     },
     'click .navbar-collapse a': function(event){
         $(".navbar-collapse").collapse('hide');
-    }
+    },
+
+    'click #logo-img': function(event){
+        $(".navbar-collapse").collapse('hide');
+      }
 });
 
 Template.nav.helpers({
