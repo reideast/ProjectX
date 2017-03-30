@@ -1,4 +1,4 @@
-Template.viewFilms.onRendered(function() {
+Template.filmGrid.onRendered(function() {
     let self = this;
     self.autorun(function() {
         self.subscribe('users.withFilms');
@@ -6,7 +6,7 @@ Template.viewFilms.onRendered(function() {
     });
 })
 
-Template.viewFilms.helpers({
+Template.filmGrid.helpers({
     filmListing: Users.find({ submittedFilm: { $exists: true } }),
 
     thumbRef: function() {
