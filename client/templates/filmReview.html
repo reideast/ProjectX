@@ -1,4 +1,5 @@
 <template name="filmReview">
+  <div class="container">
     {{#if Template.subscriptionsReady}}
         {{#with userData}}
             <div class="row">
@@ -129,6 +130,7 @@
                     <!-- Comments HTML End -->
                 </div>
             </div>
+
             {{> footer}}
 
 
@@ -246,4 +248,5 @@
     {{else}}
         <p>Loading...</p>
     {{/if}}
+    </div>
 </template>
