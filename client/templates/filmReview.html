@@ -42,7 +42,7 @@
                             <div class="row">
                                 <!-- Rating -->
                                 <div id="ratings" class="col-xs-12">
-                                    <h4 class="page-header">Rating: {{ reviewScore }}</h4>
+                                    <h4 class="page-header">Rating: <span id="ratingIcon" class="{{ reviewIcon }}"></span> {{ reviewScore }}</h4>
                                     {{#if currentUser}}
                                     <div class="row">
                                         <div id="ratings" class="col-xs-12">
