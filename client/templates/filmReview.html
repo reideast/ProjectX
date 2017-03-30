@@ -37,97 +37,94 @@
                             <!-- end hidden modal -->
                         {{/if}}
                     {{/if}}
-                    <!-- Comments HTML Start -->
                     <div class="row">
-                      <div class="col-xs-12 col-md-6">
-                        <h4 class="page-header">Add Comment</h4>
-                        <form id="add-comment">
-                          <div class="form-group">
-                            <label for="author">Your Name</label>
-                            <input type="text" class="form-control" name="author" placeholder="Your Name">
-                          </div>
-                          <div class="form-group">
-                            <label for="content">Content</label>
-                            <textarea name="content" class="form-control" placeholder="Your comment...."></textarea>
-                          </div>
-                          <input type="submit" class="btn btn-success" value="Add Comment">
-                        </form>
-
-                    </div>
-                    <div class="col-xs-12 col-md-6">
-                      <h4 class="page-header">Comments</h4>
-                      <div class="ovH">
-                        {{#each comments}}
-                          <div class="panel panel-default">
-                            <div class="panel-heading"><strong>{{author}}</strong> {{ formatTime date }}</div>
-                            <div class="panel-body">
-                              {{content}}
-                            </div>
-                          </div>
-                        {{else}}
-                          <p class="alert alert-warning">No comments yet!</p>
-                        {{/each}}
-                      </div>
-                    </div>
-                    <!-- Voting HTML Start -->
-                    <div id="ratings" class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-12 col-md-offset-0">
-                        <h4 class="page-header">Rating</h4>
-                        <h5 class="text-center">Aggregate Score: {{ reviewScore }}</h5>
-                        <div class="row">
-                            <div id="ratings" class="col-xs-8 col-xs-offset-2 col-md-6 col-md-offset-3">
-                                <div class="list-group">
-                                    <label class="list-group-item row">
-                                       {{#if currentUser}}
-                                           {{#if notSelfUser }}
-                                                <div class="col-xs-3">
-                                                    <input checked="{{ hasReviewerChecked 1 }}" type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
-                                                </div>
-                                            {{/if}}
-                                        {{/if}}
-                                        <div class="col-xs-6">
-                                            Liked
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="row">
+                                <!-- Rating -->
+                                <div id="ratings" class="col-xs-12">
+                                    <h4 class="page-header">Rating: <span id="ratingIcon" class="{{ reviewIcon }}"></span> {{ reviewScore }}</h4>
+                                    {{#if currentUser}}
+                                    <div class="row">
+                                        <div id="ratings" class="col-xs-12">
+                                            <div class="list-group">
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 1 }}" type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Liked
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-upload"></span>
+                                                    </div>
+                                                </label>
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 0 }}" type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Neutral
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-record"></span>
+                                                    </div>
+                                                </label>
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked -1 }}" type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Disliked
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-download"></span>
+                                                    </div>
+                                                </label>
+                                            </div>
                                         </div>
-                                        <div class="col-xs-3">
-                                            <span class="glyphicon glyphicon-upload"></span>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <!-- Add Comment -->
+                                <div class="col-xs-12">
+                                    <h4 class="page-header">Add Comment</h4>
+                                    <form id="add-comment">
+                                        <div class="form-group">
+                                            <label for="author">Your Name</label>
+                                            <input type="text" class="form-control" name="author" placeholder="Your Name">
                                         </div>
-                                    </label>
-                                    <label class="list-group-item row">
-                                       {{#if currentUser}}
-                                           {{#if notSelfUser }}
-                                                <div class="col-xs-3">
-                                                    <input checked="{{ hasReviewerChecked 0 }}" type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
-                                                </div>
-                                            {{/if}}
-                                        {{/if}}
-                                        <div class="col-xs-6">
-                                            Neutral
+                                        <div class="form-group">
+                                            <label for="content">Content</label>
+                                            <textarea name="content" class="form-control" placeholder="Your comment...."></textarea>
                                         </div>
-                                        <div class="col-xs-3">
-                                            <span class="glyphicon glyphicon-record"></span>
-                                        </div>
-                                    </label>
-                                    <label class="list-group-item row">
-                                       {{#if currentUser}}
-                                           {{#if notSelfUser }}
-                                                <div class="col-xs-3">
-                                                    <input checked="{{ hasReviewerChecked -1 }}" type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
-                                                </div>
-                                            {{/if}}
-                                        {{/if}}
-                                        <div class="col-xs-6">
-                                            Disliked
-                                        </div>
-                                        <div class="col-xs-3">
-                                            <span class="glyphicon glyphicon-download"></span>
-                                        </div>
-                                    </label>
+                                        <input type="submit" class="btn btn-success" value="Add Comment">
+                                    </form>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <!-- Comments HTML Start -->
+                            <h4 class="page-header">Comments</h4>
+                            <div class="ovH">
+                                {{#each comments}}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><strong>{{author}}</strong> {{ formatTime date }}</div>
+                                    <div class="panel-body">
+                                        {{content}}
+                                    </div>
+                                </div>
+                                {{else}}
+                                <p class="alert alert-warning">No comments yet!</p>
+                                {{/each}}
+                            </div>
+                        </div>
                     </div>
-                    <!-- Voting HTML End -->
-                    </div>
-                    <!-- Comments HTML End -->
                 </div>
             </div>
 
@@ -182,11 +179,14 @@
                 }
 
                 .ovH {
-                  height: 150px;
-                  overflow: scroll;
+                  /*height: 150px;*/
+                  /*overflow: scroll;*/
 
                 }
 
+                .panel-default {
+                    margin-bottom: 15px;
+                }
                 .panel-default>.panel-heading {
                   color: #fff;
                   background-color: #62040f;

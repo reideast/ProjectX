@@ -84,12 +84,32 @@ Template.filmReview.helpers({
     reviewScore: function() {
         if (this.submittedFilm) {
             if ('ratingScore' in this.submittedFilm) {
-                return this.submittedFilm.ratingScore;
+                const score = this.submittedFilm.ratingScore;
+                if (score == 0) {
+                    return "Neutral Rating";
+                } else {
+                    return score;
+                }
             } else {
                 return "No ratings yet";
             }
         }
         return "n/a"; // if the object is not available, provide graceful error message to user
+    },
+    reviewIcon: function() {
+        if (this.submittedFilm) {
+            if ('ratingScore' in this.submittedFilm) {
+                let score = this.submittedFilm.ratingScore;
+                if (score > 0) {
+                    return 'glyphicon glyphicon-thumbs-up';
+                } else if (score < 0) {
+                    return 'glyphicon glyphicon-thumbs-down';
+                } else { //score is zero
+                    return '';
+                }
+            }
+        }
+        return '';
     },
 
     // helpers for Comments
