@@ -69,45 +69,42 @@ Template.filmReview.helpers({
     hasReviewerChecked: function(thisRadioButtonScore) {
         const reviewerId = Meteor.userId();
         if (reviewerId) {
-            const ratingsArray = this.submittedFilm.ratings;
-            const filtered = ratingsArray.filter((item) => {
-                return item.reviewerId == reviewerId;
-            });
-            if (filtered.length === 1) {
-                return (filtered[0].rating == thisRadioButtonScore);
-            } else {
-                console.log("Info: No review yet submitted");
+            if ('ratings' in this.submittedFilm) {
+                const ratingsArray = this.submittedFilm.ratings;
+                const filtered = ratingsArray.filter((item) => {
+                    return item.reviewerId == reviewerId;
+                });
+                if (filtered.length === 1) {
+                    return (filtered[0].rating == thisRadioButtonScore);
+                }
             }
         }
         return false;
     },
     reviewScore: function() {
-        return this.submittedFilm.ratingScore;
+        if (this.submittedFilm) {
+            if ('ratingScore' in this.submittedFilm) {
+                return this.submittedFilm.ratingScore;
+            } else {
+                return "No ratings yet";
+            }
+        }
+        return "n/a"; // if the object is not available, provide graceful error message to user
     },
 
     // helpers for Comments
     comments() {
-        // console.log("this=");
-        // console.log(this);
-        // console.log(this._id);
-        //
         let comments = Comments.find({ postId: this._id},{ sort: { date: -1 }});
-        // console.log("found, count=");
-        // console.log(comments.count());
-        // console.log(comments.fetch());
-        //
         if ( comments ) {
             return comments;
         }
     },
-    // post() {
-    //   let post = Users.findOne();
-    //
-    //   if ( post ) {
-    //     return post;
-    //   }
-    // },
-
+    formatTime: function(myTime) {
+        const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        const time = new Date(myTime);
+        return weekday[time.getDay()] + ' ' + month[time.getMonth()] + ' ' + time.getDate() + ', ' + time.getFullYear() + ' ' + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+    },
 });
 
 Template.filmReview.events({
@@ -125,28 +122,32 @@ Template.filmReview.events({
         const rating = e.target.value;
         Meteor.call('setRating', filmmakerId, reviewerId, rating, function(error, result) {
             if (error) {
-                sAlert.error("Rating failed: " + error.reason);
+                Bert.alert("Rating failed: " + error.reason, 'danger', 'growl-top-right');
             } else {
-                sAlert.success("Your rating has been counted!");
+                Bert.alert("Your rating has been counted!", 'success', 'growl-top-right');
             }
         });
     },
 
-  // Comments events:
-  'submit #add-comment' ( event, template ) {
-    event.preventDefault();
+    // Comments events:
+    'submit #add-comment' ( event, template ) {
+        event.preventDefault();
 
-    let comment = {
-      postId: this._id,
-      author: template.find( "[name='author']" ).value,
-      content: template.find( "[name='content']" ).value,
-      date: new Date
-    };
+        let comment = {
+            postId: this._id,
+            author: template.find( "[name='author']" ).value,
+            content: template.find( "[name='content']" ).value,
+            date: new Date
+        };
 
-    Meteor.call( 'addComment', comment, ( error, response ) => {
-      if ( error ) {
-        Bert.alert( error.reason, "warning" );
-      }
-    });
-  }
+        Meteor.call( 'addComment', comment, ( error, response ) => {
+            if ( error ) {
+                Bert.alert( error.reason, "warning" );
+            } else {
+                Bert.alert( 'Your comment has been posted', 'success', 'growl-top-right');
+                template.find( "[name='author']" ).value = '';
+                template.find( "[name='content']" ).value = '';
+            }
+        });
+    }
 });

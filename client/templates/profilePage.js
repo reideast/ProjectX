@@ -9,16 +9,16 @@ Template.profilePage.onCreated(function() {
 Template.profilePage.helpers({
     privateMessageConversations: function() {
         if (Meteor.userId()) {
-            return PrivateMessages.find({ to: Meteor.userId() });
+            return PrivateMessages.find({ to: Meteor.userId() }, { sort: { "date": -1 } });
         } else {
             return undefined;
         }
     },
     formatTime: function(myTime) {
+        const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const time = new Date(myTime);
-        return time.toString();
-        // TODO: format nicer. use this as example of functions:
-        // let dateStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + '-' + now.getHours() + '-' + now.getMinutes();
+        return weekday[time.getDay()] + ' ' + month[time.getMonth()] + ' ' + time.getDate() + ', ' + time.getFullYear() + ' ' + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
     },
     conversationDetails: function(userId) {
         return Users.findOne({ _id: userId });
@@ -68,10 +68,8 @@ Template.profilePage.helpers({
         return options;
     },
     thumbRef: function() {
-        console.log("THUMBREF");
         if (this.fileId) {
             let film = Films.collection.findOne({ _id: this.fileId});
-            console.log(film);
             return film;
         }
     }
@@ -90,9 +88,9 @@ Template.profilePage.events({
 
         Meteor.call('filmUpdate', filmData, function(error, result) {
             if (error) {
-                sAlert.error("Film update failed: " + error.reason);
+                Bert.alert("Film update failed: " + error.reason, 'danger', 'growl-top-right');
             } else {
-                sAlert.success("Film has been updated");
+                Bert.alert("Film has been updated", 'success', 'growl-top-right');
             }
         });
     }

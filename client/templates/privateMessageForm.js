@@ -42,7 +42,7 @@ Template.privateMessageForm.helpers({
         if (Template.instance().hasCheckedForExistingConversation && !Template.instance().needToCreateConversation) {
             const result = PrivateMessages.findOne({
                 _id: Template.instance().conversationID
-            });
+            }, { sort: { "date": -1 } });
             if (result) {
                 return result;
             } else {
@@ -54,10 +54,11 @@ Template.privateMessageForm.helpers({
     },
 
     formatTime: function(myTime) {
+        const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+        const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const time = new Date(myTime);
-        return time.toString();
-        // TODO: format nicer. use this as example of functions:
-        // let dateStr = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate() + '-' + now.getHours() + '-' + now.getMinutes();
+        return weekday[time.getDay()] + ' ' + month[time.getMonth()] + ' ' + time.getDate() + ', ' + time.getFullYear() + ' ' + time.getHours() + ':' + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes();
+
     },
 });
 

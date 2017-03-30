@@ -97,14 +97,10 @@ Template.filmSubmission.events({
 
         Meteor.call('filmSubmit', filmData, function(error, result) {
             if (error) {
-                sAlert.error("Film submission failed: " + error.reason);
+                Bert.alert("Film submission failed: " + error.reason, 'danger', 'growl-top-right');
             } else {
-                sAlert.success("Film has been submitted");
-                // TODO: router route to new own Profile page
-                // TODO: ok to move {{> sAlert }} to master template?
-
-		// TODO: verify this works (I added it during the diff/merge)
-          	FlowRouter.go('profilePage');
+                Bert.alert("Film has been submitted", 'success', 'growl-top-right');
+              	FlowRouter.go('profilePage');
             }
         });
     },
@@ -125,9 +121,9 @@ Template.filmSubmission.events({
 
                 uploadInstance.on('end', function(error, fileObj) {
                     if (error) {
-                        sAlert.error('Error during upload: ' + error.reason);
+                        Bert.alert('Error during upload: ' + error.reason, 'danger', 'growl-top-right');
                     } else {
-                        sAlert.success('File "' + fileObj.name + '" successfully uploaded');
+                        Bert.alert('File "' + fileObj.name + '" successfully uploaded', 'success', 'growl-top-right');
                     }
                     template.currentUpload.set(false);
                 });
@@ -144,5 +140,15 @@ Template.filmSubmission.events({
     'change #filmTermsAccepted': function(e, template) {
         template.hasAcceptedTerms = e.currentTarget.checked;
         template.testEnableSubmit();
+    },
+    'click .resend-verification-link' ( event, template ) {
+        Meteor.call( 'sendVerificationLink', ( error, response ) => {
+            if ( error ) {
+                Bert.alert( error.reason, 'danger' );
+            } else {
+                let email = Meteor.user().emails[ 0 ].address;
+                Bert.alert( `Verification sent to ${ email }!`, 'success', 'growl-top-right' );
+            }
+        });
     }
 });
