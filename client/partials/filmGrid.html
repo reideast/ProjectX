@@ -13,7 +13,7 @@
                           <div class="well">
                             <a href="film/{{_id}}">
                                 <div class="well">
-                                  <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                                  <h5>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h5>
                                   <h6>{{submittedFilm.genre}}</h6>
                                 </div>
                                 <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
@@ -26,8 +26,8 @@
           </div>
         </div>
         <style>
-        h4, .h4 {
-          font-size: 18px;
+        h5, .h5 {
+          font-size: 14px;
           color: #62040F  ;
         }
         h6, .h6 {
