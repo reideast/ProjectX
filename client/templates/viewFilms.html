@@ -14,6 +14,7 @@
                             <a href="film/{{_id}}">
                                 <div class="well">
                                   <h4>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h4>
+                                  <h6>{{submittedFilm.genre}}</h6>
                                 </div>
                                 <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
                             </a>
@@ -24,4 +25,19 @@
               </div>
           </div>
         </div>
+        <style>
+        h4, .h4 {
+          font-size: 18px;
+          color: #62040F  ;
+        }
+        h6, .h6 {
+          color: #62040F  ;
+        }
+        .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+          display: block;
+          max-width: 100%;
+          height: auto;
+          color: #62040F  ;
+        }
+        </style>
 </template>
