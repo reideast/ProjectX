@@ -69,6 +69,8 @@ save the file, close it
 
 on the command line, run:
 travis encrypt $(heroku auth:token) --add deploy.api_key
+	UPDATE: if you're on travis-ci.com, you can add --pro. If you're on travis-ci.org, you can add --org
+	This is necessary when you switch from a public to a private repot to regenerate your keys with a new private key
 
 this will automatically place an encrypted api key inside your .travis.yml file under deploy:api_key:secure:
 
