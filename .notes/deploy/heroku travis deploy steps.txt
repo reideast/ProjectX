@@ -1,0 +1,77 @@
+These steps to set up Meteor deployment was syntheized from these guides (either one, they're pretty equivalent):
+https://www.coshx.com/blog/2016/08/19/how-to-deploy-a-meteor-1-4-app-to-heroku/
+https://medium.com/@gge/deploy-a-meteor-1-3-application-to-heroku-cda1f68ca20a#.6kudtznue
+and also the heroku & travis docs, mainly:
+https://docs.travis-ci.com/user/deployment/heroku/
+https://docs.travis-ci.com/user/customizing-the-build/
+
+Create an account on Travis:
+Note: Use your github login, and make sure you're signed up for the free Github Education pack with that github account
+https://education.travis-ci.com/
+
+Create an account on Heroku:
+https://signup.heroku.com/
+
+configure a new, blank app on heroku:
+https://dashboard.heroku.com/apps
+New
+Create New App
+Name: enter the name you want to be your http://YOUR_HEROKU_NAME_HERE.herokuapp.com
+Region: EU or US
+
+after the app is created, you'll see it on https://dashboard.heroku.com/apps
+click the app, then go into Settings
+Reveal Config Vars
+add one for ROOT_URL, set equal to: http://YOUR_HEROKU_NAME_HERE.herokuapp.com
+scroll down to Buildpacks
+remove node.js buildpack
+Add Buildpack: https://github.com/AdmitHub/meteor-buildpack-horse.git
+
+install Heroku CLI on your computer:
+https://devcenter.heroku.com/articles/heroku-cli#download-and-install
+
+while you're at it, install Travis CLI:
+https://github.com/travis-ci/travis.rb#installation
+(note: this requires ruby 2.3 or greater)
+
+open shell
+cd to your existing app directory
+(which should have a git repot already initialized)
+
+put in your heroku account credentials (saves it for this directory):
+heroku login
+
+    Optional: testing heroku only (no travis yet)
+        tell heroku that this your app:
+        heroku git:remote -a YOUR_HEROKU_NAME_HERE
+
+        make sure meteor is working locally, then make sure you've made a git commit recently
+
+        push it manually to heroku:
+        git push heroku master
+
+create a text file called ".travis.yml" in your app's root directory
+paste in everything in between the """'s:
+GitBranchNameYouWantToDeploy is the git branch that will go online through heroku (no other git branches will get pushed online)
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+language: node_js
+node_js:
+- '0.12'
+services:
+- mongodb
+deploy:
+  provider: heroku
+  app:
+    GitBranchNameYouWantToDeploy: YOUR_HEROKU_NAME_HERE
+  buildpack: https://github.com/AdmitHub/meteor-buildpack-horse.git
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+save the file, close it
+
+on the command line, run:
+travis encrypt $(heroku auth:token) --add deploy.api_key
+
+this will automatically place an encrypted api key inside your .travis.yml file under deploy:api_key:secure:
+
+all that's left is to commit that change into your branch called GitBranchNameYouWantToDeploy
+push that branch to github.com
+travis picks up that change within 5 minutes or so, and starts a build, which will end up on http://YOUR_HEROKU_NAME_HERE.herokuapp.com
