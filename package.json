@@ -6,6 +6,8 @@
   },
   "dependencies": {
     "bcrypt": "^1.0.2",
-    "meteor-node-stubs": "~0.2.0"
+    "dropbox": "^0.10.3",
+    "meteor-node-stubs": "~0.2.0",
+    "moment": "^2.18.1"
   }
 }
