@@ -1,0 +1,12 @@
+need to set Heroku config variables like so:
+ROOT_URL
+http://*.herokuapp.com/
+MONGODB_URI (for mLab)
+mongodb://__username:__password@ds155747.mlab.com:55747/__database
+MAIL_URL
+smtp://__username:__password@smtp.sendgrid.net:587
+DROPBOX
+{"dropbox":{"key": "myKey", "secret": "mySecret", "token": "myToken"}}
+    see:
+        to generate on Dropbox.com/developers: https://github.com/VeliovGroup/Meteor-Files/wiki/DropBox-Integration
+        to see how to use: https://github.com/VeliovGroup/Meteor-Files-Demos/blob/master/demo/lib/files.collection.js
