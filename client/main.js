@@ -4,7 +4,3 @@ import { ReactiveVar } from 'meteor/reactive-var';
 /*global _*/
 
 import './main.html';
-
-// test NPM on heroku:
-import moment from 'moment';
-console.log(moment);
