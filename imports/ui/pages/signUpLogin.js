@@ -1,7 +1,15 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'; // Disable these if not needed
+import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+// TODO: need to import Bert?
+// TODO: need to import Accounts?
 
-Template.signUp_reg.events({
+// Load template itself
+import './signUpLogin.html';
+// Load templates used inside this template
+import '../components/footer.js'; // TODO remove this once template-ized
+
+Template.signUpLogin.events({
     'submit #login-form': function(event){
         event.preventDefault();
         var email = $('[name=email-login]').val();
@@ -19,7 +27,6 @@ Template.signUp_reg.events({
     'submit #register-form': function(event) {
         event.preventDefault();
         if (event.target.filmTermsAccepted.checked) {
-            // var emailvar=event.find('#email').value;
             var emailvar = event.target.email.value;
             var passwordvar = event.target.password.value;
             var namevar = event.target.username.value;
@@ -46,7 +53,6 @@ Template.signUp_reg.events({
             Bert.alert("Terms Must be checked", 'danger', 'growl-top-right');
         }
         FlowRouter.go("homePage");
-        // name: "homePage";
     }
 });
 

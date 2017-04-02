@@ -2,11 +2,19 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 // https://kadira.io/academy/meteor-routing-guide/content/subscriptions-and-data-management/with-blaze
+// TODO: need to import Bert?
+// TODO: need ot import $?
 
 // Load template itself
 import './filmReview.html';
 // Load templates used inside this template
-import '../components/filmPlayer.js'
+import '../components/filmPlayer.js';
+import '../components/privateMessageForm.js';
+import '../components/footer.js'; // TODO remove this once template-ized
+import '../../api/filmManagement/users/users.js';
+import '../../api/filmManagement/films/films.js';
+import '../../api/filmManagement/privateMessages/privateMessages.js';
+import '../../api/filmManagement/comments/comments.js';
 
 Template.filmReview.onRendered(function() {
     let self = this;
@@ -129,6 +137,7 @@ Template.filmReview.helpers({
         }
     },
     formatTime: function(myTime) {
+        // TODO: can formatTime be split off into a template on its own??
         const weekday = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
         const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const time = new Date(myTime);

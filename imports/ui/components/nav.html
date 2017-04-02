@@ -10,6 +10,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <!-- <a class="navbar-brand " href="/"> Junior Film Fleadh</a> -->
+                <!-- TODO: switch all nav links to retrieve URL from FlowRouer via name, not route path -->
                 <a href="/" class="navbar-left logo-img" id="logo-img" ><img src="/img/logo.png"></a>
             </div>
 
@@ -28,7 +29,7 @@
                         <li><a href="#" class="logout"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
                         <li><a href="{{#if currentUser.submittedFilm}}/profilePage{{else}}/filmSubmission{{/if}}">| {{currentUser.profile.user.name}} |</a></li>
                     {{else}}
-                        <li><a href="/signUp_reg"><i class="fa fa-user" aria-hidden="true"></i> SignUp/Login</a></li>
+                        <li><a href="/signUpLogin"><i class="fa fa-user" aria-hidden="true"></i> SignUp/Login</a></li>
                     {{/if}}
                 </ul>
 

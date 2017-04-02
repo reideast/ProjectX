@@ -1,4 +1,17 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'; // Disable these if not needed
+import { Template } from 'meteor/templating';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
+// TODO: Need to import Bert?
+
+// Load template itself
+import './profilePage.html';
+// Load templates used inside this template
+import '../components/filmPlayer.js';
+import '../components/profilePagePrivateMessageReply.js';
+import '../components/footer.js'; // TODO remove this once template-ized
+import '../../api/filmManagement/privateMessages/privateMessages.js';
+import '../../api/filmManagement/users/users.js';
+import '../../api/filmManagement/films/films.js';
 
 Template.profilePage.onCreated(function() {
     let self = this;

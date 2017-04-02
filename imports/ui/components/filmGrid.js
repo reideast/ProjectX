@@ -1,14 +1,12 @@
-// Disable these if not needed
-import { Meteor } from 'meteor/meteor';
+// import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
-import { FlowRouter } from 'meteor/kadira:flow-router';
-
-import '../../api/filmManagement/users/users.js';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
 
 // Load template itself
-import './templatename.html';
+import './filmGrid.html';
 // Load templates used inside this template
-import '../components/subTemplate.js';
+import '../../api/filmManagement/users/users.js';
+import '../../api/filmManagement/films/films.js';
 
 Template.filmGrid.onRendered(function() {
     let self = this;

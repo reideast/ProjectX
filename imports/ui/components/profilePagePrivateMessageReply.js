@@ -1,4 +1,10 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'; // Disable these if not needed
+import { Template } from 'meteor/templating';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
+
+// Load template itself
+import './profilePagePrivateMessageReply.html';
+import '../../api/filmManagement/privateMessages/privateMessages.js';
 
 Template.profilePagePrivateMessageReply.events = {
     'submit form' : function (event) {

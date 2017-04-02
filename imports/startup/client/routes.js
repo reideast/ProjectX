@@ -81,11 +81,11 @@ FlowRouter.route( '/verify-email/:token', {
   }
 });
 
-FlowRouter.route( '/signUp_reg', {
+FlowRouter.route( '/signUpLogin', {
   action: function() {
-    BlazeLayout.render( 'signUp_reg' );
+    BlazeLayout.render( 'signUpLogin' );
   },
-  name: 'signUp_reg'
+  name: 'signUpLogin'
 });
 
 FlowRouter.route( '/profilePage', {

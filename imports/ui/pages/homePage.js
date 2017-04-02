@@ -6,8 +6,8 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import './homePage.html';
 // Load templates used inside this template
 import '../components/callToAction.js';
-    // {{> filmGrid}}
-    // {{> gallery}}
-    // {{> footer}}
-    //
+import '../components/filmGrid.js';
+import '../components/gallery.js';
+import '../components/footer.js'; // TODO remove this once template-ized
+
 // helpers and events would go here

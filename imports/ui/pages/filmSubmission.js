@@ -1,5 +1,16 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'; // Disable these if not needed
+import { Template } from 'meteor/templating';
 import { FlowRouter } from 'meteor/kadira:flow-router';
+import { ReactiveVar } from 'meteor/reactive-var';
+import { $ } from 'meteor/jquery'; // TODO: is this necessary on all pages that use jQuery?
+// TODO: need to import Bert?
+
+// Load template itself
+import './filmSubmission.html';
+// Load templates used inside this template
+import '../components/footer.js'; // TODO remove this once template-ized
+import '../../api/filmManagement/users/users.js';
+import '../../api/filmManagement/films/films.js';
 
 Template.filmSubmission.onCreated(function () {
     this.currentUpload = new ReactiveVar(false); // holds the progress bar info
@@ -53,6 +64,7 @@ Template.filmSubmission.helpers({
 
 
     optionsGenres: function() {
+        // TODO: move select-option code to a component template
         return [
             { value: "Action/Adventure", selected: "" },
             { value: "Comedy", selected: "" },

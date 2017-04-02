@@ -1,4 +1,14 @@
-import { Meteor } from 'meteor/meteor';
+import { Meteor } from 'meteor/meteor'; // Disable these if not needed
+import { Template } from 'meteor/templating';
+// import { FlowRouter } from 'meteor/kadira:flow-router';
+// TODO: need to import Deps.Dpeendency
+// TODO: need to import Tracker?
+
+// Load template itself
+import './privateMessageForm.html';
+// Load templates used inside this template
+// Load collections from API folder
+import '../../api/filmManagement/privateMessages/privateMessages.js';
 
 Template.privateMessageForm.onCreated(function() {
     const dataContext = this;
