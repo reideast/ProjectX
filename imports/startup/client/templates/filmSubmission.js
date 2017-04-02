@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 Template.filmSubmission.onCreated(function () {
     this.currentUpload = new ReactiveVar(false); // holds the progress bar info
 

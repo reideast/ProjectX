@@ -1,9 +1,11 @@
+import { Meteor } from 'meteor/meteor';
+
 console.log("DEBUG: ran configVariables.js");
 
 // NOTE: this file doesn't need .isServer (it's inside a ../server/.. folder) or a .startup() wrapper (it is manually loaded by server/main.js's execution)
 if (process.env.MAIL_URL) {
     console.log("Startups success: Found a MAIL_URL");
-    // email package loads from process.env already
+    // NOTE: not saving the ENV anywhere, because email package loads from process.env already
 } else {
     console.log("STARTUP ERROR: Did not find a MAIL_URL");
 }

@@ -1,10 +1,12 @@
+import { Meteor } from 'meteor/meteor';
+
 var Dropbox, Request, bound, client, fs, Collections = {};
 if (Meteor.isServer) {
     console.log("Loading NPM libraries:");
     Dropbox = Npm.require('dropbox');
     Request = Npm.require('request');
     fs = Npm.require('fs');
-    console.log("DROPBOX:" + Dropbox + "REQUEST:" + Request + "FS:" + fs);
+    console.log("Has Npm properly loaded? DROPBOX:" + Dropbox + "REQUEST:" + Request + "FS:" + fs);
 
     // define this alias to Meteor.bindEnvironment that is used by Files scripts
     bound = Meteor.bindEnvironment(function(callback) {

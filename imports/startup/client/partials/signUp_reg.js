@@ -1,3 +1,6 @@
+import { Meteor } from 'meteor/meteor';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+
 Template.signUp_reg.events({
     'submit #login-form': function(event){
         event.preventDefault();

@@ -1,4 +1,13 @@
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
+import { FlowRouter } from 'meteor/kadira:flow-router';
 // https://kadira.io/academy/meteor-routing-guide/content/subscriptions-and-data-management/with-blaze
+
+// Load template itself
+import './filmReview.html';
+// Load templates used inside this template
+import '../components/filmPlayer.js'
+
 Template.filmReview.onRendered(function() {
     let self = this;
     self.autorun(function() {

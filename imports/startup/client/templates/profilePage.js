@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 Template.profilePage.onCreated(function() {
     let self = this;
     self.autorun(() => {

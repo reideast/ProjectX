@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 Template.privateMessageForm.onCreated(function() {
     const dataContext = this;
     dataContext.toUserID = dataContext.data._id;

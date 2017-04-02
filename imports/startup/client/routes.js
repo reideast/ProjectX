@@ -1,3 +1,34 @@
+import { Meteor } from 'meteor/meteor';
+import { FlowRouter } from 'meteor/kadira:flow-router';
+import { BlazeLayout } from 'meteor/kadira:blaze-layout';
+
+
+// NOTE: This is where all client side code is brought in. I'm not sure why these imports shouldn't instead be in ./index.js, but I'll follow the example for now
+// Import templates
+import '../../ui/components/nav.js'; // TODO: once router is templat-ized, remove this
+import '../../ui/pages/DEFAULT_BODY_TEMPLATE.html'; // TODO: once router is templat-ized, remove this
+
+import '../../ui/pages/homePage.js'
+import '../../ui/pages/filmReview.js'
+
+// DEBUG:
+// Import to load these templates
+// import '../../ui/layouts/app-body.js';
+// import '../../ui/pages/root-redirector.js';
+// import '../../ui/pages/lists-show-page.js';
+// import '../../ui/pages/app-not-found.js';
+// // Import to override accounts templates
+// import '../../ui/accounts/accounts-templates.js';
+
+// TODO: Make sure the rest of this file fits the app example. see example file: https://github.com/meteor/todos/blob/master/imports/startup/client/routes.js
+
+// TODO: template-ize routes. basic example: https://github.com/meteor/todos/blob/master/imports/startup/client/routes.js
+// FlowRouter.route('/lists/:_id', {
+//   name: 'Lists.show',
+//   action() {
+//     BlazeLayout.render('App_body', { main: 'Lists_show_page' });
+//   },
+// });
 
 FlowRouter.route( '/', {
   action: function() {
