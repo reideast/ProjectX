@@ -1,6 +1,8 @@
 // TODO: rearrange into load order per new meteor standards
 
-// TODO: 
+// NOTE: create client/main.js and server/main.js that loads EVERYTHING
+    they both only use js import statements to load /imports/startup/client (or server)
+// NOTE:
 
 Special Directories:
 imports/

@@ -1,3 +1,5 @@
+console.log("DEBUG: ran email-verify-account.js");
+
 Accounts.emailTemplates.siteName = "Junior Film Fleadh";
 Accounts.emailTemplates.from     = "Junior Film Fleadh <admin@jff.com>";
 
