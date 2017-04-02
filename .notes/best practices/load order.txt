@@ -1,0 +1,20 @@
+// TODO: rearrange into load order per new meteor standards
+
+// TODO: 
+
+Special Directories:
+imports/
+    any directory named imports/ is not loaded anywhere, and must be imported using js "import" statement
+client/
+server/
+    still work the same (note: these rules are applied recursively, i.e. code inside imports/server/passwords.js is not sent to the client at all)
+public/
+    served as-is to client. not parsed by meteor. references "public/image.jpg" as src="/image.jpg"
+private/
+    server only. accessible via "Assets API": http://docs.meteor.com/#/full/assets_getText
+tests/
+    not loaded or used anywhere by meteor. useful for test runners that work outside of Meteor's framework
+.anything/
+    not loaded
+programs/, packages/, cordova-build-override/
+    not loaded
