@@ -8,18 +8,6 @@ import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 import '../../ui/components/nav.js'; // TODO: once router is templat-ized, remove this
 import '../../ui/pages/DEFAULT_BODY_TEMPLATE.html'; // TODO: once router is templat-ized, remove this
 
-import '../../ui/pages/homePage.js'
-import '../../ui/pages/filmReview.js'
-
-// DEBUG:
-// Import to load these templates
-// import '../../ui/layouts/app-body.js';
-// import '../../ui/pages/root-redirector.js';
-// import '../../ui/pages/lists-show-page.js';
-// import '../../ui/pages/app-not-found.js';
-// // Import to override accounts templates
-// import '../../ui/accounts/accounts-templates.js';
-
 // TODO: Make sure the rest of this file fits the app example. see example file: https://github.com/meteor/todos/blob/master/imports/startup/client/routes.js
 
 // TODO: template-ize routes. basic example: https://github.com/meteor/todos/blob/master/imports/startup/client/routes.js
@@ -30,28 +18,42 @@ import '../../ui/pages/filmReview.js'
 //   },
 // });
 
+// ************ Template-Based Routes ************
+import '../../ui/pages/homePage.js';
 FlowRouter.route( '/', {
-  action: function() {
-    // Do whatever we need to do when we visit http://app.com/terms.
-    BlazeLayout.render( 'homePage' );
-  },
-  name: 'homePage' // Optional route name.
+    action: function() {
+        // Do whatever we need to do when we visit http://app.com/terms.
+        BlazeLayout.render( 'homePage' );
+    },
+    name: 'homePage' // Optional route name.
 });
+// FlowRouter.route('/', {
+//     action: function(params) {
+//         Tracker.autorun(function() {
+//             if (!Meteor.user()) {
+//                 FlowLayout.render("welcome", { content: 'profilePage' });
+//             }
+//         });
+//     }
+// });
 
+import '../../ui/pages/filmSubmission.js';
 FlowRouter.route( '/filmSubmission', {
-  action: function() {
-    BlazeLayout.render( 'filmSubmission' );
-  },
-  name: 'filmSubmission'
+    action: function() {
+        BlazeLayout.render( 'filmSubmission' );
+    },
+    name: 'filmSubmission'
 });
 
+import '../../ui/pages/filmReview.js';
 FlowRouter.route( '/filmReview', {
-  action: function() {
-    BlazeLayout.render( 'filmReview' );
-  },
-  name: 'filmReview'
+    action: function() {
+        BlazeLayout.render( 'filmReview' );
+    },
+    name: 'filmReview'
 });
 
+import '../../ui/pages/filmReview.js';
 FlowRouter.route('/film/:userId', {
     action: function(params, queryParams) {
         // console.log("on a film page with id=" + params.userId);
@@ -60,6 +62,7 @@ FlowRouter.route('/film/:userId', {
     name: 'film',
 });
 
+import '../../ui/pages/viewFilms.js';
 FlowRouter.route('/viewFilms', {
     action: function() {
         BlazeLayout.render('viewFilms');
@@ -67,39 +70,33 @@ FlowRouter.route('/viewFilms', {
     name: 'viewFilms',
 });
 
-FlowRouter.route( '/verify-email/:token', {
-  name: 'verify-email',
-  action( params ) {
-    Accounts.verifyEmail( params.token, ( error ) =>{
-      if ( error ) {
-        Bert.alert( error.reason, 'danger' );
-      } else {
-        FlowRouter.go( '/' );
-        Bert.alert( 'Email verified! Thanks!', 'success', 'growl-top-right' );
-      }
-    });
-  }
-});
-
+import '../../ui/pages/signUpLogin.js';
 FlowRouter.route( '/signUpLogin', {
-  action: function() {
-    BlazeLayout.render( 'signUpLogin' );
-  },
-  name: 'signUpLogin'
+    action: function() {
+        BlazeLayout.render( 'signUpLogin' );
+    },
+    name: 'signUpLogin'
 });
 
+import '../../ui/pages/profilePage.js';
 FlowRouter.route( '/profilePage', {
-  action: function() {
-    BlazeLayout.render( 'profilePage' );
-  },
-  name: 'profilePage'
+    action: function() {
+        BlazeLayout.render( 'profilePage' );
+    },
+    name: 'profilePage'
 });
-FlowRouter.route('/', {
-    action: function(params) {
-        Tracker.autorun(function() {
-            if (!Meteor.user()) {
-              FlowLayout.render("welcome", { content: 'profilePage' });
+
+// ************ Non-Template-Based Routes ************
+FlowRouter.route( '/verify-email/:token', {
+    name: 'verify-email',
+    action( params ) {
+        Accounts.verifyEmail( params.token, ( error ) =>{
+            if ( error ) {
+                Bert.alert( error.reason, 'danger' );
+            } else {
+                FlowRouter.go( '/' );
+                Bert.alert( 'Email verified! Thanks!', 'success', 'growl-top-right' );
             }
         });
-      }
+    }
 });
