@@ -30,6 +30,5 @@
   - film submissions,
   - submission reviews,
   
-  
-## Existing Website
-- http://www.galwayfilmfleadh.com/index.php/juniorfilmfleadh/
+## Viewable at:
+- https://teamtrycatch.herokuapp.com
