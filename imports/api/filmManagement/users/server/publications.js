@@ -1,5 +1,3 @@
-console.log("DEBUG: ran users/publications.js");
-
 import { Meteor } from 'meteor/meteor';
 import '../users.js';
 

@@ -1,5 +1,3 @@
-console.log("DEBUG: films/methods.js");
-
 import { Meteor } from 'meteor/meteor';
 import '../users/users.js';
 
