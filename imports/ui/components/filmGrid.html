@@ -1,0 +1,46 @@
+<template name="filmGrid">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3 class="page-header">Latest Submissions</h3>
+            </div>
+        </div>
+        <div class="container container-viewFilms">
+            <div class="row">
+                {{#each filmListing}}
+                    <div class="filmItem col-xs-offset-1 col-xs-10 col-md-4 col-md-offset-0">
+                        <div class="well">
+                            <a href="film/{{_id}}">
+                                <div class="well">
+                                    <h5>{{submittedFilm.title}}<small><em><br>by {{profile.user.name}}</em></small></h5>
+                                    <h6>{{submittedFilm.genre}}</h6>
+                                </div>
+                                <img src="{{ fileURL thumbRef 'thumbnail' }}" alt="thumbnail" class="img-responsive">
+                            </a>
+                        </div>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+    <style>
+        /* TODO: move these styles to separate, imported file */
+        h5, .h5 {
+            font-size: 14px;
+            color: #62040F  ;
+        }
+        h6, .h6 {
+            color: #62040F  ;
+        }
+        .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            color: #62040F  ;
+        }
+
+        .filmItem a {
+            text-decoration: none;
+        }
+    </style>
+</template>

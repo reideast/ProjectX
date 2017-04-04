@@ -1,0 +1,253 @@
+<template name="filmReview">
+  <div class="container">
+    {{#if Template.subscriptionsReady}}
+        {{#with userData}}
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 col-xs-12">
+                    <div class="form-group">
+                        <h3 class="page-header">{{submittedFilm.title}}</h3>
+                        <!-- <h1><em>{{submittedFilm.title}}</em></h1> -->
+                        {{> filmPlayer }}
+                        <h3>By {{profile.user.name}}</h3>
+                        <h4>{{submittedFilm.genre}} - <em>{{ titlecase submittedFilm.length}} Length Film</em></h4>
+                        <h5><strong>Description:</strong> {{submittedFilm.description}}</h5>
+                    </div>
+                   {{#if currentUser}}
+                       {{#if notSelfUser }}
+                            <div class="form-group">
+                                <!-- <h3>Your Private Messages to Filmmaker</h3> -->
+                                <button data-toggle="modal" data-target="#privateMessageDialog" class="btn btn-primary" type="button">
+                                    <i class="glyphicon glyphicon-envelope"></i> Message Filmmaker
+                                    <span class="badge">{{ numPrivateMessages }}</span>
+                                </button>
+                            </div>
+                            <!-- Private Messages modal dialog (hidden) -->
+                            <div id="privateMessageDialog" class="modal" role="dialog" tabindex="-2">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h3 class="modal-title">Send a Private Message to Filmmaker</h3>
+                                        </div>
+                                        {{> privateMessageForm }}
+                                        <!-- <button class="btn btn-default" type="button" data-dismiss="modal">Close</button> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- end hidden modal -->
+                        {{/if}}
+                    {{/if}}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-6">
+                            <div class="row">
+                                <!-- Rating -->
+                                <div id="ratings" class="col-xs-12">
+                                    <h4 class="page-header">Rating: <span id="ratingIcon" class="{{ reviewIcon }}"></span> {{ reviewScore }}</h4>
+                                    {{#if currentUser}}
+                                    <div class="row">
+                                        <div id="ratings" class="col-xs-12">
+                                            <div class="list-group">
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 1 }}" type="radio" name="rating" class="ratingRadio" id="ratingLike" value="1">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Liked
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-upload"></span>
+                                                    </div>
+                                                </label>
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked 0 }}" type="radio" name="rating" class="ratingRadio" id="ratingNeutral" value="0">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Neutral
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-record"></span>
+                                                    </div>
+                                                </label>
+                                                <label class="list-group-item row">
+                                                    {{#if notSelfUser }}
+                                                    <div class="col-xs-3">
+                                                        <input checked="{{ hasReviewerChecked -1 }}" type="radio" name="rating" class="ratingRadio" id="ratingDislike" value="-1">
+                                                    </div>
+                                                    {{/if}}
+                                                    <div class="col-xs-6">
+                                                        Disliked
+                                                    </div>
+                                                    <div class="col-xs-3">
+                                                        <span class="glyphicon glyphicon-download"></span>
+                                                    </div>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{/if}}
+                                </div>
+                                <!-- Add Comment -->
+                                <div class="col-xs-12">
+                                    <h4 class="page-header">Add Comment</h4>
+                                    <form id="add-comment">
+                                        <div class="form-group">
+                                            <label for="author">Your Name</label>
+                                            <input type="text" class="form-control" name="author" placeholder="Your Name">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="content">Content</label>
+                                            <textarea name="content" class="form-control" placeholder="Your comment...."></textarea>
+                                        </div>
+                                        <input type="submit" class="btn btn-success" value="Add Comment">
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <!-- Comments HTML Start -->
+                            <h4 class="page-header">Comments</h4>
+                            <div class="ovH">
+                                {{#each comments}}
+                                <div class="panel panel-default">
+                                    <div class="panel-heading"><strong>{{author}}</strong> {{ formatTime date }}</div>
+                                    <div class="panel-body">
+                                        {{content}}
+                                    </div>
+                                </div>
+                                {{else}}
+                                <p class="alert alert-warning">No comments yet!</p>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <style>
+            /* TODO: move to own file */
+
+                /**************************/
+                /* styles for ratings box */
+                /**************************/
+                #ratings .glyphicon {
+                    font-size: 24px;
+                    line-height: 14px;
+                    vertical-align: sub;
+                }
+                #ratings .list-group-item {
+                    /* make whole list-group's pill-shape act like anchor tag */
+                    cursor: pointer;
+                }
+                #ratings .list-group .row {
+                    /*remove bootstrap style for here only*/
+                    margin-right: 0;
+                    margin-left: 0;
+                }
+                #ratings div:first-child {
+                    text-align: right;
+                }
+                #ratings div {
+                    text-align: center;
+                }
+                #ratings div:last-child {
+                    text-align: left;
+                }
+                .listGroup input:checked {
+
+                }
+
+                .btn-primary {
+                    color: #fff;
+                    background-color: #62040F;
+                    border-color: #62040F;
+                }
+
+                .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
+                    z-index: 2;
+                    color: #fff;
+                    background-color: #62040F;
+                    border-color: #62040F;
+                }
+
+                .btn-success {
+                  background-color: #62040F;
+                    border-color: #62040f;
+                }
+
+                .ovH {
+                  /*height: 150px;*/
+                  /*overflow: scroll;*/
+
+                }
+
+                .panel-default {
+                    margin-bottom: 15px;
+                }
+                .panel-default>.panel-heading {
+                  color: #fff;
+                  background-color: #62040f;
+                  border-color: #ddd;
+                }
+
+                .page-header {
+                  padding-bottom: 9px;
+                  margin: 40px 0 20px;
+                  border-bottom: 1px solid #eee;
+                  color: #62040f;
+                }
+
+                .btn-primary {
+                  color: #fff;
+                  background-color: #62040F;
+                  border-color: #62040F;
+                }
+
+                .btn-primary:hover,
+                .btn-primary:disabled,
+              	.btn-primary:focus {
+              		color: #62040F;
+              		background-color: #fff;
+              		border-color: #62040F;
+              	}
+
+                .btn-success {
+                    color: #fff;
+                    background-color: #62040F;
+                    border-color: #62040F;
+                    font-weight: 700;
+                }
+
+                .btn-success:hover,
+                .btn-success:disabled,
+              	.btn-success:focus {
+              		color: #62040F;
+              		background-color: #fff;
+              		border-color: #62040F;
+              		font-size: 16px;
+              	}
+
+            </style>
+            <script>
+                $(document).ready(function() {
+                    // this is for radio boxes that are found from the db, to set the visual cue
+                    // it happens ONCE, when the page loads, and only adds the class to the pre-selected radio
+                    $('.list-group-item').each(function(i, item) {
+                        if($(item).find('input:checked').length) {
+                            $(item).addClass('active');
+                        }
+                    });
+                });
+            </script>
+        {{/with}}
+    {{else}}
+        <p>Loading...</p>
+    {{/if}}
+    </div>
+    {{> footer}}
+</template>
