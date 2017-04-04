@@ -1,7 +1,3 @@
-import { Meteor } from 'meteor/meteor';
-
-
-
-Meteor.startup(() => {
-  // code to run on server at startup
-});
+// NOTE: this is the application entry point for server. all other js files must be loaded within these functions
+import '/imports/startup/server';
+import '/imports/startup/both';
