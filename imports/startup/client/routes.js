@@ -56,7 +56,6 @@ FlowRouter.route( '/filmReview', {
 import '../../ui/pages/filmReview.js';
 FlowRouter.route('/film/:userId', {
     action: function(params, queryParams) {
-        // console.log("on a film page with id=" + params.userId);
         BlazeLayout.render('filmReview');
     },
     name: 'film',

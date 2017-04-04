@@ -1,5 +1,3 @@
-console.log("DEBUG: users/methods.js");
-
 import { Meteor } from 'meteor/meteor';
 // import the code used to create and export collection object, Users
 import './users.js'; // TODO: once users.js is properly in export-style, this line should change to: import { Users } from './users.js';

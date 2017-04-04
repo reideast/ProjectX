@@ -1,5 +1,3 @@
-console.log("DEBUG: ran films/publications.js");
-
 import { Meteor } from 'meteor/meteor';
 import '../films.js';
 

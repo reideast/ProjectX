@@ -1,5 +1,3 @@
-console.log("DEBUG: ran comments/publications.js");
-
 import { Meteor } from 'meteor/meteor';
 import '../../users/users.js';
 import '../comments.js';

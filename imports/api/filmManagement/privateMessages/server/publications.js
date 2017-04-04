@@ -1,5 +1,3 @@
-console.log("DEBUG: ran publications.js");
-
 import { Meteor } from 'meteor/meteor';
 
 import '../privateMessages.js';
