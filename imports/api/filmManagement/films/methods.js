@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import '../users/users.js';
 
+import './globals.js'; // DEBUG: for _app variable
+// import './imageProcessing.js'; // DEBUG: for createThumbnails example
 import './films.js'; // TODO: once films.js is properly in export-style, this line should change to: import { Films } from './films.js';
 
 // ****************** Save Uploaded File to User Collection ******************

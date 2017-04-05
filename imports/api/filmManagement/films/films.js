@@ -56,7 +56,7 @@ this.Films = new Meteor.Files({
 
     downloadCallback(fileObj) {
         if (this.params && this.params.query && this.params.query.download === 'true') {
-            Collections.files.collection.update(fileObj._id, {
+            Films.update(fileObj._id, {
                 $inc: {
                     'meta.downloads': 1
                 }
@@ -147,7 +147,381 @@ this.Films = new Meteor.Files({
     } // end onAfterUpload
 }); // end creating new Mongo Files collection
 
+// if (Meteor.isServer) {
+//     // TODO: can this go in the server/publications.js file? or can it be client & server code?
+//     Films.denyClient();
+// }
 if (Meteor.isServer) {
-    // TODO: can this go in the server/publications.js file? or can it be client & server code?
     Films.denyClient();
+    Films.on('afterUpload', function(fileRef) {
+        if (useDropBox) {
+            const makeUrl = (stat, fileRef, version, triesUrl = 0) => {
+                client.makeUrl(stat.path, {
+                    long: true,
+                    downloadHack: true
+                }, (error, xml) => {
+                    bound(() => {
+                        // Store downloadable link in file's meta object
+                        if (error) {
+                            if (triesUrl < 10) {
+                                Meteor.setTimeout(() => {
+                                    makeUrl(stat, fileRef, version, ++triesUrl);
+                                }, 2048);
+                            } else {
+                                console.error(error, {
+                                    triesUrl: triesUrl
+                                });
+                            }
+                        } else if (xml) {
+                            const upd = { $set: {} };
+                            upd['$set']['versions.' + version + '.meta.pipeFrom'] = xml.url;
+                            upd['$set']['versions.' + version + '.meta.pipePath'] = stat.path;
+                            this.collection.update({
+                                _id: fileRef._id
+                            }, upd, (error) => {
+                                if (error) {
+                                    console.error(error);
+                                } else {
+                                    // Unlink original files from FS
+                                    // after successful upload to DropBox
+                                    this.unlink(this.collection.findOne(fileRef._id), version);
+                                }
+                            });
+                        } else {
+                            if (triesUrl < 10) {
+                                Meteor.setTimeout(() => {
+                                    // Generate downloadable link
+                                    makeUrl(stat, fileRef, version, ++triesUrl);
+                                }, 2048);
+                            } else {
+                                console.error("client.makeUrl doesn't returns xml", {
+                                    triesUrl: triesUrl
+                                });
+                            }
+                        }
+                    });
+                });
+            };
+
+            const writeToDB = (fileRef, version, data, triesSend = 0) => {
+                // DropBox already uses random URLs
+                // No need to use random file names
+                client.writeFile(fileRef._id + '-' + version + '.' + fileRef.extension, data, (error, stat) => {
+                    bound(() => {
+                        if (error) {
+                            if (triesSend < 10) {
+                                Meteor.setTimeout(() => {
+                                    // Write file to DropBox
+                                    writeToDB(fileRef, version, data, ++triesSend);
+                                }, 2048);
+                            } else {
+                                console.error(error, {
+                                    triesSend: triesSend
+                                });
+                            }
+                        } else {
+                            makeUrl(stat, fileRef, version);
+                        }
+                    });
+                });
+            };
+
+            const readFile = (fileRef, vRef, version, triesRead = 0) => {
+                fs.readFile(vRef.path, (error, data) => {
+                    bound(() => {
+                        if (error) {
+                            if (triesRead < 10) {
+                                readFile(fileRef, vRef, version, ++triesRead);
+                            } else {
+                                console.error(error);
+                            }
+                        } else {
+                            writeToDB(fileRef, version, data);
+                        }
+                    });
+                });
+            };
+
+            sendToStorage = (fileRef) => {
+                _.each(fileRef.versions, (vRef, version) => {
+                    readFile(fileRef, vRef, version);
+                });
+            };
+        } else if (useS3) {
+            sendToStorage = (fileRef) => {
+                _.each(fileRef.versions, (vRef, version) => {
+                    // We use Random.id() instead of real file's _id
+                    // to secure files from reverse engineering
+                    // As after viewing this code it will be easy
+                    // to get access to unlisted and protected files
+                    const filePath = 'files/' + (Random.id()) + '-' + version + '.' + fileRef.extension;
+                    client.putFile(vRef.path, filePath, (error) => {
+                        bound(() => {
+                            if (error) {
+                                console.error(error);
+                            } else {
+                                const upd = { $set: {} };
+                                upd['$set']['versions.' + version + '.meta.pipeFrom'] = Meteor.settings.s3.cfdomain + '/' + filePath;
+                                upd['$set']['versions.' + version + '.meta.pipePath'] = filePath;
+                                this.collection.update({
+                                    _id: fileRef._id
+                                }, upd, (error) => {
+                                    if (error) {
+                                        console.error(error);
+                                    } else {
+                                        // Unlink original files from FS
+                                        // after successful upload to AWS:S3
+                                        this.unlink(this.collection.findOne(fileRef._id), version);
+                                    }
+                                });
+                            }
+                        });
+                    });
+                });
+            };
+        }
+
+        if (/png|jpe?g/i.test(fileRef.extension || '')) {
+            _app.createThumbnails(this, fileRef, (fileRef, error) => {
+                if (error) {
+                    console.error(error);
+                }
+                if (useDropBox || useS3) {
+                    sendToStorage(this.collection.findOne(fileRef._id));
+                }
+            });
+        } else {
+            if (useDropBox || useS3) {
+                sendToStorage(fileRef);
+            }
+        }
+    });
+
+    // This line now commented due to Heroku usage
+    // Films.collection._ensureIndex {'meta.expireAt': 1}, {expireAfterSeconds: 0, background: true}
+
+    // Intercept FileCollection's remove method
+    // to remove file from DropBox or AWS S3
+    if (useDropBox || useS3) {
+        _origRemove = Films.remove;
+        Films.remove = function(search) {
+            const cursor = this.collection.find(search);
+            cursor.forEach((fileRef) => {
+                _.each(fileRef.versions, (vRef) => {
+                    if (vRef && vRef.meta && vRef.meta.pipePath != null) {
+                        if (useDropBox) {
+                            // DropBox usage:
+                            client.remove(vRef.meta.pipePath, (error) => {
+                                bound(() => {
+                                    if (error) {
+                                        console.error(error);
+                                    }
+                                });
+                            });
+                        } else {
+                            // AWS:S3 usage:
+                            client.deleteFile(vRef.meta.pipePath, (error) => {
+                                bound(() => {
+                                    if (error) {
+                                        console.error(error);
+                                    }
+                                });
+                            });
+                        }
+                    }
+                });
+            });
+            // Call original method
+            _origRemove.call(this, search);
+        };
+    }
+
+    // Remove all files on server load/reload, useful while testing/development
+    // Meteor.startup -> Films.remove {}
+
+    // Remove files along with MongoDB records two minutes before expiration date
+    // If we have 'expireAfterSeconds' index on 'meta.expireAt' field,
+    // it won't remove files themselves.
+    Meteor.setInterval(() => {
+        Films.remove({
+            'meta.expireAt': {
+                $lte: new Date(+new Date() + 120000)
+            }
+        }, _app.NOOP);
+    }, 120000);
+
+    Meteor.publish('latest', function(take = 10, userOnly = false) {
+        check(take, Number);
+        check(userOnly, Boolean);
+
+        let selector;
+        if (userOnly && this.userId) {
+            selector = {
+                userId: this.userId
+            };
+        } else {
+            selector = {
+                $or: [
+                    {
+                        'meta.unlisted': false,
+                        'meta.secured': false,
+                        'meta.blamed': {
+                            $lt: 3
+                        }
+                    }, {
+                        userId: this.userId
+                    }
+                ]
+            };
+        }
+
+        return Films.find(selector, {
+            limit: take,
+            sort: {
+                'meta.created_at': -1
+            },
+            fields: {
+                _id: 1,
+                name: 1,
+                size: 1,
+                meta: 1,
+                type: 1,
+                isPDF: 1,
+                isText: 1,
+                isJSON: 1,
+                isVideo: 1,
+                isAudio: 1,
+                isImage: 1,
+                userId: 1,
+                'versions.thumbnail40.extension': 1,
+                'versions.preview.extension': 1,
+                extension: 1,
+                _collectionName: 1,
+                _downloadRoute: 1
+            }
+        }).cursor;
+    });
+
+    Meteor.publish('file', function(_id) {
+        check(_id, String);
+        return Films.find({
+            $or: [
+                {
+                    _id: _id,
+                    'meta.secured': false
+                }, {
+                    _id: _id,
+                    'meta.secured': true,
+                    userId: this.userId
+                }
+            ]
+        }, {
+            fields: {
+                _id: 1,
+                name: 1,
+                size: 1,
+                type: 1,
+                meta: 1,
+                isPDF: 1,
+                isText: 1,
+                isJSON: 1,
+                isVideo: 1,
+                isAudio: 1,
+                isImage: 1,
+                extension: 1,
+                'versions.preview.extension': 1,
+                _collectionName: 1,
+                _downloadRoute: 1
+            }
+        }).cursor;
+    });
+
+    Meteor.methods({
+        filesLenght(userOnly = false) {
+            check(userOnly, Boolean);
+
+            let selector;
+            if (userOnly && this.userId) {
+                selector = {
+                    userId: this.userId
+                };
+            } else {
+                selector = {
+                    $or: [
+                        {
+                            'meta.unlisted': false,
+                            'meta.secured': false,
+                            'meta.blamed': {
+                                $lt: 3
+                            }
+                        }, {
+                            userId: this.userId
+                        }
+                    ]
+                };
+            }
+            return Films.find(selector).count();
+        },
+        unblame(_id) {
+            check(_id, String);
+            Films.update({
+                _id: _id
+            }, {
+                $inc: {
+                    'meta.blamed': -1
+                }
+            }, _app.NOOP);
+            return true;
+        },
+        blame(_id) {
+            check(_id, String);
+            Films.update({
+                _id: _id
+            }, {
+                $inc: {
+                    'meta.blamed': 1
+                }
+            }, _app.NOOP);
+            return true;
+        },
+        changeAccess(_id) {
+            check(_id, String);
+            if (Meteor.userId()) {
+                const file = Films.findOne({
+                    _id: _id,
+                    userId: Meteor.userId()
+                });
+
+                if (file) {
+                    Films.update(_id, {
+                        $set: {
+                            'meta.unlisted': file.meta.unlisted ? false : true
+                        }
+                    }, _app.NOOP);
+                    return true;
+                }
+            }
+            throw new Meteor.Error(401, 'Access denied!');
+        },
+        changePrivacy(_id) {
+            check(_id, String);
+            if (Meteor.userId()) {
+                const file = Films.findOne({
+                    _id: _id,
+                    userId: Meteor.userId()
+                });
+
+                if (file) {
+                    Films.update(_id, {
+                        $set: {
+                            'meta.unlisted': true,
+                            'meta.secured': file.meta.secured ? false : true
+                        }
+                    }, _app.NOOP);
+                    return true;
+                }
+            }
+            throw new Meteor.Error(401, 'Access denied!');
+        }
+    });
 }
