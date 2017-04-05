@@ -1,21 +1,25 @@
 import { Meteor } from 'meteor/meteor';
 
 var Dropbox, Request, bound, client, fs, Collections = {};
+var useDropBox = false;
 if (Meteor.isServer) {
-    console.log("Loading NPM libraries:");
-    Dropbox = Npm.require('dropbox');
-    Request = Npm.require('request');
-    fs = Npm.require('fs');
-    console.log("Has Npm properly loaded? DROPBOX:" + Dropbox + "REQUEST:" + Request + "FS:" + fs);
-
     // define this alias to Meteor.bindEnvironment that is used by Files scripts
     bound = Meteor.bindEnvironment(function(callback) {
         return callback();
     });
 
-    console.log("Has Dropbox config been loaded??");
-    console.log(Meteor.settings.dropbox);
+    console.log("DEBUG: Has Dropbox config been loaded??");
+    // console.log(Meteor.settings.dropbox);
     if (Meteor.settings.dropbox) {
+        console.log("DEBUG: Yes");
+
+        useDropBox = true;
+        console.log("DEBUG: Loading NPM libraries:");
+        Dropbox = Npm.require('dropbox');
+        Request = Npm.require('request');
+        fs = Npm.require('fs');
+        console.log("DEBUG: Has Npm properly loaded? DROPBOX:" + Dropbox + "REQUEST:" + Request + "FS:" + fs);
+
         // create Dropbox worker
         client = new Dropbox.Client({
             key: Meteor.settings.dropbox.key,
@@ -43,12 +47,49 @@ this.Films = new Meteor.Files({
 
     onBeforeUpload: function (file) {
         // Allow upload files under 10MB, and only in png/jpg/jpeg formats
-        if (file.size <= 2147483648 && /mp4|avi|3gp/i.test(file.extension)) {
+        if (file.size <= 1024 * 1024 * 256 && /mp4|avi|3gp/i.test(file.extension)) {
             return true;
         } else {
-            return 'Please upload film, with size equal or less than 2GB';
+            return 'Please upload film, with size equal or less than 256MB' + (filesize(file.size));
         }
     },
+
+    downloadCallback(fileObj) {
+        if (this.params && this.params.query && this.params.query.download === 'true') {
+            Collections.files.collection.update(fileObj._id, {
+                $inc: {
+                    'meta.downloads': 1
+                }
+            });
+        }
+        return true;
+    },
+
+    interceptDownload(http, fileRef, version) {
+        if (useDropBox) {
+            const path = (fileRef && fileRef.versions && fileRef.versions[version] && fileRef.versions[version].meta && fileRef.versions[version].meta.pipeFrom) ? fileRef.versions[version].meta.pipeFrom : void 0;
+            if (path) {
+                // If file is successfully moved to Storage
+                // We will pipe request to Storage
+                // So, original link will stay always secure
+
+                // To force ?play and ?download parameters
+                // and to keep original file name, content-type,
+                // content-disposition and cache-control
+                // we're using low-level .serve() method
+                this.serve(http, fileRef, fileRef.versions[version], version, Request({
+                    url: path,
+                    headers: _.pick(http.request.headers, 'range', 'accept-language', 'accept', 'cache-control', 'pragma', 'connection', 'upgrade-insecure-requests', 'user-agent')
+                }));
+                return true;
+            }
+            // While file is not yet uploaded to Storage
+            // We will serve file from FS
+            return false;
+        }
+        return false;
+    },
+
 
     onAfterUpload: function (fileRef) {
         // call createThumbnail function (defined just below)
